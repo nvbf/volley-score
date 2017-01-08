@@ -9,7 +9,7 @@ var jsonParser = bodyParser.json()
 
 
 if(!process.env.OBSPLUGINPATH) {
-  throw error new Error(' OBSPLUGINPATH need to be defined');
+  throw new Error(' OBSPLUGINPATH need to be defined');
 }
 
 app.post('/update', jsonParser, (req, res) => {
