@@ -1,4 +1,5 @@
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <h1>Scoreboard</h1>
@@ -50,10 +51,23 @@ function save() {
   }
 );
 }
+
+function reset() {
+  pointsA=0;
+  pointsB=0;
+  document.getElementById("pointsA").innerHTML  = 0;
+  document.getElementById("pointsB").innerHTML  = 0;
+  save();
+}
+
+
 </script/>
 
 
 <span id="pointsA">0</span>  Points <button onclick="onClickAPluss()" >+</button><button onclick="onClickAMinus()">-</button>
 <br/>
 <span id="pointsB">0</span> Points <button onclick="onClickBPluss()">+</button><button onclick="onClickBMinus()">-</button>
+<br/>
+<br/>
+<button onclick="reset()">RESET</button>
 <body />

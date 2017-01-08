@@ -18,4 +18,4 @@ PORT (optional) : Will default to 3000 if it's not set
 
 ## E.g
 
-`OBSPLUGINPATH=/home/dir/obs/ PORT=80 node index.js`
+`OBSPLUGINPATH=/home/dir/obs/ PORT=3001 node index.js`
