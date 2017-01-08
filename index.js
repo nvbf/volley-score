@@ -13,9 +13,11 @@ if(!process.env.OBSPLUGINPATH) {
 }
 
 app.post('/update', jsonParser, (req, res) => {
-  fs.writeFile(process.env.OBSPLUGINPATH + '/score1.txt', req.body.a);
-  fs.writeFile(process.env.OBSPLUGINPATH + '/score2.txt', req.body.b);
-  res.send('mottat')
+  fs.writeFile(process.env.OBSPLUGINPATH + '/score1.txt', req.body.pointsA);
+  fs.writeFile(process.env.OBSPLUGINPATH + '/score2.txt', req.body.pointsB);
+  fs.writeFile(process.env.OBSPLUGINPATH + '/set1.txt', req.body.setA);
+  fs.writeFile(process.env.OBSPLUGINPATH + '/set2.txt', req.body.setB);
+  res.send('received')
 })
 
 app.use(express.static('public'))
