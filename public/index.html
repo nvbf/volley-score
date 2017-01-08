@@ -33,6 +33,8 @@ var pointsA=0
 var pointsB=0
 var setA=0
 var setB=0
+var nameA=0
+var nameB=0
 
 function onClickPlussPointsA() {
   pointsA++;
@@ -84,7 +86,17 @@ function onClickSubtractSetB() {
 
 
 function save() {
-  var data = {pointsA: pointsA, pointsB: pointsB, setA: setA, setB: setB}
+  nameA = document.getElementById("nameA").value || "";
+  nameB = document.getElementById("nameB").value || "";
+  var data = {
+    pointsA: pointsA,
+    pointsB: pointsB,
+    setA: setA,
+    setB: setB,
+    nameA: nameA,
+    nameB: nameB
+  }
+
   jQuery.ajax({
     contentType:"application/json; charset=utf-8",
     data: JSON.stringify(data),
@@ -119,5 +131,9 @@ function reset() {
 <h3><span id="setB">0</span> set </h3><button type="button" class="btn btn-default btn-lg" onclick="onClickPlussSetB()">+</button> <button type="button" class="btn btn-default btn-lg" onclick="onClickSubtractSetB()">-</button>
 <br/>
 <br/>
+<h2>Name </h2>
+<h3>Team A <input id="nameA"/>
+<br/>
+<h3>Team B <input id="nameB"/>
 
 <body />

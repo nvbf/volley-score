@@ -17,6 +17,8 @@ app.post('/update', jsonParser, (req, res) => {
   fs.writeFile(process.env.OBSPLUGINPATH + '/score2.txt', req.body.pointsB);
   fs.writeFile(process.env.OBSPLUGINPATH + '/set1.txt', req.body.setA);
   fs.writeFile(process.env.OBSPLUGINPATH + '/set2.txt', req.body.setB);
+  fs.writeFile(process.env.OBSPLUGINPATH + '/name1.txt', req.body.nameA);
+  fs.writeFile(process.env.OBSPLUGINPATH + '/name2.txt', req.body.nameB);
   res.send('received')
 })
 
