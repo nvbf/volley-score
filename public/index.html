@@ -1,0 +1,59 @@
+<head>
+</head>
+<body>
+<h1>Scoreboard</h1>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+<script>
+var pointsA=0
+var pointsB=0
+
+function onClickAPluss() {
+  console.log('onClickAPluss')
+  pointsA++;
+  document.getElementById("pointsA").innerHTML  = pointsA;
+  save()
+}
+
+function onClickAMinus() {
+  console.log('onClickAMinus')
+  pointsA--;
+  document.getElementById("pointsA").innerHTML  = pointsA;
+  save()
+}
+
+function onClickBPluss() {
+  console.log('onClickBPluss')
+  pointsB++;
+  document.getElementById("pointsB").innerHTML  = pointsB;
+  save()
+}
+
+function onClickBMinus() {
+  console.log('onClickBMinus')
+  pointsB--;
+  document.getElementById("pointsB").innerHTML  = pointsB;
+  save()
+}
+
+function save() {
+  var data = {a: pointsA, b: pointsB}
+  jQuery.ajax({
+    contentType:"application/json; charset=utf-8",
+    data: JSON.stringify(data),
+    type: "POST",
+    url: '/update',
+  }
+);
+}
+</script/>
+
+
+<span id="pointsA">0</span>  Points <button onclick="onClickAPluss()" >+</button><button onclick="onClickAMinus()">-</button>
+<br/>
+<span id="pointsB">0</span> Points <button onclick="onClickBPluss()">+</button><button onclick="onClickBMinus()">-</button>
+<body />
