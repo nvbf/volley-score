@@ -35,7 +35,7 @@ PORT (optional) : Will default to 3000 if it's not set
 `OBSPLUGINPATH=/home/dir/obs/ PORT=3001 node index.js`
 
 
-## Update from another computer than is prodcasting. 
+## Update from another computer than is brodcasting. 
 We recommend to install and try https://ngrok.com/  
 
 with ngrok you can access your local website from the internet. And therefor update the local computer from a tablet or similar. without having to start this webapp on their computer.
