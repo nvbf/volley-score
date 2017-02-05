@@ -1,139 +1,238 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css" crossorigin="anonymous">
+  <style type="text/css">
+    .counters {
+      align-items: center;
+      justify-content: space-around;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .counter {
+      margin-bottom: 16px;
+    }
+
+    .point {
+      width: 120px;
+      height: 120px;
+      background-color: #ffffff;
+      border-radius: 3px;
+      border: 1px solid #cacaca;
+      color: #222222;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .point > .desc {
+      font-size: 10px;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    .point span {
+      font-size: 80px;
+    }
+
+    .score-button {
+      width: 58px;
+      height: 58px;
+      line-height: 58px;
+      font-size: 48px;
+    }
+
+    #setB, #setA {
+      color: #8b0000;
+      font-size: 50px;
+    }
+
+    @media only screen and (min-width: 655px) {
+      .is-flipped-on-desktop {
+        flex-direction: row-reverse;
+      }
+    }
+
+    @media only screen and (min-width: 820px) {
+
+        .is-big-on-desktop > .point {
+            width: 200px;
+            height: 200px;
+        }
+
+        .is-big-on-desktop span {
+          font-size: 150px;
+        }
+
+        .is-big-on-desktop > .score-button {
+          width: 98px;
+          height: 98px;
+          font-size: 50px;
+        }
+
+        .point > .desc {
+          font-size: 14px;
+          top: 8px;
+          left: 8px;
+        }
+    }
+  </style>
 </head>
 <body>
-<h1>Scoreboard</h1>
+  <section class="section">
+    <h1 class="title is-1">Scoreboard</h1>
+  </section>
+  <section class="section">
+  <div class="columns is-mobile">
+    <div class="column">
+      <p class="control">
+        <input type="text" class="input is-large" placeholder="Team A" id="nameA" />
+      </p>
+      <div class="notification is-success">
+        <div class="counters is-flipped-on-desktop">
+          <div class="counter is-big-on-desktop">
+            <div class="point">
+              <span class="desc">POINTS</span>
+              <span id="pointsA">0</span>
+            </div>
+            <a class="button is-large score-button" onclick="onClickPlussPointsA()" >+</a>
+            <a class="button is-large score-button" onclick="onClickSubtractPointsA()">-</a>
+            <!--<a class="button is-large" onclick="reset()">RESET</a>-->
+          </div>
+          <div class="counter">
+            <div class="point">
+              <span class="desc">SET</span>
+              <span id="setA">0</span>
+            </div>
+            <a class="button is-large score-button" onclick="onClickPlussSetA()" >+</a>
+            <a class="button is-large score-button" onclick="onClickSubtractSetA()">-</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <p class="control">
+        <input type="text" class="input is-large" placeholder="Team B" id="nameB" />
+      </p>
+      <div class="notification is-info">
+        <div class="counters">
+          <div class="counter is-big-on-desktop">
+            <div class="point">
+              <span class="desc">POINTS</span>
+              <span id="pointsB">0</span>
+            </div>
+            <a class="button is-large score-button" onclick="onClickPlussPointsB()" >+</a>
+            <a class="button is-large score-button" onclick="onClickSubtractPointsB()">-</a>
+          </div>
+          <div class="counter">
+            <div class="point">
+              <span class="desc">SET</span>
+              <span id="setB">0</span>
+            </div>
+            <a class="button is-large score-button" onclick="onClickPlussSetB()" >+</a>
+            <a class="button is-large score-button" onclick="onClickSubtractSetB()">-</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section class="section is-flex">
+    <div class="control">
+      <a class="button is-large is-danger" onClick="reset()">Reset points</a>
+      <a class="button is-large" onClick="save()">Save team names</a>
+    </div>
+  </section>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous">
+  </script>
+  <script>
+    var pointsA = 0;
+    var pointsB = 0;
+    var setA= 0;
+    var setB = 0;
+    var nameA = 0;
+    var nameB = 0;
 
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-  <style>
-    button {
-      margin: 10px;
+    function onClickPlussPointsA() {
+      pointsA++;
+      document.getElementById("pointsA").innerHTML = pointsA;
+      save();
     }
-    body {
-       margin-left: 10px
-      }
-  </style>
 
+    function onClickSubtractPointsA() {
+      pointsA--;
+      document.getElementById("pointsA").innerHTML = pointsA;
+      save();
+    }
 
-<script>
-var pointsA=0
-var pointsB=0
-var setA=0
-var setB=0
-var nameA=0
-var nameB=0
+    function onClickPlussPointsB() {
+      pointsB++;
+      document.getElementById("pointsB").innerHTML = pointsB;
+      save();
+    }
 
-function onClickPlussPointsA() {
-  pointsA++;
-  document.getElementById("pointsA").innerHTML  = pointsA;
-  save()
-}
+    function onClickSubtractPointsB() {
+      pointsB--;
+      document.getElementById("pointsB").innerHTML = pointsB;
+      save();
+    }
 
-function onClickSubtractPointsA() {
-  pointsA--;
-  document.getElementById("pointsA").innerHTML  = pointsA;
-  save()
-}
+    function onClickPlussSetA() {
+      setA++;
+      document.getElementById("setA").innerHTML = setA;
+      save();
+    }
 
-function onClickPlussPointsB() {
-  pointsB++;
-  document.getElementById("pointsB").innerHTML  = pointsB;
-  save()
-}
+    function onClickSubtractSetA() {
+      setA--;
+      document.getElementById("setA").innerHTML = setA;
+      save();
+    }
 
-function onClickSubtractPointsB() {
-  pointsB--;
-  document.getElementById("pointsB").innerHTML  = pointsB;
-  save()
-}
+    function onClickPlussSetB() {
+      setB++;
+      document.getElementById("setB").innerHTML = setB;
+      save();
+    }
 
-function onClickPlussSetA() {
-  setA++;
-  document.getElementById("setA").innerHTML  = setA;
-  save()
-}
+    function onClickSubtractSetB() {
+      setB--;
+      document.getElementById("setB").innerHTML = setB;
+      save();
+    }
 
-function onClickSubtractSetA() {
-  setA--;
-  document.getElementById("setA").innerHTML  = setA;
-  save()
-}
+    function save() {
+      nameA = document.getElementById("nameA").value || "";
+      nameB = document.getElementById("nameB").value || "";
+      var data = {
+        pointsA: pointsA,
+        pointsB: pointsB,
+        setA: setA,
+        setB: setB,
+        nameA: nameA,
+        nameB: nameB
+      };
 
-function onClickPlussSetB() {
-  setB++;
-  document.getElementById("setB").innerHTML  = setB;
-  save()
-}
+      jQuery.ajax({
+        contentType:"application/json; charset=utf-8",
+        data: JSON.stringify(data),
+        type: "POST",
+        url: '/update',
+      });
+    }
 
-function onClickSubtractSetB() {
-  setB--;
-  document.getElementById("setB").innerHTML  = setB;
-  save()
-}
-
-
-function save() {
-  nameA = document.getElementById("nameA").value || "";
-  nameB = document.getElementById("nameB").value || "";
-  var data = {
-    pointsA: pointsA,
-    pointsB: pointsB,
-    setA: setA,
-    setB: setB,
-    nameA: nameA,
-    nameB: nameB
-  }
-
-  jQuery.ajax({
-    contentType:"application/json; charset=utf-8",
-    data: JSON.stringify(data),
-    type: "POST",
-    url: '/update',
-  }
-);
-}
-
-function reset() {
-  pointsA=0;
-  pointsB=0;
-  document.getElementById("pointsA").innerHTML  = 0;
-  document.getElementById("pointsB").innerHTML  = 0;
-  save();
-}
-
-
-</script/>
-
-<h2>Points  </h2>
-<h3><span id="pointsA">0</span>  Points </h3><button type="button" class="btn btn-default btn-lg" onclick="onClickPlussPointsA()" >+</button> <button type="button" class="btn btn-default btn-lg" onclick="onClickSubtractPointsA()">-</button>
-<br/>
-<h3><span id="pointsB">0</span> Points </h3><button type="button" class="btn btn-default btn-lg" onclick="onClickPlussPointsB()">+</button> <button type="button" class="btn btn-default btn-lg" onclick="onClickSubtractPointsB()">-</button>
-<br/>
-<br/>
-<button onclick="reset()">RESET</button>
-
-<h2>Set </h2>
-<h3><span id="setA">0</span>  set </h3><button type="button" class="btn btn-default btn-lg" onclick="onClickPlussSetA()" >+</button> <button type="button" class="btn btn-default btn-lg" onclick="onClickSubtractSetA()">-</button>
-<br/>
-<h3><span id="setB">0</span> set </h3><button type="button" class="btn btn-default btn-lg" onclick="onClickPlussSetB()">+</button> <button type="button" class="btn btn-default btn-lg" onclick="onClickSubtractSetB()">-</button>
-<br/>
-<br/>
-<h2>Name </h2>
-<h3>Team A <input id="nameA"/>
-<br/>
-<h3>Team B <input id="nameB"/>
-
-<body />
+    function reset() {
+      pointsA = 0;
+      pointsB = 0;
+      document.getElementById("pointsA").innerHTML = 0;
+      document.getElementById("pointsB").innerHTML = 0;
+      save();
+    }
+    </script>
+</body>
