@@ -12,8 +12,8 @@
       .score {
         margin-top: 16px;
         margin-left: 16px;
-        padding: 8px;
-        width: 220px;
+        padding: 6px;
+        width: 240px;
         height: 74px;
         border: 1px solid #333;
         border-radius: 3px;
@@ -25,15 +25,20 @@
 
       .team {
         width: 100%;
-        height: 37px;
+        height: 38px;
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
+      .teamLogo {
+        width: 30px;
+        height: 34px;
+      }
+
       .teamName {
         font-size: 20px;
-        width: 120px;
+        width: 80px;
       }
 
       .teamSet {
@@ -53,11 +58,13 @@
   <body>
     <div class="score">
       <div class="team">
+          <img class="teamLogo" id="HomeTeamLogo" alt="Home Team Logo" />
           <div class="teamName" id="HomeTeamName">HomeTeam</div>
           <div class="teamSet" id="HomeTeamSet">0</div>
           <div class="teamScore" id="HomeTeamScore">25</div>
       </div>
       <div class="team">
+        <img class="teamLogo" id="AwayTeamLogo" alt="Away Team Logo" />
         <div class="teamName" id="AwayTeamName">AwayTeam</div>
         <div class="teamSet" id="AwayTeamSet">0</div>
         <div class="teamScore" id="AwayTeamScore">25</div>
@@ -73,14 +80,23 @@
         document.getElementById(id).innerHTML = content;
       }
 
+      function setImg(id, imgName) {
+        if (!imgName || imgName === '') {
+          document.getElementById(id).src = "";
+        }
+        document.getElementById(id).src = '/logo/' + imgName + '.svg';
+      }
+
       function load() {
         jQuery.get("/scores", function(data, status) {
           fill('HomeTeamName', data.nameA);
           fill('HomeTeamSet', data.setA);
           fill('HomeTeamScore', data.scoreA);
+          setImg('HomeTeamLogo', data.logoA);
           fill('AwayTeamName', data.nameB);
           fill('AwayTeamSet', data.setB);
           fill('AwayTeamScore', data.scoreB);
+          setImg('AwayTeamLogo', data.logoB);
         });
       }
 

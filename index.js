@@ -11,19 +11,22 @@ var jsonParser = bodyParser.json()
 
 
 if(!process.env.OBSPLUGINPATH) {
-  throw new Error(' OBSPLUGINPATH need to be defined');
+  throw new Error('OBSPLUGINPATH needs to be defined');
 }
 
 var getPath = fileName => process.env.OBSPLUGINPATH + fileName;
 var getFile = name => readFile(getPath(name), 'utf-8');
 
-function update(pointsA = '', pointsB = '', setA = '', setB = '', nameA = '', nameB = '') {
+function update(pointsA = 0, pointsB = 0, setA = 0,
+  setB = 0, nameA = '', nameB = '', logoA = '', logoB = '') {
   fs.writeFile(process.env.OBSPLUGINPATH + '/scoreA.txt', pointsA);
   fs.writeFile(process.env.OBSPLUGINPATH + '/scoreB.txt', pointsB);
   fs.writeFile(process.env.OBSPLUGINPATH + '/setA.txt', setA);
   fs.writeFile(process.env.OBSPLUGINPATH + '/setB.txt', setB);
   fs.writeFile(process.env.OBSPLUGINPATH + '/nameA.txt', nameA);
   fs.writeFile(process.env.OBSPLUGINPATH + '/nameB.txt', nameB);
+  fs.writeFile(process.env.OBSPLUGINPATH + '/logoA.txt', logoA);
+  fs.writeFile(process.env.OBSPLUGINPATH + '/logoB.txt', logoB);
 }
 
 // Init files empty when starting server, to make sure files are there
@@ -36,7 +39,9 @@ app.post('/update', jsonParser, (req, res) => {
     req.body.setA,
     req.body.setB,
     req.body.nameA,
-    req.body.nameB
+    req.body.nameB,
+    req.body.logoA,
+    req.body.logoB
   );
   res.send('received')
 })
@@ -49,6 +54,8 @@ app.get('/scores', (req, res) => {
     getFile('/setB.txt'),
     getFile('/nameA.txt'),
     getFile('/nameB.txt'),
+    getFile('/logoA.txt'),
+    getFile('/logoB.txt'),
   ]).then(data => {
     res.json({
       scoreA: data[0],
@@ -56,7 +63,9 @@ app.get('/scores', (req, res) => {
       setA: data[2],
       setB: data[3],
       nameA: data[4],
-      nameB: data[5]
+      nameB: data[5],
+      logoA: data[6],
+      logoB: data[7]
     });
   });
 });
