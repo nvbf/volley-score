@@ -24,16 +24,21 @@ You need to set the environment variable ```OBSPLUGINPATH``` so that the system 
 The system also need access to write to the files. If you have any problems check that the correct path is added and that the application have access rights.
 
 ## Prerequisites
-Node
+* Node.js
 
 ## Environment variables
 * `OBSPLUGINPATH` (obligatory) : The path to where it should update the point
 * `PORT` (optional) : Will default to 3000 if it's not set
 
+## install
+```
+npm install
+```
+
 ## Run Example
 
 ```
-OBSPLUGINPATH=/home/dir/obs/ PORT=3001 node index.js
+OBSPLUGINPATH=/home/dir/obs/ PORT=3000 node index.js
 ```
 
 ## Update from another device
