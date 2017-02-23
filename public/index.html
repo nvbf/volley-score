@@ -1,7 +1,17 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://websemantics.github.io/Image-Select/src/ImageSelect.css" type="text/css" />
+  <link rel="stylesheet" href="http://websemantics.github.io/Image-Select/src/chosen/chosen.css" type="text/css" />
+  <link rel="stylesheet" href="http://websemantics.github.io/Image-Select/src/Flat.css" type="text/css" />
+
   <style type="text/css">
+    .optlol {
+      width: 50px;
+      height: 50px;
+      border-radius: 3px;
+    }
+
     .counters {
       align-items: center;
       justify-content: space-around;
@@ -92,6 +102,36 @@
       <p class="control">
         <input type="text" class="input is-large" placeholder="Home Team" id="nameA" />
       </p>
+
+      <select id="logoA" class="my-select">
+        <option value="askim" data-img-src="/logo/askim.svg">Askim</option>
+        <option value="austratt" data-img-src="/logo/austratt.svg">Austrått</option>
+        <option value="bktromso" data-img-src="/logo/bktromso.svg">BK Tromsø</option>
+        <option value="blindheim" data-img-src="/logo/blindheim.svg">Blindheim</option>
+        <option value="blussuvoll" data-img-src="logo/blussuvoll.svg">Blussuvoll</option>
+        <option value="bsi" data-img-src="/logo/bsi.svg">BSI</option>
+        <option value="dristug" data-img-src="/logo/dristug.svg">Dristug</option>
+        <option value="egersund" data-img-src="/logo/egersund.svg">Egersund</option>
+        <option value="forde" data-img-src="/logo/forde.svg">Førde</option>
+        <option value="gneist" data-img-src="/logo/gneist.svg">Gneist</option>
+        <option value="koll" data-img-src="logo/koll.svg">Koll</option>
+        <option value="ksk" data-img-src="logo/ksk.svg">KSK</option>
+        <option value="lierne" data-img-src="logo/lierne.svg">Lierne</option>
+        <option value="ntnui" data-img-src="/logo/ntnui.svg">NTNUI</option>
+        <option value="oskil" data-img-src="/logo/oksil.svg">ØKSIL</option>
+        <option value="osi" data-img-src="/logo/osi.svg">OSI</option>
+        <option value="oslovolley" data-img-src="/logo/oslovolley.svg">NTNUI</option>
+        <option value="randaberg" data-img-src="logo/randaberg.svg">Randaberg</option>
+        <option value="sandnes" data-img-src="logo/sandnes.svg">Sandnes</option>
+        <option value="spiritlorenskog" data-img-src="logo/spiritlorenskog.svg">Sprit Lørenskog</option>
+        <option value="stod" data-img-src="logo/stod.svg">Stod</option>
+        <option value="sunnfjord" data-img-src="logo/sunnfjord.svg">Sunnfjord</option>
+        <option value="tonsberg" data-img-src="logo/tonsberg.svg">Tønsberg</option>
+        <option value="tvn" data-img-src="logo/tvn.svg">TVN</option>
+        <option value="vestli" data-img-src="logo/vestli.svg">Vestli</option>
+        <option value="viking" data-img-src="logo/viking.svg">Viking</option>
+      </select>
+
       <div class="notification is-success">
         <div class="counters is-flipped-on-desktop">
           <div class="counter is-big-on-desktop">
@@ -118,6 +158,37 @@
       <p class="control">
         <input type="text" class="input is-large" placeholder="Away Team" id="nameB" />
       </p>
+
+      <select id="logoB" class="my-select">
+        <option value="askim" data-img-src="/logo/askim.svg">Askim</option>
+        <option value="austratt" data-img-src="/logo/austratt.svg">Austrått</option>
+        <option value="bktromso" data-img-src="/logo/bktromso.svg">BK Tromsø</option>
+        <option value="blindheim" data-img-src="/logo/blindheim.svg">Blindheim</option>
+        <option value="blussuvoll" data-img-src="logo/blussuvoll.svg">Blussuvoll</option>
+        <option value="bsi" data-img-src="/logo/bsi.svg">BSI</option>
+        <option value="dristug" data-img-src="/logo/dristug.svg">Dristug</option>
+        <option value="egersund" data-img-src="/logo/egersund.svg">Egersund</option>
+        <option value="forde" data-img-src="/logo/forde.svg">Førde</option>
+        <option value="gneist" data-img-src="/logo/gneist.svg">Gneist</option>
+        <option value="koll" data-img-src="logo/koll.svg">Koll</option>
+        <option value="ksk" data-img-src="logo/ksk.svg">KSK</option>
+        <option value="lierne" data-img-src="logo/lierne.svg">Lierne</option>
+        <option value="ntnui" data-img-src="/logo/ntnui.svg">NTNUI</option>
+        <option value="oskil" data-img-src="/logo/oksil.svg">ØKSIL</option>
+        <option value="osi" data-img-src="/logo/osi.svg">OSI</option>
+        <option value="oslovolley" data-img-src="/logo/oslovolley.svg">NTNUI</option>
+        <option value="randaberg" data-img-src="logo/randaberg.svg">Randaberg</option>
+        <option value="sandnes" data-img-src="logo/sandnes.svg">Sandnes</option>
+        <option value="spiritlorenskog" data-img-src="logo/spiritlorenskog.svg">Sprit Lørenskog</option>
+        <option value="stod" data-img-src="logo/stod.svg">Stod</option>
+        <option value="sunnfjord" data-img-src="logo/sunnfjord.svg">Sunnfjord</option>
+        <option value="tonsberg" data-img-src="logo/tonsberg.svg">Tønsberg</option>
+        <option value="tvn" data-img-src="logo/tvn.svg">TVN</option>
+        <option value="vestli" data-img-src="logo/vestli.svg">Vestli</option>
+        <option value="viking" data-img-src="logo/viking.svg">Viking</option>
+      </select>
+
+
       <div class="notification is-info">
         <div class="counters">
           <div class="counter is-big-on-desktop">
@@ -152,6 +223,9 @@
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous">
   </script>
+  <script type="text/javascript" src="http://websemantics.github.io/Image-Select/src/chosen/chosen.jquery.js"></script>
+  <script type="text/javascript" src="http://websemantics.github.io/Image-Select/src/ImageSelect.jquery.js"></script>
+
   <script>
     var pointsA = 0;
     var pointsB = 0;
@@ -159,6 +233,8 @@
     var setB = 0;
     var nameA = 0;
     var nameB = 0;
+    var logoA = '';
+    var logoB = '';
 
     function onClickPlussPointsA() {
       pointsA++;
@@ -211,13 +287,19 @@
     function save() {
       nameA = document.getElementById("nameA").value || "";
       nameB = document.getElementById("nameB").value || "";
+      var selectA = document.getElementById("logoA");
+      logoA = selectA.options[selectA.selectedIndex].value;
+      var selectB = document.getElementById("logoB");
+      logoB = selectB.options[selectB.selectedIndex].value;
       var data = {
         pointsA: pointsA,
         pointsB: pointsB,
         setA: setA,
         setB: setB,
         nameA: nameA,
-        nameB: nameB
+        nameB: nameB,
+        logoA: logoA,
+        logoB: logoB
       };
 
       jQuery.ajax({
@@ -235,5 +317,11 @@
       document.getElementById("pointsB").innerHTML = 0;
       save();
     }
+
+    $(".my-select")
+      .chosen({ width:"100%", disable_search_threshold: 100 })
+      .change(function(data) {
+        console.log(data);
+      });
     </script>
 </body>
