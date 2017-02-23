@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      body {
+        background: rgba(0,0,0,0) !important;
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: 200;
+        margin: 0;
+        padding: 0;
+      }
+      .score {
+        margin-top: 16px;
+        margin-left: 16px;
+        padding: 8px;
+        width: 220px;
+        height: 74px;
+        border: 1px solid #333;
+        border-radius: 3px;
+        background-color: #555;
+        color: white;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .team {
+        width: 100%;
+        height: 37px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .teamName {
+        font-size: 20px;
+        width: 120px;
+      }
+
+      .teamSet {
+        width: 16px;
+        text-align: center;
+        background-color: tomato;
+        border-radius: 3px;
+      }
+
+      .teamScore {
+        width: 30px;
+        font-size: 20px;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="score">
+      <div class="team">
+          <div class="teamName" id="HomeTeamName">HomeTeam</div>
+          <div class="teamSet" id="HomeTeamSet">0</div>
+          <div class="teamScore" id="HomeTeamScore">25</div>
+      </div>
+      <div class="team">
+        <div class="teamName" id="AwayTeamName">AwayTeam</div>
+        <div class="teamSet" id="AwayTeamSet">0</div>
+        <div class="teamScore" id="AwayTeamScore">25</div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous">
+    </script>
+    <script>
+      function fill(id, content) {
+        document.getElementById(id).innerHTML = content;
+      }
+
+      function load() {
+        jQuery.get("/scores", function(data, status) {
+          fill('HomeTeamName', data.nameA);
+          fill('HomeTeamSet', data.setA);
+          fill('HomeTeamScore', data.scoreA);
+          fill('AwayTeamName', data.nameB);
+          fill('AwayTeamSet', data.setB);
+          fill('AwayTeamScore', data.scoreB);
+        });
+      }
+
+      load();
+      setInterval(load, 2000);
+    </script>
+  </body>
+</html>
