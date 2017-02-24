@@ -5,19 +5,19 @@
       body {
         background: rgba(0,0,0,0) !important;
         font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-weight: 200;
+        font-weight: 300;
         margin: 0;
         padding: 0;
       }
       .score {
         margin-top: 16px;
         margin-left: 16px;
-        padding: 6px;
-        width: 240px;
+        padding: 6px 8px;
+        width: 260px;
         height: 74px;
-        border: 1px solid #333;
+        border: 1px solid #111;
         border-radius: 3px;
-        background-color: #555;
+        background-color: #444;
         color: white;
         display: flex;
         flex-direction: column;
@@ -34,24 +34,34 @@
       .teamLogo {
         width: 30px;
         height: 34px;
+        visibility: hidden;
       }
 
       .teamName {
+        letter-spacing: 1px;
         font-size: 20px;
-        width: 80px;
+        width: 150px;
+        text-transform: uppercase;
       }
 
       .teamSet {
-        width: 16px;
+        width: 18px;
+        padding: 2px 0px;
         text-align: center;
-        background-color: tomato;
+        background-color: #222222;
         border-radius: 3px;
       }
 
       .teamScore {
-        width: 30px;
-        font-size: 20px;
-        text-align: right;
+        font-weight: 300;
+        background-color: white;
+        color: black;
+        width: 34px;
+        height: 34px;
+        line-height: 37px;
+        font-size: 24px;
+        text-align: center;
+        border-radius: 3px;
       }
     </style>
   </head>
@@ -59,15 +69,15 @@
     <div class="score">
       <div class="team">
           <img class="teamLogo" id="HomeTeamLogo" alt="Home Team Logo" />
-          <div class="teamName" id="HomeTeamName">HomeTeam</div>
-          <div class="teamSet" id="HomeTeamSet">0</div>
-          <div class="teamScore" id="HomeTeamScore">25</div>
+          <div class="teamName" id="HomeTeamName"></div>
+          <div class="teamSet" id="HomeTeamSet"></div>
+          <div class="teamScore" id="HomeTeamScore"></div>
       </div>
       <div class="team">
         <img class="teamLogo" id="AwayTeamLogo" alt="Away Team Logo" />
-        <div class="teamName" id="AwayTeamName">AwayTeam</div>
-        <div class="teamSet" id="AwayTeamSet">0</div>
-        <div class="teamScore" id="AwayTeamScore">25</div>
+        <div class="teamName" id="AwayTeamName"></div>
+        <div class="teamSet" id="AwayTeamSet"></div>
+        <div class="teamScore" id="AwayTeamScore"></div>
       </div>
     </div>
     <script
@@ -81,10 +91,13 @@
       }
 
       function setImg(id, imgName) {
+        var imgEl = document.getElementById(id);
         if (!imgName || imgName === '') {
-          document.getElementById(id).src = "";
+          imgEl.style.visibility = 'hidden';
+        } else {
+          imgEl.src = '/logo/' + imgName + '.svg';
+          imgEl.style.visibility = 'visible';
         }
-        document.getElementById(id).src = '/logo/' + imgName + '.svg';
       }
 
       function load() {
