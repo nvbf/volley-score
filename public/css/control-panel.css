@@ -1,0 +1,87 @@
+.optlol {
+  width: 50px;
+  height: 50px;
+  border-radius: 3px;
+}
+
+.counters {
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.counter {
+  margin-bottom: 16px;
+}
+
+.point {
+  width: 120px;
+  height: 120px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  border: 1px solid #cacaca;
+  color: #222222;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.point > .desc {
+  font-size: 10px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+.point span {
+  font-size: 80px;
+}
+
+.score-button {
+  width: 58px;
+  height: 58px;
+  line-height: 58px;
+  font-size: 48px;
+}
+
+#setB, #setA {
+  color: #8b0000;
+  font-size: 50px;
+}
+
+@media only screen and (min-width: 655px) {
+  .is-flipped-on-desktop {
+    flex-direction: row-reverse;
+  }
+}
+
+@media only screen and (min-width: 820px) {
+
+    .is-big-on-desktop > .point {
+        width: 200px;
+        height: 200px;
+    }
+
+    .is-big-on-desktop span {
+      font-size: 150px;
+    }
+
+    .is-big-on-desktop > .score-button {
+      width: 98px;
+      height: 98px;
+      font-size: 50px;
+    }
+
+    .point > .desc {
+      font-size: 14px;
+      top: 8px;
+      left: 8px;
+    }
+}
+
+.is-hidden {
+  display: hidden;
+}

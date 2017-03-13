@@ -1,99 +1,14 @@
+<!DOCTYPE html>
+<html>
 <head>
+  <title>OBS Scoreboard</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/bulma.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/bulma.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/control-panel.css" />
   <link rel="stylesheet" href="/chosen/ImageSelect.css" type="text/css" />
   <link rel="stylesheet" href="/chosen/chosen.css" type="text/css" />
   <link rel="stylesheet" href="/chosen/flat.css" type="text/css" />
-
-  <style type="text/css">
-    .optlol {
-      width: 50px;
-      height: 50px;
-      border-radius: 3px;
-    }
-
-    .counters {
-      align-items: center;
-      justify-content: space-around;
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .counter {
-      margin-bottom: 16px;
-    }
-
-    .point {
-      width: 120px;
-      height: 120px;
-      background-color: #ffffff;
-      border-radius: 3px;
-      border: 1px solid #cacaca;
-      color: #222222;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 4px;
-    }
-
-    .point > .desc {
-      font-size: 10px;
-      position: absolute;
-      top: 4px;
-      left: 4px;
-    }
-
-    .point span {
-      font-size: 80px;
-    }
-
-    .score-button {
-      width: 58px;
-      height: 58px;
-      line-height: 58px;
-      font-size: 48px;
-    }
-
-    #setB, #setA {
-      color: #8b0000;
-      font-size: 50px;
-    }
-
-    @media only screen and (min-width: 655px) {
-      .is-flipped-on-desktop {
-        flex-direction: row-reverse;
-      }
-    }
-
-    @media only screen and (min-width: 820px) {
-
-        .is-big-on-desktop > .point {
-            width: 200px;
-            height: 200px;
-        }
-
-        .is-big-on-desktop span {
-          font-size: 150px;
-        }
-
-        .is-big-on-desktop > .score-button {
-          width: 98px;
-          height: 98px;
-          font-size: 50px;
-        }
-
-        .point > .desc {
-          font-size: 14px;
-          top: 8px;
-          left: 8px;
-        }
-    }
-
-    .is-hidden {
-      display: hidden;
-    }
-  </style>
 </head>
 <body>
   <section class="section">
@@ -123,7 +38,7 @@
         <input type="text" class="input is-large" placeholder="Home Team" id="nameA" />
       </p>
 
-      <select id="logoA" class="my-select" onChange="onLogoAChange()">
+      <select id="logoA" onChange="onLogoAChange()">
         <option value="askim" data-img-src="/logo/askim.svg">Askim</option>
         <option value="austratt" data-img-src="/logo/austratt.svg">Austrått</option>
         <option value="bktromso" data-img-src="/logo/bktromso.svg">BK Tromsø</option>
@@ -179,7 +94,7 @@
         <input type="text" class="input is-large" placeholder="Away Team" id="nameB" />
       </p>
 
-      <select id="logoB" class="my-select" onChange="onLogoBChange()">
+      <select id="logoB" onChange="onLogoBChange()">
         <option value="askim" data-img-src="/logo/askim.svg">Askim</option>
         <option value="austratt" data-img-src="/logo/austratt.svg">Austrått</option>
         <option value="bktromso" data-img-src="/logo/bktromso.svg">BK Tromsø</option>
@@ -247,68 +162,72 @@
   <script type="text/javascript" src="/chosen/ImageSelect.jquery.js"></script>
 
   <script>
-    var matchId = '';
-    var pointsA = 0;
-    var pointsB = 0;
-    var setA= 0;
-    var setB = 0;
-    var nameA = 0;
-    var nameB = 0;
-    var logoA = '';
-    var logoB = '';
+    var defaultState = {
+      matchId: '',
+      pointsA: 0,
+      pointsB: 0,
+      setA: 0,
+      setB: 0,
+      nameA: 0,
+      nameB: 0,
+      logoA: '',
+      logoB: '',
+    };
+
+    var state = Object.assign({}, defaultState);
 
     function onClickPlussPointsA() {
-      pointsA++;
-      document.getElementById("pointsA").innerHTML = pointsA;
+      state.pointsA++;
+      document.getElementById("pointsA").innerHTML = state.pointsA;
       save();
     }
 
     function onClickSubtractPointsA() {
-      pointsA--;
-      document.getElementById("pointsA").innerHTML = pointsA;
+      state.pointsA--;
+      document.getElementById("pointsA").innerHTML = state.pointsA;
       save();
     }
 
     function onClickPlussPointsB() {
-      pointsB++;
-      document.getElementById("pointsB").innerHTML = pointsB;
+      state.pointsB++;
+      document.getElementById("pointsB").innerHTML = state.pointsB;
       save();
     }
 
     function onClickSubtractPointsB() {
-      pointsB--;
-      document.getElementById("pointsB").innerHTML = pointsB;
+      state.pointsB--;
+      document.getElementById("pointsB").innerHTML = state.pointsB;
       save();
     }
 
     function onClickPlussSetA() {
-      setA++;
-      document.getElementById("setA").innerHTML = setA;
+      state.setA++;
+      document.getElementById("setA").innerHTML = state.setA;
       save();
     }
 
     function onClickSubtractSetA() {
-      setA--;
-      document.getElementById("setA").innerHTML = setA;
+      state.setA--;
+      document.getElementById("setA").innerHTML = state.setA;
       save();
     }
 
     function onClickPlussSetB() {
-      setB++;
-      document.getElementById("setB").innerHTML = setB;
+      state.setB++;
+      document.getElementById("setB").innerHTML = state.setB;
       save();
     }
 
     function onClickSubtractSetB() {
-      setB--;
-      document.getElementById("setB").innerHTML = setB;
+      state.setB--;
+      document.getElementById("setB").innerHTML = state.setB;
       save();
     }
 
     function onLogoAChange() {
       var selectA = document.getElementById('logoA');
-      logoA = selectA.options[selectA.selectedIndex].value;
-      if (logoA) {
+      state.logoA = selectA.options[selectA.selectedIndex].value;
+      if (state.logoA) {
         logoTeamName = selectA.options[selectA.selectedIndex].text;
         document.getElementById('nameA').value = logoTeamName;
         save();
@@ -317,8 +236,8 @@
 
     function onLogoBChange() {
       var selectB = document.getElementById('logoB');
-      logoB = selectB.options[selectB.selectedIndex].value;
-      if (logoB) {
+      state.logoB = selectB.options[selectB.selectedIndex].value;
+      if (state.logoB) {
         logoTeamName = selectB.options[selectB.selectedIndex].text;
         document.getElementById('nameB').value = logoTeamName;
         save();
@@ -326,51 +245,65 @@
     }
 
     function onMatchIdInput() {
-      matchId = document.getElementById('matchId').value || '';
-      if (matchId.length < 3) {
+      state.matchId = document.getElementById('matchId').value || '';
+      if (state.matchId.length < 3) {
         document.getElementById('buttonList').classList.add('is-hidden');
         document.getElementById('controlPanel').classList.add('is-hidden');
         return;
       }
+      load();
       document.getElementById('buttonList').classList.remove('is-hidden');
       document.getElementById('controlPanel').classList.remove('is-hidden');
-      document.getElementById('scoreLink').value = window.location.href + 'scoreboard.html?matchId=' + matchId;
+      document.getElementById('scoreLink').value =
+        window.location.href + 'scoreboard.html?matchId=' + state.matchId;
     }
 
     function save() {
-      nameA = document.getElementById("nameA").value || "";
-      nameB = document.getElementById("nameB").value || "";
-      var data = {
-        pointsA: pointsA,
-        pointsB: pointsB,
-        setA: setA,
-        setB: setB,
-        nameA: nameA,
-        nameB: nameB,
-        logoA: logoA,
-        logoB: logoB
-      };
+      state.nameA = document.getElementById("nameA").value || "";
+      state.nameB = document.getElementById("nameB").value || "";
 
       jQuery.ajax({
-        contentType:"application/json; charset=utf-8",
-        data: JSON.stringify(data),
-        type: "POST",
-        url: '/update/' + matchId,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(state),
+        type: 'POST',
+        url: '/update/' + state.matchId,
+      });
+    }
+
+    function load() {
+      jQuery.get('/scores/' + state.matchId)
+      .done(function(data) {
+        state = Object.assign({}, state, data);
+        refresh();
       });
     }
 
     function reset() {
-      pointsA = 0;
-      pointsB = 0;
-      document.getElementById("pointsA").innerHTML = 0;
-      document.getElementById("pointsB").innerHTML = 0;
+      state.pointsA = 0;
+      state.pointsB = 0;
+      refresh();
       save();
     }
 
-    $(".my-select")
-      .chosen({ width:"100%", disable_search_threshold: 100 })
-      .change(function(data) {
-        console.log(data);
-      });
+    function refresh() {
+      console.log('refreshing!');
+      document.getElementById("pointsA").innerHTML = state.pointsA;
+      document.getElementById("pointsB").innerHTML = state.pointsB;
+      document.getElementById("setA").innerHTML = state.setA;
+      document.getElementById("setB").innerHTML = state.setB;
+      // Set logo A
+      $("#logoA").val(state.logoA);
+      $("#logoA").trigger("chosen:updated");
+      // Set logo B
+      $("#logoB").val(state.logoB);
+      $("#logoB").trigger("chosen:updated");
+
+      document.getElementById('nameA').value = state.nameA;
+      document.getElementById('nameB').value = state.nameB;
+    }
+    $('#logoA').chosen({ width:"100%", disable_search_threshold: 100 });
+    $('#logoB').chosen({ width:"100%", disable_search_threshold: 100 });
+    refresh();
     </script>
 </body>
+</html>
