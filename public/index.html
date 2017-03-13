@@ -15,20 +15,16 @@
     <h1 class="title is-1">Volleyball Scoreboard</h1>
   </section>
   <section class="section">
-    <div class="columns is-mobile">
-      <div class="column">
-        <label class="label" for="matchId">Match ID</label>
-        <p class="control">
-          <input type="text" class="input is-large" onInput="onMatchIdInput()" placeholder="Match ID" id="matchId" />
-        </p>
-      </div>
-      <div class="column">
-        <label class="label" for="scoreLink">Scoreboard Link</label>
-        <p class="control">
-          <input type="text" class="input is-large" placeholder="Scoreboard Link" id="scoreLink" readonly />
-        </p>
-      </div>
-    </div>
+    <label class="label" for="matchId">Match ID</label>
+    <p class="control">
+      <input type="text" class="input is-large" onInput="onMatchIdInput()" placeholder="Match ID" id="matchId" />
+    </p>
+  </section>
+  <section id="scoreLinkSection" class="section is-hidden">
+    <label class="label" for="scoreLink">Scoreboard Link</label>
+    <p class="control">
+      <input type="text" class="input is-large" placeholder="Scoreboard Link" id="scoreLink" readonly />
+    </p>
   </section>
   <section id="controlPanel" class="section is-hidden">
   <div class="columns is-mobile">
@@ -249,11 +245,13 @@
       if (state.matchId.length < 3) {
         document.getElementById('buttonList').classList.add('is-hidden');
         document.getElementById('controlPanel').classList.add('is-hidden');
+        document.getElementById('scoreLinkSection').classList.add('is-hidden');
         return;
       }
       load();
       document.getElementById('buttonList').classList.remove('is-hidden');
       document.getElementById('controlPanel').classList.remove('is-hidden');
+      document.getElementById('scoreLinkSection').classList.remove('is-hidden');
       document.getElementById('scoreLink').value =
         window.location.href + 'scoreboard.html?matchId=' + state.matchId;
     }
