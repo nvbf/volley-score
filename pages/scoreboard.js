@@ -63,7 +63,7 @@ class Scoreboard extends React.Component {
     return (
       <div>
         <Head>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <title>OBS Scoreboard</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="stylesheet" href="/static/css/scoreboard.css" />
