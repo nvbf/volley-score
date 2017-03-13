@@ -1,14 +1,16 @@
 const Redis = require('../cache/redis');
 
 function updateScore(matchId, data) {
-    Redis.set(`${matchId}-score-pointsA`, data.pointsA || 0);
-    Redis.set(`${matchId}-score-pointsB`, data.pointsB || 0);
-    Redis.set(`${matchId}-score-setA`, data.setA || 0);
-    Redis.set(`${matchId}-score-setB`, data.setB || 0);
-    Redis.set(`${matchId}-score-nameA`, data.nameA || 0);
-    Redis.set(`${matchId}-score-nameB`, data.nameB || 0);
-    Redis.set(`${matchId}-score-logoA`, data.logoA || 0);
-    Redis.set(`${matchId}-score-logoB`, data.logoB || 0);
+  return Promise.all([
+    Redis.set(`${matchId}-score-pointsA`, data.pointsA || 0),
+    Redis.set(`${matchId}-score-pointsB`, data.pointsB || 0),
+    Redis.set(`${matchId}-score-setA`, data.setA || 0),
+    Redis.set(`${matchId}-score-setB`, data.setB || 0),
+    Redis.set(`${matchId}-score-nameA`, data.nameA || 0),
+    Redis.set(`${matchId}-score-nameB`, data.nameB || 0),
+    Redis.set(`${matchId}-score-logoA`, data.logoA || 0),
+    Redis.set(`${matchId}-score-logoB`, data.logoB || 0),
+  ]);
 }
 
 function fetchScore(matchId) {
