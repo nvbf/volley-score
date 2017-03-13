@@ -1,9 +1,9 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://websemantics.github.io/Image-Select/src/ImageSelect.css" type="text/css" />
-  <link rel="stylesheet" href="http://websemantics.github.io/Image-Select/src/chosen/chosen.css" type="text/css" />
-  <link rel="stylesheet" href="http://websemantics.github.io/Image-Select/src/Flat.css" type="text/css" />
+  <link rel="stylesheet" href="/css/bulma.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="/chosen/ImageSelect.css" type="text/css" />
+  <link rel="stylesheet" href="/chosen/chosen.css" type="text/css" />
+  <link rel="stylesheet" href="/chosen/flat.css" type="text/css" />
 
   <style type="text/css">
     .optlol {
@@ -91,7 +91,7 @@
     }
 
     .is-hidden {
-      display: none;
+      display: hidden;
     }
   </style>
 </head>
@@ -243,8 +243,8 @@
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous">
   </script>
-  <script type="text/javascript" src="http://websemantics.github.io/Image-Select/src/chosen/chosen.jquery.js"></script>
-  <script type="text/javascript" src="http://websemantics.github.io/Image-Select/src/ImageSelect.jquery.js"></script>
+  <script type="text/javascript" src="/chosen/chosen.jquery.js"></script>
+  <script type="text/javascript" src="/chosen/ImageSelect.jquery.js"></script>
 
   <script>
     var matchId = '';
@@ -328,6 +328,8 @@
     function onMatchIdInput() {
       matchId = document.getElementById('matchId').value || '';
       if (matchId.length < 3) {
+        document.getElementById('buttonList').classList.add('is-hidden');
+        document.getElementById('controlPanel').classList.add('is-hidden');
         return;
       }
       document.getElementById('buttonList').classList.remove('is-hidden');
