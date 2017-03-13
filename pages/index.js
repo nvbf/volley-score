@@ -109,10 +109,10 @@ class ScoreboardPanel extends React.Component {
     return (
       <div>
         <Head>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <title>OBS Control Panel</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="stylesheet" href="/static/css/bulma.min.css" crossorigin="anonymous" />
+          <link rel="stylesheet" href="/static/css/bulma.min.css" crossOrigin="anonymous" />
           <link rel="stylesheet" href="/static/css/react-select.css" />
           <link rel="stylesheet" href="/static/css/control-panel.css" />
         </Head>
