@@ -64,6 +64,10 @@
   font-size: 48px;
 }
 
+.right-margin-4 {
+  margin-right: 4px;
+}
+
 #setB, #setA {
   color: #8b0000;
   font-size: 50px;

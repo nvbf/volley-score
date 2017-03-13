@@ -12,8 +12,8 @@ class ScoreboardPanel extends React.Component {
       pointsB: 0,
       setA: 0,
       setB: 0,
-      nameA: 0,
-      nameB: 0,
+      nameA: '',
+      nameB: '',
       logoA: '',
       logoB: '',
     };
