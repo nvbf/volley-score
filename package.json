@@ -2,9 +2,12 @@
   "name": "scoreboard-obs-plugin",
   "version": "0.0.1",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "node server.js"
+    "start": "next build && node server.js"
+  },
+  "engines": {
+    "node": "7.2.1"
   },
   "dependencies": {
     "axios": "^0.15.3",
