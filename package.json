@@ -2,7 +2,7 @@
   "name": "scoreboard-obs-plugin",
   "version": "0.0.1",
   "scripts": {
-    "start": "OBSPLUGINPATH=~/obs node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "bluebird": "^3.4.7",

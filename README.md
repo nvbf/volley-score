@@ -19,15 +19,15 @@ To be used together with [OBS](https://obsproject.com/), to provide a (beach) vo
 By default you can find the application on ```http://localhost:3000```.
 The web-based scoreboard output is found on ```http://localhost:3000/score.html```.
 
-You need to set the environment variable ```OBSPLUGINPATH``` so that the system knows where to place the files.
+You need to install and run Redis before running the server.
 
 The system also need access to write to the files. If you have any problems check that the correct path is added and that the application have access rights.
 
 ## Prerequisites
 * Node.js
+* Redis
 
 ## Environment variables
-* `OBSPLUGINPATH` (obligatory) : The path to where it should update the point
 * `PORT` (optional) : Will default to 3000 if it's not set
 
 ## install
@@ -38,7 +38,7 @@ npm install
 ## Run Example
 
 ```
-OBSPLUGINPATH=/home/dir/obs/ PORT=3000 node index.js
+PORT=3000 node index.js
 ```
 
 ## Update from another device

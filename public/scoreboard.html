@@ -86,6 +86,21 @@
       crossorigin="anonymous">
     </script>
     <script>
+      function getUrlParameter(sParam) {
+          var sPageURL = decodeURIComponent(window.location.search.substring(1));
+          var sURLVariables = sPageURL.split('&');
+
+          for (var i = 0; i < sURLVariables.length; i++) {
+              var sParameterName = sURLVariables[i].split('=');
+
+              if (sParameterName[0] === sParam) {
+                  return sParameterName[1] === undefined ? true : sParameterName[1];
+              }
+          }
+      };
+
+      const matchId = getUrlParameter('matchId');
+
       function fill(id, content) {
         document.getElementById(id).innerHTML = content;
       }
@@ -101,14 +116,14 @@
       }
 
       function load() {
-        jQuery.get("/scores", function(data, status) {
+        jQuery.get("/scores/" + matchId, function(data, status) {
           fill('HomeTeamName', data.nameA);
           fill('HomeTeamSet', data.setA);
-          fill('HomeTeamScore', data.scoreA);
+          fill('HomeTeamScore', data.pointsA);
           setImg('HomeTeamLogo', data.logoA);
           fill('AwayTeamName', data.nameB);
           fill('AwayTeamSet', data.setB);
-          fill('AwayTeamScore', data.scoreB);
+          fill('AwayTeamScore', data.pointsB);
           setImg('AwayTeamLogo', data.logoB);
         });
       }

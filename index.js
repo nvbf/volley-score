@@ -3,67 +3,55 @@ var express = require('express');
 var app = express();
 var Promise = require('bluebird');
 const Redis = require('./src/cache/redis');
+const { updateScore, fetchScore } = require('./src/score/score');
 
 var bodyParser = require('body-parser');
-
-// create application/json parser
 var jsonParser = bodyParser.json();
 
-function update(pointsA = 0, pointsB = 0, setA = 0,
-  setB = 0, nameA = '', nameB = '', logoA = '', logoB = '') {
-  Redis.set('pointsA', pointsA);
-  Redis.set('pointsB', pointsB);
-  Redis.set('setA', setA);
-  Redis.set('setB', setB);
-  Redis.set('nameA', nameA);
-  Redis.set('nameB', nameB);
-  Redis.set('logoA', logoA);
-  Redis.set('logoB', logoB);
-}
-
-// Init redis empty when starting server, to make redis is filled
-update();
-
-app.post('/update', jsonParser, (req, res) => {
-  update(
-    req.body.pointsA,
-    req.body.pointsB,
-    req.body.setA,
-    req.body.setB,
-    req.body.nameA,
-    req.body.nameB,
-    req.body.logoA,
-    req.body.logoB
-  );
-  res.send('received')
+app.post('/update/:matchId', jsonParser, (req, res) => {
+  const matchId = req.params.matchId;
+  if (matchId.length < 3) {
+    return res.status(400).json(
+      { message: 'Match ID must be string with at least three characters' }
+    );
+  }
+  updateScore(matchId, {
+    pointsA: req.body.pointsA,
+    pointsB: req.body.pointsB,
+    setA: req.body.setA,
+    setB: req.body.setB,
+    nameA: req.body.nameA,
+    nameB: req.body.nameB,
+    logoA: req.body.logoA,
+    logoB: req.body.logoB
+  })
+  .then(() => res.json({ message: 'Data received.'}));
 })
 
-app.get('/scores', (req, res) => {
-  Promise.all([
-    Redis.get('pointsA'),
-    Redis.get('pointsB'),
-    Redis.get('setA'),
-    Redis.get('setB'),
-    Redis.get('nameA'),
-    Redis.get('nameB'),
-    Redis.get('logoA'),
-    Redis.get('logoB')
-  ]).then(data => {
+app.get('/scores/:matchId', (req, res) => {
+  const matchId = req.params.matchId;
+  if (matchId.length < 3) {
+    return res.status(400).json(
+      { message: 'Match ID must be string with at least three characters' }
+    );
+  }
+  return fetchScore(matchId)
+  .then(data =>
     res.json({
-      scoreA: data[0],
-      scoreB: data[1],
-      setA: data[2],
-      setB: data[3],
-      nameA: data[4],
-      nameB: data[5],
-      logoA: data[6],
-      logoB: data[7]
-    });
-  });
+      pointsA: data.pointsA,
+      pointsB: data.pointsB,
+      setA: data.setA,
+      setB: data.setB,
+      nameA: data.nameA,
+      nameB: data.nameB,
+      logoA: data.logoA,
+      logoB: data.logoB,
+    })
+  );
 });
 
 app.use(express.static('public'))
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log('app listening on port ' + (process.env.PORT || 3000))
+  console.log('OBS Scoreboard Plugin listening on port ' + (process.env.PORT || 3000))
 })

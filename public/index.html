@@ -89,13 +89,33 @@
           left: 8px;
         }
     }
+
+    .is-hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <section class="section">
-    <h1 class="title is-1">Scoreboard</h1>
+    <h1 class="title is-1">Volleyball Scoreboard</h1>
   </section>
   <section class="section">
+    <div class="columns is-mobile">
+      <div class="column">
+        <label class="label" for="matchId">Match ID</label>
+        <p class="control">
+          <input type="text" class="input is-large" onInput="onMatchIdInput()" placeholder="Match ID" id="matchId" />
+        </p>
+      </div>
+      <div class="column">
+        <label class="label" for="scoreLink">Scoreboard Link</label>
+        <p class="control">
+          <input type="text" class="input is-large" placeholder="Scoreboard Link" id="scoreLink" readonly />
+        </p>
+      </div>
+    </div>
+  </section>
+  <section id="controlPanel" class="section is-hidden">
   <div class="columns is-mobile">
     <div class="column">
       <label class="label" for="nameA">Home Team</label>
@@ -212,7 +232,7 @@
     </div>
   </div>
   </section>
-  <section class="section is-flex">
+  <section id="buttonList" class="section is-flex is-hidden">
     <div class="control">
       <a class="button is-large is-danger" onClick="reset()">Reset points</a>
       <a class="button is-large" onClick="save()">Save team names</a>
@@ -227,6 +247,7 @@
   <script type="text/javascript" src="http://websemantics.github.io/Image-Select/src/ImageSelect.jquery.js"></script>
 
   <script>
+    var matchId = '';
     var pointsA = 0;
     var pointsB = 0;
     var setA= 0;
@@ -304,6 +325,16 @@
       }
     }
 
+    function onMatchIdInput() {
+      matchId = document.getElementById('matchId').value || '';
+      if (matchId.length < 3) {
+        return;
+      }
+      document.getElementById('buttonList').classList.remove('is-hidden');
+      document.getElementById('controlPanel').classList.remove('is-hidden');
+      document.getElementById('scoreLink').value = window.location.href + 'scoreboard.html?matchId=' + matchId;
+    }
+
     function save() {
       nameA = document.getElementById("nameA").value || "";
       nameB = document.getElementById("nameB").value || "";
@@ -322,7 +353,7 @@
         contentType:"application/json; charset=utf-8",
         data: JSON.stringify(data),
         type: "POST",
-        url: '/update',
+        url: '/update/' + matchId,
       });
     }
 
