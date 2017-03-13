@@ -1,3 +1,4 @@
 node_modules
 lib/redis/redis
 npm-debug.log
+.next
