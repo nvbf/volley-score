@@ -21,6 +21,7 @@ class Scoreboard extends React.Component {
         points: 0,
       },
     };
+    this.update = this.update.bind(this);
   }
 
   static async getInitialProps(context) {
@@ -29,7 +30,17 @@ class Scoreboard extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+  }
+
   componentDidMount() {
+    const intervalId = setInterval(this.update, 2000);
+    this.setState({ intervalId });
+    this.update();
+  }
+
+  update() {
     axios.get(`/api/scores/${this.state.matchId}`)
     .then(({ data })  => this.setState({
       homeTeam: {
@@ -45,7 +56,6 @@ class Scoreboard extends React.Component {
         name: data.nameB || '',
       },
     }));
-    console.log(this.props);
   }
 
   render() {
