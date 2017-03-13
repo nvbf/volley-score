@@ -92,7 +92,6 @@ class ScoreboardPanel extends React.Component {
   }
 
   loadFromServer(matchId = this.state.matchId) {
-    console.log(this.state);
     axios.get(`/api/scores/${matchId}`)
     .then(({ data })  => this.setState({
       pointsA: data.pointsA || 0,
