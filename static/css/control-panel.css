@@ -1,3 +1,8 @@
+.is-reversed {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .select-logo-option {
   display: flex;
   flex-direction: row;

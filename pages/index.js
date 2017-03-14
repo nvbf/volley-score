@@ -8,6 +8,7 @@ class ScoreboardPanel extends React.Component {
     super(props);
     this.state = {
       matchId: '',
+      teamsFlipped: false,
       pointsA: 0,
       pointsB: 0,
       setA: 0,
@@ -26,8 +27,8 @@ class ScoreboardPanel extends React.Component {
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
     this.resetPoints = this.resetPoints.bind(this);
+    this.flipTeams = this.flipTeams.bind(this);
     this.saveToServer = this.saveToServer.bind(this);
-
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -53,6 +54,10 @@ class ScoreboardPanel extends React.Component {
       pointsA: 0,
       pointsB: 0,
     });
+  }
+
+  flipTeams() {
+    this.setState({ teamsFlipped: !this.state.teamsFlipped });
   }
 
   handleLogoAChange(selected) {
@@ -125,6 +130,7 @@ class ScoreboardPanel extends React.Component {
           onIncrement={this.increment}
           onDecrement={this.decrement}
           onResetClick={this.resetPoints}
+          onFlipClick={this.flipTeams}
           matchId={this.state.matchId}
           pointsA={this.state.pointsA}
           pointsB={this.state.pointsB}
@@ -134,6 +140,7 @@ class ScoreboardPanel extends React.Component {
           nameB={this.state.nameB}
           logoA={this.state.logoA}
           logoB={this.state.logoB}
+          isFlipped={this.state.teamsFlipped}
         />
     </div>
   );

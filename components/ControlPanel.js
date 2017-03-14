@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import TeamControl from './TeamControl';
+import classNames from 'classnames';
 
 function ControlPanel(props) {
   return (
@@ -35,7 +36,7 @@ function ControlPanel(props) {
             </p>
           </section>
           <section id="controlPanel" className="section">
-            <div className="columns is-mobile">
+            <div className={classNames('columns', 'is-mobile', { 'is-reversed': props.isFlipped })}>
               <TeamControl
                 nameLabel="Home Team"
                 name={props.nameA}
@@ -48,7 +49,8 @@ function ControlPanel(props) {
                 decrementSets={() => props.onDecrement('setA')}
                 onLogoChange={props.onLogoAChange}
                 logo={props.logoA}
-                isFlipped
+                isFlipped={!props.isFlipped}
+                isGreen={false}
               />
               <TeamControl
                 nameLabel="Away Team"
@@ -62,12 +64,15 @@ function ControlPanel(props) {
                 decrementSets={() => props.onDecrement('setB')}
                 onLogoChange={props.onLogoBChange}
                 logo={props.logoB}
+                isFlipped={props.isFlipped}
+                isGreen
               />
             </div>
           </section>
           <section id="buttonList" className="section is-flex">
             <div className="control">
-              <a className="button is-large is-danger" onClick={props.onResetClick}>Reset points</a>
+              <a className="button is-large is-danger right-margin-4" onClick={props.onResetClick}>Reset points</a>
+              <a className="button is-large is-info" onClick={props.onFlipClick}>Flip teams</a>
             </div>
           </section>
         </div>
@@ -85,6 +90,7 @@ ControlPanel.propTypes = {
   onIncrement: PropTypes.func,
   onDecrement: PropTypes.func,
   onResetClick: PropTypes.func,
+  onFlipClick: PropTypes.func.isRequired,
   matchId: PropTypes.string,
   pointsA: PropTypes.number,
   pointsB: PropTypes.number,
@@ -94,6 +100,7 @@ ControlPanel.propTypes = {
   nameB: PropTypes.string,
   logoA: PropTypes.string,
   logoB: PropTypes.string,
+  isFlipped: PropTypes.boolean,
 };
 
 export default ControlPanel;

@@ -22,23 +22,23 @@ function TeamControl(props) {
           selected={props.logo}
         />
       </div>
-      <div className={classNames('notification', props.isFlipped ? 'is-success' : 'is-info')}>
+      <div className={classNames('notification', props.isGreen ? 'is-success' : 'is-info')}>
         <div className={classNames('counters', { 'is-flipped-on-desktop': props.isFlipped })}>
           <div className="counter is-big-on-desktop">
             <div className="point">
               <span className="desc">POINTS</span>
               <span id="pointsA">{props.points}</span>
             </div>
-            <a className="button is-large score-button right-margin-4" onClick={props.incrementPoints}>+</a>
-            <a className="button is-large score-button" onClick={props.decrementPoints}>-</a>
+            <a className="button is-large score-button right-margin-4" onClick={props.decrementPoints}>-</a>
+            <a className="button is-large score-button" onClick={props.incrementPoints}>+</a>
           </div>
           <div className="counter">
             <div className="point">
               <span className="desc">SET</span>
               <span id="setA">{props.sets}</span>
             </div>
-            <a className="button is-large score-button right-margin-4" onClick={props.incrementSets}>+</a>
-            <a className="button is-large score-button" onClick={props.decrementSets}>-</a>
+            <a className="button is-large score-button right-margin-4" onClick={props.decrementSets}>-</a>
+            <a className="button is-large score-button" onClick={props.incrementSets}>+</a>
           </div>
         </div>
       </div>
