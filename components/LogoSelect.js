@@ -24,6 +24,7 @@ const options = [
   { value: 'spiritlorenskog', img: '/static/logo/spiritlorenskog.svg', label: 'Spirit Lørenskog' },
   { value: 'stod', img: '/static/logo/stod.svg', label: 'Stod' },
   { value: 'sunnfjord', img: '/static/logo/sunnfjord.svg', label: 'Sunnfjord' },
+  { value: 'tbk', img: '/static/logo/tbk.svg', label: 'TBK' },
   { value: 'tonsberg', img: '/static/logo/tonsberg.svg', label: 'Tønsberg' },
   { value: 'tvn', img: '/static/logo/tvn.svg', label: 'TVN' },
   { value: 'vestli', img: '/static/logo/vestli.svg', label: 'Vestli' },
