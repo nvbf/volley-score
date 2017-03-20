@@ -3,6 +3,7 @@ import TeamControl from './TeamControl';
 import classNames from 'classnames';
 import styled from 'styled-components';
 import CheckBox from './form/CheckBox';
+import Notification from './Notification';
 
 function ControlPanel(props) {
   const MarginCheckBox = styled(CheckBox)`
@@ -14,13 +15,20 @@ function ControlPanel(props) {
         <h1 className="title is-1">Volleyball Scoreboard</h1>
       </section>
       <section className="section">
-        <label className="label" htmlFor="matchId">Match ID</label>
+        <Notification>
+          Please insert a match code. This can be anything.
+          It does not really matter what it is, unless you want to remember it for later, or when you open
+          this page on your cell phone.<br />
+          If you pick something common, like "123", chances are high someone else i going to do the same.<br />
+          <strong>Example</strong>: "dragvoll-court-1".
+        </Notification>
+        <label className="label" htmlFor="matchId">Match Code</label>
         <p className="control">
           <input
             type="text"
             className="input is-large"
             onChange={props.onMatchIdChange}
-            placeholder="Match ID"
+            placeholder="Match Code"
             id="matchId"
           />
         </p>
