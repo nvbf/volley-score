@@ -1,8 +1,13 @@
 import React, { PropTypes } from 'react';
 import TeamControl from './TeamControl';
 import classNames from 'classnames';
+import styled from 'styled-components';
+import CheckBox from './form/CheckBox';
 
 function ControlPanel(props) {
+  const MarginCheckBox = styled(CheckBox)`
+    margin-left: 8px;
+  `;
   return (
     <div>
       <section className="section">
@@ -35,6 +40,17 @@ function ControlPanel(props) {
               />
             </p>
           </section>
+          <section id="buttonList" className="section is-flex">
+            <div className="control">
+              <a className="button is-large is-danger right-margin-4" onClick={props.onResetClick}>Reset points</a>
+              <a className="button is-large is-info right-margin-4" onClick={props.onFlipClick}>Flip teams</a>
+            </div>
+            <MarginCheckBox
+              checked={props.showLogos}
+              label="Team logos"
+              onCheck={props.onLogoCheck}
+            />
+          </section>
           <section id="controlPanel" className="section">
             <div className={classNames('columns', 'is-mobile', { 'is-reversed': props.isFlipped })}>
               <TeamControl
@@ -51,6 +67,7 @@ function ControlPanel(props) {
                 logo={props.logoA}
                 isFlipped={!props.isFlipped}
                 isGreen={false}
+                showLogo={props.showLogos}
               />
               <TeamControl
                 nameLabel="Away Team"
@@ -66,13 +83,8 @@ function ControlPanel(props) {
                 logo={props.logoB}
                 isFlipped={props.isFlipped}
                 isGreen
+                showLogo={props.showLogos}
               />
-            </div>
-          </section>
-          <section id="buttonList" className="section is-flex">
-            <div className="control">
-              <a className="button is-large is-danger right-margin-4" onClick={props.onResetClick}>Reset points</a>
-              <a className="button is-large is-info" onClick={props.onFlipClick}>Flip teams</a>
             </div>
           </section>
         </div>
@@ -90,6 +102,7 @@ ControlPanel.propTypes = {
   onIncrement: PropTypes.func,
   onDecrement: PropTypes.func,
   onResetClick: PropTypes.func,
+  onLogoCheck: PropTypes.func,
   onFlipClick: PropTypes.func.isRequired,
   matchId: PropTypes.string,
   pointsA: PropTypes.number,
@@ -100,7 +113,9 @@ ControlPanel.propTypes = {
   nameB: PropTypes.string,
   logoA: PropTypes.string,
   logoB: PropTypes.string,
-  isFlipped: PropTypes.boolean,
+  isFlipped: PropTypes.bool,
+  showLogos: PropTypes.bool,
+  showColors: PropTypes.bool,
 };
 
 export default ControlPanel;

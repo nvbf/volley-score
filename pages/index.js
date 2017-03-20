@@ -17,12 +17,15 @@ class ScoreboardPanel extends React.Component {
       nameB: '',
       logoA: '',
       logoB: '',
+      showLogos: false,
+      showColors: false,
     };
     this.handleMatchIdChange = this.handleMatchIdChange.bind(this);
     this.handleNameAChange = this.handleNameAChange.bind(this);
     this.handleNameBChange = this.handleNameBChange.bind(this);
     this.handleLogoAChange = this.handleLogoAChange.bind(this);
     this.handleLogoBChange = this.handleLogoBChange.bind(this);
+    this.handleLogoCheck = this.handleLogoCheck.bind(this);
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -90,6 +93,12 @@ class ScoreboardPanel extends React.Component {
     }
   }
 
+  handleLogoCheck() {
+    this.setState({
+      showLogos: !this.state.showLogos,
+    });
+  }
+
   saveToServer() {
     axios.post(`/api/update/${this.state.matchId}`, {
       ...this.state
@@ -127,6 +136,7 @@ class ScoreboardPanel extends React.Component {
           onNameBChange={this.handleNameBChange}
           onLogoAChange={this.handleLogoAChange}
           onLogoBChange={this.handleLogoBChange}
+          onLogoCheck={this.handleLogoCheck}
           onIncrement={this.increment}
           onDecrement={this.decrement}
           onResetClick={this.resetPoints}
@@ -141,6 +151,8 @@ class ScoreboardPanel extends React.Component {
           logoA={this.state.logoA}
           logoB={this.state.logoB}
           isFlipped={this.state.teamsFlipped}
+          showLogos={this.state.showLogos}
+          showColors={this.state.showColors}
         />
     </div>
   );

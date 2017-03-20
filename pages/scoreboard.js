@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import axios from 'axios';
+import Score from '../components/scoreboard/Scoreboard.js';
 
 class Scoreboard extends React.Component {
 
@@ -20,6 +21,8 @@ class Scoreboard extends React.Component {
         sets: 0,
         points: 0,
       },
+      showColors: false,
+      showLogos: false,
     };
     this.update = this.update.bind(this);
   }
@@ -55,6 +58,8 @@ class Scoreboard extends React.Component {
         logo: data.logoB || '',
         name: data.nameB || '',
       },
+      showLogos: data.showLogos,
+      showColors: data.showColors,
     }));
   }
 
@@ -66,42 +71,14 @@ class Scoreboard extends React.Component {
           <meta charSet="utf-8" />
           <title>OBS Scoreboard</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="stylesheet" href="/static/css/scoreboard.css" />
+          <link rel="stylesheet" href="/static/css/base.css" />
         </Head>
-        <div className="score">
-          <div className="team">
-              { !!homeTeam.logo.length &&
-                <img
-                  className="teamLogo"
-                  id="HomeTeamLogo"
-                  alt="Home Team Logo"
-                  src={`/static/logo/${homeTeam.logo}.svg`}
-                />
-              }
-              { !homeTeam.logo.length &&
-                <div className="teamLogo"></div>
-              }
-              <div className="teamName" id="HomeTeamName">{homeTeam.name}</div>
-              <div className="teamSet" id="HomeTeamSet">{homeTeam.sets}</div>
-              <div className="teamScore" id="HomeTeamScore">{homeTeam.points}</div>
-          </div>
-          <div className="team">
-            { !!awayTeam.logo.length &&
-              <img
-                className="teamLogo"
-                id="AwayTeamLogo"
-                alt="Away Team Logo"
-                src={`/static/logo/${awayTeam.logo}.svg`}
-              />
-            }
-            { !awayTeam.logo.length &&
-              <div className="teamLogo"></div>
-            }
-            <div className="teamName" id="AwayTeamName">{awayTeam.name}</div>
-            <div className="teamSet" id="AwayTeamSet">{awayTeam.sets}</div>
-            <div className="teamScore" id="AwayTeamScore">{awayTeam.points}</div>
-          </div>
-        </div>
+        <Score
+          homeTeam={this.state.homeTeam}
+          awayTeam={this.state.awayTeam}
+          showLogos={this.state.showLogos}
+          showColors={this.state.showColors}
+        />
       </div>
     );
   }

@@ -31,7 +31,9 @@ app.prepare()
       nameA: req.body.nameA,
       nameB: req.body.nameB,
       logoA: req.body.logoA,
-      logoB: req.body.logoB
+      logoB: req.body.logoB,
+      showLogos: req.body.showLogos,
+      showColors: req.body.showColors,
     })
     .then(() => res.json({ message: 'Data received.'}));
   });
@@ -54,6 +56,8 @@ app.prepare()
         nameB: data.nameB,
         logoA: data.logoA,
         logoB: data.logoB,
+        showLogos: data.showLogos,
+        showColors: data.showColors,
       })
     );
   });

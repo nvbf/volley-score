@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import LogoSelect from './LogoSelect';
+import LogoSelect from './form/LogoSelect';
 
 function TeamControl(props) {
   return (
@@ -16,12 +16,14 @@ function TeamControl(props) {
           onChange={props.onNameChange}
         />
       </p>
-      <div className="control">
-        <LogoSelect
-          onChange={props.onLogoChange}
-          selected={props.logo}
-        />
-      </div>
+      { props.showLogo &&
+        <div className="control">
+          <LogoSelect
+            onChange={props.onLogoChange}
+            selected={props.logo}
+          />
+        </div>
+      }
       <div className={classNames('notification', props.isGreen ? 'is-success' : 'is-info')}>
         <div className={classNames('counters', { 'is-flipped-on-desktop': props.isFlipped })}>
           <div className="counter is-big-on-desktop">
@@ -59,6 +61,7 @@ TeamControl.propTypes = {
   incrementSets: PropTypes.func.isRequired,
   decrementSets: PropTypes.func.isRequired,
   isFlipped: PropTypes.bool.isRequired,
+  showLogo: PropTypes.bool.isRequired,
 };
 
 TeamControl.defaultProps = {

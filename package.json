@@ -4,7 +4,11 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next build && node server.js"
+    "start": "next build && node server.js",
+    "storybook": "start-storybook -p 9001 -s ./static",
+    "build-storybook": "build-storybook",
+    "install-redis": "./lib/redis/install.sh",
+    "redis": "./lib/redis/redis/src/redis-server"
   },
   "engines": {
     "node": "7.7.2",
@@ -20,7 +24,14 @@
     "next": "2.0.0-beta.36",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-select": "^1.0.0-rc.3"
+    "react-select": "^1.0.0-rc.3",
+    "styled-components": "^1.4.4"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@kadira/react-storybook-addon-info": "^3.3.0",
+    "@kadira/storybook": "^2.21.0",
+    "@kadira/storybook-addon-knobs": "^1.7.1",
+    "storybook-host": "^1.0.14"
+  }
 }
