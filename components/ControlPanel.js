@@ -5,10 +5,11 @@ import styled from 'styled-components';
 import CheckBox from './form/CheckBox';
 import Notification from './Notification';
 
+const SuperCheckBox = styled(CheckBox)`
+  margin-right: 4px;
+`;
+
 function ControlPanel(props) {
-  const MarginCheckBox = styled(CheckBox)`
-    margin-left: 8px;
-  `;
   return (
     <div>
       <section className="section">
@@ -50,13 +51,18 @@ function ControlPanel(props) {
           </section>
           <section id="buttonList" className="section is-flex">
             <div className="control">
-              <a className="button is-large is-danger right-margin-4" onClick={props.onResetClick}>Reset points</a>
-              <a className="button is-large is-info right-margin-4" onClick={props.onFlipClick}>Flip teams</a>
+              <button className="button is-large is-danger right-margin-4" onClick={props.onResetClick}>Reset points</button>
+              <button className="button is-large is-info right-margin-4" onClick={props.onFlipClick}>Flip teams</button>
             </div>
-            <MarginCheckBox
+            <SuperCheckBox
               checked={props.showLogos}
               label="Team logos"
               onCheck={props.onLogoCheck}
+            />
+            <SuperCheckBox
+              checked={props.showColors}
+              label="Shirt colors"
+              onCheck={props.onColorCheck}
             />
           </section>
           <section id="controlPanel" className="section">
@@ -111,6 +117,7 @@ ControlPanel.propTypes = {
   onDecrement: PropTypes.func,
   onResetClick: PropTypes.func,
   onLogoCheck: PropTypes.func,
+  onColorCheck: PropTypes.func,
   onFlipClick: PropTypes.func.isRequired,
   matchId: PropTypes.string,
   pointsA: PropTypes.number,

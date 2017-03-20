@@ -26,6 +26,7 @@ class ScoreboardPanel extends React.Component {
     this.handleLogoAChange = this.handleLogoAChange.bind(this);
     this.handleLogoBChange = this.handleLogoBChange.bind(this);
     this.handleLogoCheck = this.handleLogoCheck.bind(this);
+    this.handleColorCheck = this.handleColorCheck.bind(this);
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -99,6 +100,12 @@ class ScoreboardPanel extends React.Component {
     });
   }
 
+  handleColorCheck() {
+    this.setState({
+      showColors: !this.state.showColors,
+    });
+  }
+
   saveToServer() {
     axios.post(`/api/update/${this.state.matchId}`, {
       ...this.state
@@ -137,6 +144,7 @@ class ScoreboardPanel extends React.Component {
           onLogoAChange={this.handleLogoAChange}
           onLogoBChange={this.handleLogoBChange}
           onLogoCheck={this.handleLogoCheck}
+          onColorCheck={this.handleColorCheck}
           onIncrement={this.increment}
           onDecrement={this.decrement}
           onResetClick={this.resetPoints}
