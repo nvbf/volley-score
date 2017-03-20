@@ -12,10 +12,11 @@ const SuperCheckBox = styled(CheckBox)`
 function ControlPanel(props) {
   return (
     <div>
-      <section className="section">
+      <section className="section container">
+
         <h1 className="title is-1">Volleyball Scoreboard</h1>
       </section>
-      <section className="section">
+      <section className="section container">
         <Notification>
           Please insert a match code. This can be anything.
           It does not really matter what it is, unless you want to remember it for later, or when you open
@@ -36,7 +37,7 @@ function ControlPanel(props) {
       </section>
       { props.matchId.length > 2 &&
         <div>
-          <section id="scoreLinkSection" className="section">
+          <section id="scoreLinkSection" className="section container">
             <label className="label" htmlFor="scoreLink">Scoreboard Link</label>
             <p className="control">
               <input
@@ -49,7 +50,7 @@ function ControlPanel(props) {
               />
             </p>
           </section>
-          <section id="buttonList" className="section is-flex">
+          <section id="buttonList" className="section container is-flex">
             <div className="control">
               <button className="button is-large is-danger right-margin-4" onClick={props.onResetClick}>Reset points</button>
               <button className="button is-large is-info right-margin-4" onClick={props.onFlipClick}>Flip teams</button>
@@ -65,7 +66,7 @@ function ControlPanel(props) {
               onCheck={props.onColorCheck}
             />
           </section>
-          <section id="controlPanel" className="section">
+          <section id="controlPanel" className="section container">
             <div className={classNames('columns', 'is-mobile', { 'is-reversed': props.isFlipped })}>
               <TeamControl
                 nameLabel="Home Team"
