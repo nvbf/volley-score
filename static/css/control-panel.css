@@ -3,6 +3,13 @@
   flex-direction: row-reverse;
 }
 
+.is-flex-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
 .select-logo-option {
   display: flex;
   flex-direction: row;
@@ -71,6 +78,10 @@
 
 .right-margin-4 {
   margin-right: 4px;
+}
+
+.margin-4 {
+  margin: 4px;
 }
 
 #setB, #setA {

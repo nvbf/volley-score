@@ -4,6 +4,7 @@ import TeamRow from './TeamRow';
 
 function Scoreboard({ homeTeam, awayTeam, showLogos, showColors }) {
   const Container = styled.div`
+    box-sizing: content-box;
     margin-top: 16px;
     margin-left: 16px;
     padding: 6px 8px;

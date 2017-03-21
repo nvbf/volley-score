@@ -8,6 +8,7 @@ function TeamRow(props) {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-sizing: content-box;
   `;
 
   const ImageLogo = styled.img`
@@ -40,6 +41,7 @@ function TeamRow(props) {
     color: #000;
     background-color: papayawhip;
     border-radius: 3px;
+    height: 20px;
   `;
 
   const Score = styled.div`

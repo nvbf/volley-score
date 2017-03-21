@@ -4,16 +4,16 @@ import classNames from 'classnames';
 import styled from 'styled-components';
 import CheckBox from './form/CheckBox';
 import Notification from './Notification';
+import Scoreboard from './scoreboard/Scoreboard';
 
 const SuperCheckBox = styled(CheckBox)`
-  margin-right: 4px;
+  margin: 4px;
 `;
 
 function ControlPanel(props) {
   return (
     <div>
       <section className="section container">
-
         <h1 className="title is-1">Volleyball Scoreboard</h1>
       </section>
       <section className="section container">
@@ -50,11 +50,9 @@ function ControlPanel(props) {
               />
             </p>
           </section>
-          <section id="buttonList" className="section container is-flex">
-            <div className="control">
-              <button className="button is-large is-danger right-margin-4" onClick={props.onResetClick}>Reset points</button>
-              <button className="button is-large is-info right-margin-4" onClick={props.onFlipClick}>Flip teams</button>
-            </div>
+          <section id="buttonList" className="section container is-flex-wrap">
+            <button className="button is-large is-danger margin-4" onClick={props.onResetClick}>Reset points</button>
+            <button className="button is-large is-info margin-4" onClick={props.onFlipClick}>Flip teams</button>
             <SuperCheckBox
               checked={props.showLogos}
               label="Team logos"
@@ -107,6 +105,27 @@ function ControlPanel(props) {
                 showColor={props.showColors}
               />
             </div>
+          </section>
+          <section className="section container">
+            <h3 className="title is-3">Preview</h3>
+            <Scoreboard
+              homeTeam={{
+                points: props.pointsA,
+                sets: props.setA,
+                name: props.nameA,
+                color: props.colorA,
+                logo: props.logoA,
+              }}
+              awayTeam={{
+                points: props.pointsB,
+                sets: props.setB,
+                name: props.nameB,
+                color: props.colorB,
+                logo: props.logoB,
+              }}
+              showLogos={props.showLogos}
+              showColors={props.showColors}
+            />
           </section>
         </div>
       }
