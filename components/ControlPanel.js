@@ -18,9 +18,8 @@ function ControlPanel(props) {
       </section>
       <section className="section container">
         <Notification>
-          Please insert a match code. This can be anything.
-          It does not really matter what it is, unless you want to remember it for later, or when you open
-          this page on your cell phone.<br />
+          Please insert a match code of your choice.
+          Remember it for later if you want to come back to the same game.<br />
           If you pick something common, like "123", chances are high someone else i going to do the same.<br />
           <strong>Example</strong>: "dragvoll-court-1".
         </Notification>
