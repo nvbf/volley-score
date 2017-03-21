@@ -38,12 +38,12 @@ function ControlPanel(props) {
       { props.matchId.length > 2 &&
         <div>
           <section id="scoreLinkSection" className="section container">
-            <label className="label" htmlFor="scoreLink">Scoreboard Link</label>
+            <label className="label" htmlFor="scoreLink">OBS Link</label>
             <p className="control">
               <input
                 type="text"
                 className="input is-large"
-                placeholder="Scoreboard Link"
+                placeholder="OBS Link"
                 id="scoreLink"
                 readOnly
                 value={`${window.location.href}scoreboard?matchId=${props.matchId}`}

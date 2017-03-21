@@ -23,7 +23,9 @@ app.post('/update/:matchId', jsonParser, (req, res) => {
     nameA: req.body.nameA,
     nameB: req.body.nameB,
     logoA: req.body.logoA,
-    logoB: req.body.logoB
+    logoB: req.body.logoB,
+    colorA: req.body.colorA,
+    colorB: req.body.colorB
   })
   .then(() => res.json({ message: 'Data received.'}));
 })
@@ -46,6 +48,8 @@ app.get('/scores/:matchId', (req, res) => {
       nameB: data.nameB,
       logoA: data.logoA,
       logoB: data.logoB,
+      colorA: data.colorA,
+      colorB: data.colorB,
     })
   );
 });

@@ -32,6 +32,8 @@ app.prepare()
       nameB: req.body.nameB,
       logoA: req.body.logoA,
       logoB: req.body.logoB,
+      colorA: req.body.colorA,
+      colorB: req.body.colorB,
       showLogos: req.body.showLogos,
       showColors: req.body.showColors,
     })
@@ -46,20 +48,20 @@ app.prepare()
       );
     }
     return fetchScore(matchId)
-    .then(data =>
-      res.json({
-        pointsA: data.pointsA,
-        pointsB: data.pointsB,
-        setA: data.setA,
-        setB: data.setB,
-        nameA: data.nameA,
-        nameB: data.nameB,
-        logoA: data.logoA,
-        logoB: data.logoB,
-        showLogos: data.showLogos,
-        showColors: data.showColors,
-      })
-    );
+    .then(data => res.json({
+      pointsA: data.pointsA,
+      pointsB: data.pointsB,
+      setA: data.setA,
+      setB: data.setB,
+      nameA: data.nameA,
+      nameB: data.nameB,
+      logoA: data.logoA,
+      logoB: data.logoB,
+      colorA: data.colorA,
+      colorB: data.colorB,
+      showLogos: data.showLogos,
+      showColors: data.showColors,
+    }));
   });
 
   server.get('*', (req, res) => {

@@ -32,12 +32,14 @@ Scoreboard.defaultProps = {
     points: 0,
     sets: 0,
     logo: '',
+    color: '',
   },
   awayTeam: {
     name: '',
     points: 0,
     sets: 0,
     logo: '',
+    color: '',
   },
 };
 

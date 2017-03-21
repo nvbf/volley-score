@@ -12,11 +12,13 @@ class Scoreboard extends React.Component {
       homeTeam: {
         logo: '',
         name: '',
+        color: '',
         sets: 0,
         points: 0,
       },
       awayTeam: {
         logo: '',
+        color: '',
         name: '',
         sets: 0,
         points: 0,
@@ -51,12 +53,14 @@ class Scoreboard extends React.Component {
         sets: data.setA || 0,
         logo: data.logoA || '',
         name: data.nameA || '',
+        color: data.colorA || '',
       },
       awayTeam: {
         points: data.pointsB || 0,
         sets: data.setB || 0,
         logo: data.logoB || '',
         name: data.nameB || '',
+        color: data.colorB || '',
       },
       showLogos: data.showLogos,
       showColors: data.showColors,

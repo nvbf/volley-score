@@ -33,7 +33,7 @@ function TeamControl(props) {
           />
         </div>
       }
-      <div className={classNames('notification', props.isGreen ? 'is-success' : 'is-info')}>
+      <div className={classNames('notification', props.isGreen ? 'is-light' : 'is-dark')}>
         <div className={classNames('counters', { 'is-flipped-on-desktop': props.isFlipped })}>
           <div className="counter is-big-on-desktop">
             <div className="point">

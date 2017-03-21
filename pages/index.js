@@ -133,8 +133,12 @@ class ScoreboardPanel extends React.Component {
       setB: data.setB || 0,
       logoA: data.logoA || '',
       logoB: data.logoB || '',
+      colorA: data.colorA || '',
+      colorB: data.colorB || '',
       nameA: data.nameA || '',
       nameB: data.nameB || '',
+      showColors: data.showColor,
+      showLogos: data.showLogos,
     }));
   }
 

@@ -85,7 +85,7 @@ class Picker extends React.Component {
   render() {
     return (
       <div>
-        <ColorSelect background={this.props.color} onClick={this.toggleSelecting}>Velg farge</ColorSelect>
+        <ColorSelect background={this.props.color} onClick={this.toggleSelecting}>Pick shirt color</ColorSelect>
         { this.state.isSelecting &&
           <PickerContainer>
             <ColorPicker color={this.props.color} onChangeComplete={this.handleColorSelect} />
