@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import LogoSelect from './form/LogoSelect';
+import ColorPicker from './form/ColorPicker';
 
 function TeamControl(props) {
   return (
@@ -21,6 +22,14 @@ function TeamControl(props) {
           <LogoSelect
             onChange={props.onLogoChange}
             selected={props.logo}
+          />
+        </div>
+      }
+      { props.showColor &&
+        <div className="control">
+          <ColorPicker
+            color={props.color}
+            onColorSelect={props.onColorChange}
           />
         </div>
       }
@@ -53,15 +62,18 @@ TeamControl.propTypes = {
   name: PropTypes.string.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onLogoChange: PropTypes.func.isRequired,
+  onColorChange: PropTypes.func.isRequired,
   points: PropTypes.number.isRequired,
   sets: PropTypes.number.isRequired,
   logo: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
   incrementPoints: PropTypes.func.isRequired,
   decrementPoints: PropTypes.func.isRequired,
   incrementSets: PropTypes.func.isRequired,
   decrementSets: PropTypes.func.isRequired,
   isFlipped: PropTypes.bool.isRequired,
   showLogo: PropTypes.bool.isRequired,
+  showColor: PropTypes.bool.isRequired,
 };
 
 TeamControl.defaultProps = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { withKnobs, boolean, text, select } from '@kadira/storybook-addon-knobs';
 import { host } from 'storybook-host';
-import ColorPicker from '../components/form/ColorPicker';
+import { ColorPicker } from '../components/form/ColorPicker';
 
 const withHost = host({
   title: 'ColorPicker',

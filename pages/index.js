@@ -17,6 +17,8 @@ class ScoreboardPanel extends React.Component {
       nameB: '',
       logoA: '',
       logoB: '',
+      colorA: '',
+      colorB: '',
       showLogos: false,
       showColors: false,
     };
@@ -25,6 +27,8 @@ class ScoreboardPanel extends React.Component {
     this.handleNameBChange = this.handleNameBChange.bind(this);
     this.handleLogoAChange = this.handleLogoAChange.bind(this);
     this.handleLogoBChange = this.handleLogoBChange.bind(this);
+    this.handleColorAChange = this.handleColorAChange.bind(this);
+    this.handleColorBChange = this.handleColorBChange.bind(this);
     this.handleLogoCheck = this.handleLogoCheck.bind(this);
     this.handleColorCheck = this.handleColorCheck.bind(this);
 
@@ -86,6 +90,14 @@ class ScoreboardPanel extends React.Component {
     this.setState({ nameB: event.target.value });
   }
 
+  handleColorAChange(color) {
+    this.setState({ colorA: color.hex });
+  }
+
+  handleColorBChange(color) {
+    this.setState({ colorB: color.hex });
+  }
+
   handleMatchIdChange(event) {
     const matchId = event.target.value;
     this.setState({ matchId });
@@ -143,6 +155,8 @@ class ScoreboardPanel extends React.Component {
           onNameBChange={this.handleNameBChange}
           onLogoAChange={this.handleLogoAChange}
           onLogoBChange={this.handleLogoBChange}
+          onColorAChange={this.handleColorAChange}
+          onColorBChange={this.handleColorBChange}
           onLogoCheck={this.handleLogoCheck}
           onColorCheck={this.handleColorCheck}
           onIncrement={this.increment}
@@ -158,6 +172,8 @@ class ScoreboardPanel extends React.Component {
           nameB={this.state.nameB}
           logoA={this.state.logoA}
           logoB={this.state.logoB}
+          colorA={this.state.colorA}
+          colorB={this.state.colorB}
           isFlipped={this.state.teamsFlipped}
           showLogos={this.state.showLogos}
           showColors={this.state.showColors}

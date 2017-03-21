@@ -79,10 +79,13 @@ function ControlPanel(props) {
                 incrementSets={() => props.onIncrement('setA')}
                 decrementSets={() => props.onDecrement('setA')}
                 onLogoChange={props.onLogoAChange}
+                onColorChange={props.onColorAChange}
                 logo={props.logoA}
+                color={props.colorA}
                 isFlipped={!props.isFlipped}
                 isGreen={false}
                 showLogo={props.showLogos}
+                showColor={props.showColors}
               />
               <TeamControl
                 nameLabel="Away Team"
@@ -95,10 +98,13 @@ function ControlPanel(props) {
                 incrementSets={() => props.onIncrement('setB')}
                 decrementSets={() => props.onDecrement('setB')}
                 onLogoChange={props.onLogoBChange}
+                onColorChange={props.onColorBChange}
                 logo={props.logoB}
+                color={props.colorB}
                 isFlipped={props.isFlipped}
                 isGreen
                 showLogo={props.showLogos}
+                showColor={props.showColors}
               />
             </div>
           </section>
@@ -129,6 +135,8 @@ ControlPanel.propTypes = {
   nameB: PropTypes.string,
   logoA: PropTypes.string,
   logoB: PropTypes.string,
+  colorA: PropTypes.string,
+  colorB: PropTypes.string,
   isFlipped: PropTypes.bool,
   showLogos: PropTypes.bool,
   showColors: PropTypes.bool,
