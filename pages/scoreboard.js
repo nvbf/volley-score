@@ -1,32 +1,15 @@
 import React from 'react';
 import Head from 'next/head';
-import axios from 'axios';
 import Score from '../components/scoreboard/Scoreboard.js';
+import isEqual from 'lodash/isEqual';
+import ScoreStore from '../store/store';
+import { Provider } from 'mobx-react';
 
 class Scoreboard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      matchId: props.query.matchId,
-      homeTeam: {
-        logo: '',
-        name: '',
-        color: '',
-        sets: 0,
-        points: 0,
-      },
-      awayTeam: {
-        logo: '',
-        color: '',
-        name: '',
-        sets: 0,
-        points: 0,
-      },
-      showColors: false,
-      showLogos: false,
-    };
-    this.update = this.update.bind(this);
+    this.store = new ScoreStore(props.query.matchId);
   }
 
   static async getInitialProps(context) {
@@ -35,40 +18,19 @@ class Scoreboard extends React.Component {
     };
   }
 
-  componentWillUnmount() {
-    clearInterval(this.state.intervalId);
-  }
+  /*shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(this.state, nextState);
+  }*/
 
   componentDidMount() {
-    const intervalId = setInterval(this.update, 2000);
-    this.setState({ intervalId });
-    this.update();
+    this.store.startUpdates();
   }
 
-  update() {
-    axios.get(`/api/scores/${this.state.matchId}`)
-    .then(({ data })  => this.setState({
-      homeTeam: {
-        points: data.pointsA || 0,
-        sets: data.setA || 0,
-        logo: data.logoA || '',
-        name: data.nameA || '',
-        color: data.colorA || '',
-      },
-      awayTeam: {
-        points: data.pointsB || 0,
-        sets: data.setB || 0,
-        logo: data.logoB || '',
-        name: data.nameB || '',
-        color: data.colorB || '',
-      },
-      showLogos: data.showLogos,
-      showColors: data.showColors,
-    }));
+  componentWillUnmount() {
+    this.store.stopUpdates();
   }
 
   render() {
-    const { homeTeam, awayTeam } = this.state;
     return (
       <div>
         <Head>
@@ -77,12 +39,9 @@ class Scoreboard extends React.Component {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="stylesheet" href="/static/css/base.css" />
         </Head>
-        <Score
-          homeTeam={this.state.homeTeam}
-          awayTeam={this.state.awayTeam}
-          showLogos={this.state.showLogos}
-          showColors={this.state.showColors}
-        />
+        <Provider store={this.store}>
+          <Score />
+        </Provider>
       </div>
     );
   }

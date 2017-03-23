@@ -17,7 +17,7 @@ function TeamControl(props) {
           onChange={props.onNameChange}
         />
       </p>
-      { props.showLogo &&
+      { props.showLogos &&
         <div className="control">
           <LogoSelect
             onChange={props.onLogoChange}
@@ -72,7 +72,7 @@ TeamControl.propTypes = {
   incrementSets: PropTypes.func.isRequired,
   decrementSets: PropTypes.func.isRequired,
   isFlipped: PropTypes.bool.isRequired,
-  showLogo: PropTypes.bool.isRequired,
+  showLogos: PropTypes.bool.isRequired,
   showColor: PropTypes.bool.isRequired,
 };
 

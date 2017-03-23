@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import styled from 'styled-components';
 import CheckBox from './form/CheckBox';
 import Notification from './Notification';
-import Scoreboard from './scoreboard/Scoreboard';
+import { Scoreboard } from './scoreboard/Scoreboard';
 
 const SuperCheckBox = styled(CheckBox)`
   margin: 4px;
@@ -81,7 +81,7 @@ function ControlPanel(props) {
                 color={props.colorA}
                 isFlipped={!props.isFlipped}
                 isGreen={false}
-                showLogo={props.showLogos}
+                showLogos={props.showLogos}
                 showColor={props.showColors}
               />
               <TeamControl
@@ -100,7 +100,7 @@ function ControlPanel(props) {
                 color={props.colorB}
                 isFlipped={props.isFlipped}
                 isGreen
-                showLogo={props.showLogos}
+                showLogos={props.showLogos}
                 showColor={props.showColors}
               />
             </div>

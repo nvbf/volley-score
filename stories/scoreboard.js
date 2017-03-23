@@ -4,13 +4,6 @@ import { withKnobs, text, number, select, boolean } from '@kadira/storybook-addo
 import { host } from 'storybook-host';
 import Scoreboard from '../components/scoreboard/Scoreboard';
 
-const withHost = host({
-  title: 'Scoreboard',
-  align: 'center',
-  height: '80%',
-  width: '100%',
-});
-
 const numberFromZeroToNinetyNine = label => number(label, 0, {
    range: true,
    min: 0,
@@ -34,7 +27,6 @@ const logoSelect = label => select(label, {
 
 storiesOf('Scoreboard', module)
   .addDecorator(withKnobs)
-  .addDecorator(withHost)
   .addWithInfo('with no props', () => (
     <Scoreboard
       homeTeam={{
