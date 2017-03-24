@@ -1,3 +1,15 @@
+.grey-box {
+  border-radius: 3px;
+  background-color: #464646;
+  padding: 16px 0px;
+}
+
+.light-box {
+  border-radius: 3px;
+  background-color: #e5e5e5;
+  padding: 16px 0px;
+}
+
 .is-reversed {
   display: flex;
   flex-direction: row-reverse;

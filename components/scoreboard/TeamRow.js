@@ -30,9 +30,15 @@ const Name = styled.div`
   letter-spacing: 1px;
   font-size: 20px;
   min-width: 100px;
+  max-width: 170px;
   text-transform: uppercase;
   margin-left: 8px;
   text-shadow: 1px 1px #000;
+  height: 22px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 const Sets = styled.div`
@@ -71,12 +77,14 @@ const RightContainer = styled.div`
 `;
 
 const AnimatedLogo = Animated.createAnimatedComponent(ImageLogo);
+const AnimatedShirtColor = Animated.createAnimatedComponent(ShirtColor);
 
 class TeamRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       logoAnim: new Animated.Value(0),
+      colorAnim: new Animated.Value(0),
     };
   }
 
@@ -92,12 +100,18 @@ class TeamRow extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
+    if (!nextProps.showColor) {
+      Animated.spring(this.state.colorAnim, { toValue: 0 }).start();
+    }
     if (!nextProps.showLogos) {
       Animated.spring(this.state.logoAnim, { toValue: 0 }).start();
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.showColor) {
+      Animated.spring(this.state.colorAnim, { toValue: 1 }).start();
+    }
     if (this.props.showLogos) {
       Animated.spring(this.state.logoAnim, { toValue: 1 }).start();
     }
@@ -115,7 +129,14 @@ class TeamRow extends React.Component {
             }}
             src={props.logo} alt="Home Team Logo"
           />
-          { props.showColor && <ShirtColor hex={props.color} /> }
+          <AnimatedShirtColor
+            style={{
+              opacity: this.state.colorAnim,
+              width: this.state.colorAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 16] }),
+              marginLeft: this.state.colorAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 8 ]}),
+            }}
+            hex={props.color}
+          />
           <Name>{props.name}</Name>
         </LeftContainer>
         <RightContainer>

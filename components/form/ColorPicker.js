@@ -53,6 +53,7 @@ export const ColorSelect = styled.button`
   cursor: pointer;
   border: none;
   text-transform: uppercase;
+  overflow: hidden;
 `;
 
 export const PickerContainer = styled.div`

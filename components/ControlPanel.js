@@ -63,6 +63,27 @@ function ControlPanel(props) {
               onCheck={props.onColorCheck}
             />
           </section>
+          <section className="section container">
+            <h3 className="title is-3">Preview</h3>
+            <Scoreboard
+              homeTeam={{
+                points: props.pointsA,
+                sets: props.setA,
+                name: props.nameA,
+                color: props.colorA,
+                logo: props.logoA,
+              }}
+              awayTeam={{
+                points: props.pointsB,
+                sets: props.setB,
+                name: props.nameB,
+                color: props.colorB,
+                logo: props.logoB,
+              }}
+              showLogos={props.showLogos}
+              showColors={props.showColors}
+            />
+          </section>
           <section id="controlPanel" className="section container">
             <div className={classNames('columns', 'is-mobile', { 'is-reversed': props.isFlipped })}>
               <TeamControl
@@ -104,27 +125,6 @@ function ControlPanel(props) {
                 showColor={props.showColors}
               />
             </div>
-          </section>
-          <section className="section container">
-            <h3 className="title is-3">Preview</h3>
-            <Scoreboard
-              homeTeam={{
-                points: props.pointsA,
-                sets: props.setA,
-                name: props.nameA,
-                color: props.colorA,
-                logo: props.logoA,
-              }}
-              awayTeam={{
-                points: props.pointsB,
-                sets: props.setB,
-                name: props.nameB,
-                color: props.colorB,
-                logo: props.logoB,
-              }}
-              showLogos={props.showLogos}
-              showColors={props.showColors}
-            />
           </section>
         </div>
       }
