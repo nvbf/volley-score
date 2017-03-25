@@ -37,6 +37,7 @@
     "@kadira/react-storybook-addon-info": "^3.3.0",
     "@kadira/storybook": "^2.21.0",
     "@kadira/storybook-addon-knobs": "^1.7.1",
+    "babel-preset-env": "^1.2.2",
     "storybook-host": "^1.0.14"
   }
 }

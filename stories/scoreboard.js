@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import { withKnobs, text, number, select, boolean } from '@kadira/storybook-addon-knobs';
 import { host } from 'storybook-host';
-import Scoreboard from '../components/scoreboard/Scoreboard';
+import { Scoreboard } from '../components/scoreboard/Scoreboard';
 
 const numberFromZeroToNinetyNine = label => number(label, 0, {
    range: true,

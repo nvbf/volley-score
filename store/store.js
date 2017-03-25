@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class ScoreStore {
 
-  @observable matchId = 124;
+  @observable matchId;
   @observable showColors = true;
   @observable showLogos = true;
 

@@ -13,10 +13,8 @@ const SuperCheckBox = styled(CheckBox)`
 function ControlPanel(props) {
   return (
     <div>
-      <section className="section container">
+      <section className="section is-medium container">
         <h1 className="title is-1">Volleyball Scoreboard</h1>
-      </section>
-      <section className="section container">
         <Notification>
           Please insert a match code of your choice.
           Remember it for later if you want to come back to the same game.<br />
@@ -33,10 +31,8 @@ function ControlPanel(props) {
             id="matchId"
           />
         </p>
-      </section>
-      { props.matchId.length > 2 &&
-        <div>
-          <section id="scoreLinkSection" className="section container">
+        { props.matchId.length > 2 &&
+          <div>
             <label className="label" htmlFor="scoreLink">OBS Link</label>
             <p className="control">
               <input
@@ -48,7 +44,11 @@ function ControlPanel(props) {
                 value={`${window.location.href}scoreboard?matchId=${props.matchId}`}
               />
             </p>
-          </section>
+          </div>
+        }
+      </section>
+      { props.matchId.length > 2 &&
+        <div>
           <section id="buttonList" className="section container is-flex-wrap">
             <button className="button is-large is-danger margin-4" onClick={props.onResetClick}>Reset points</button>
             <button className="button is-large is-info margin-4" onClick={props.onFlipClick}>Flip teams</button>

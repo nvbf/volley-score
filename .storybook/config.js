@@ -7,6 +7,7 @@ function loadStories() {
   require('../stories/scoreboard');
   require('../stories/checkbox');
   require('../stories/colorpicker');
+  require('../stories/bar');
 }
 
 configure(loadStories, module);

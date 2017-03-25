@@ -1,6 +1,7 @@
 {
   "presets": [
     "next/babel",
+    "env",
   ],
   "plugins": [
     "transform-decorators-legacy"
