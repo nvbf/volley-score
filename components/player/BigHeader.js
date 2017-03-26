@@ -1,5 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Animated from 'animated/lib/targets/react-dom';
+
+const OuterContainer = styled.div`
+  overflow: hidden;
+  width: 908px;
+  height: 96px;
+  margin-bottom: 8px;
+`;
 
 const Container = styled.div`
   width: 908px;
@@ -12,7 +20,6 @@ const Container = styled.div`
   align-items: center;
   font-family: 'Source Sans Pro', sans-serif;
   text-transform: uppercase;
-  margin-bottom: 8px;
 `;
 
 const Dangle = styled.div`
@@ -33,14 +40,41 @@ const Text = styled.div`
   width: 100%;
 `;
 
-function BigHeader(props) {
-  return (
-    <Container>
-      <Logo src={props.logo} />
-      <Text>{props.text}</Text>
-      <Dangle />
-    </Container>
-  );
+const AnimatedContainer = Animated.createAnimatedComponent(OuterContainer);
+
+class BigHeader extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      widthAnim: new Animated.Value(0),
+    };
+  }
+
+  componentDidUpdate() {
+    if (this.props.isShowing) {
+      Animated.spring(this.state.widthAnim, { toValue: 1 }).start();
+    } else {
+      Animated.spring(this.state.widthAnim, { toValue: 0 }).start();
+    }
+  }
+
+  render() {
+    return (
+      <AnimatedContainer
+        style={{
+          opacity: this.state.widthAnim,
+          width: this.state.widthAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 908] }),
+        }}
+      >
+        <Container>
+          <Logo src={this.props.logo} />
+          <Text>{this.props.text}</Text>
+          <Dangle />
+        </Container>
+      </AnimatedContainer>
+    );
+  }
 }
 
 export default BigHeader;

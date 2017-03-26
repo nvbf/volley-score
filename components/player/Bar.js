@@ -96,7 +96,6 @@ class Bar extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.animDelay);
     Animated.sequence([
       Animated.delay(this.props.animDelay),
       Animated.spring(this.state.firstAnim, { toValue: 1, tension: 70 }),
@@ -109,6 +108,7 @@ class Bar extends React.Component {
     return (
       <AnimatedContainer style={{
         height: this.state.firstAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 48] }),
+        opacity: this.state.firstAnim,
       }}>
         <NumContainer active={this.props.active}>
           <AnimatedNum style={{

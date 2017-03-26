@@ -9,15 +9,24 @@ const Container = styled.div`
   width: 300px;
 `;
 
-const Image = styled.img`
-  width:  298px;
+const ImageContainer = styled.div`
+  width:  300px;
   height: 0px;
-  opacity: 0;
-  border: 1px solid rgba(240, 240, 240, 0.8);
   margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+  background: #ccc;
+`;
+
+const Image = styled.img`
+  height: 450px;
+  width: 300px;
+  position: absolute;
+  left: 0;
 `;
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
+const AnimatedImageContainer = Animated.createAnimatedComponent(ImageContainer);
 
 class PlayerImage extends React.Component {
 
@@ -25,30 +34,30 @@ class PlayerImage extends React.Component {
     super(props);
     this.state = {
       heightAnim: new Animated.Value(0),
-      fadeAnim: new Animated.Value(0),
     };
   }
 
-  componentDidMount() {
-    Animated.sequence([
-      Animated.delay(this.props.delay * 2),
-      Animated.stagger(300, [
-        Animated.spring(this.state.heightAnim, { toValue: 1 }),
-        Animated.spring(this.state.fadeAnim, { toValue: 1 }),
-      ]),
-    ]).start();
+  componentDidUpdate() {
+    if (this.props.isShowing) {
+      Animated.spring(this.state.heightAnim, { toValue: 1 }).start();
+    } else {
+      Animated.spring(this.state.heightAnim, { toValue: 0 }).start();
+    }
   }
 
   render() {
+    let { player } = this.props;
     return (
       <Container>
-        <AnimatedImage
+        <AnimatedImageContainer
           style={{
-            height: this.state.heightAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 448] }),
-            opacity: this.state.fadeAnim,
+            height: this.state.heightAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 450] }),
+            opacity: this.state.heightAnim,
           }}
-          src={this.props.image} />
-        <SmallBar number={this.props.number} name={this.props.name} />
+        >
+          <Image src={player.image} />
+        </AnimatedImageContainer>
+        {this.props.isShowing  && <SmallBar number={player.number} name={player.name} /> }
       </Container>
     );
   }
