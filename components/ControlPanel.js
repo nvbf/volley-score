@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import TeamControl from './TeamControl';
 import classNames from 'classnames';
 import styled from 'styled-components';
+import TeamControl from './TeamControl';
 import CheckBox from './form/CheckBox';
 import Notification from './Notification';
 import { Scoreboard } from './scoreboard/Scoreboard';
@@ -18,8 +18,10 @@ function ControlPanel(props) {
         <Notification>
           Please insert a match code of your choice.
           Remember it for later if you want to come back to the same game.<br />
-          If you pick something common, like "123", chances are high someone else i going to do the same.<br />
-          <strong>Example</strong>: "dragvoll-court-1".
+          If you pick something common, like `123`,
+          chances are high someone else i going to do the same.
+          <br />
+          <strong>Example</strong>: `dragvoll-court-1`.
         </Notification>
         <label className="label" htmlFor="matchId">Match Code</label>
         <p className="control">
@@ -31,7 +33,7 @@ function ControlPanel(props) {
             id="matchId"
           />
         </p>
-        { props.matchId.length > 2 &&
+        {props.matchId.length > 2 &&
           <div>
             <label className="label" htmlFor="scoreLink">OBS Link</label>
             <p className="control">
@@ -44,14 +46,23 @@ function ControlPanel(props) {
                 value={`${window.location.href}scoreboard?matchId=${props.matchId}`}
               />
             </p>
-          </div>
-        }
+          </div>}
       </section>
-      { props.matchId.length > 2 &&
+      {props.matchId.length > 2 &&
         <div>
           <section id="buttonList" className="section container is-flex-wrap">
-            <button className="button is-large is-danger margin-4" onClick={props.onResetClick}>Reset points</button>
-            <button className="button is-large is-info margin-4" onClick={props.onFlipClick}>Flip teams</button>
+            <button
+              className="button is-large is-danger margin-4"
+              onClick={props.onResetClick}
+            >
+              Reset points
+            </button>
+            <button
+              className="button is-large is-info margin-4"
+              onClick={props.onFlipClick}
+            >
+              Flip teams
+            </button>
             <SuperCheckBox
               checked={props.showLogos}
               label="Team logos"
@@ -85,17 +96,21 @@ function ControlPanel(props) {
             />
           </section>
           <section id="controlPanel" className="section container">
-            <div className={classNames('columns', 'is-mobile', { 'is-reversed': props.isFlipped })}>
+            <div
+              className={classNames('columns', 'is-mobile', {
+                'is-reversed': props.isFlipped,
+              })}
+            >
               <TeamControl
                 nameLabel="Home Team"
                 name={props.nameA}
                 onNameChange={props.onNameAChange}
                 points={props.pointsA}
                 sets={props.setA}
-                incrementPoints={() => props.onIncrement('pointsA')}
-                decrementPoints={() => props.onDecrement('pointsA')}
-                incrementSets={() => props.onIncrement('setA')}
-                decrementSets={() => props.onDecrement('setA')}
+                incrementPoints={props.onIncrement('pointsA')}
+                decrementPoints={props.onDecrement('pointsA')}
+                incrementSets={props.onIncrement('setA')}
+                decrementSets={props.onDecrement('setA')}
                 onLogoChange={props.onLogoAChange}
                 onColorChange={props.onColorAChange}
                 logo={props.logoA}
@@ -111,10 +126,10 @@ function ControlPanel(props) {
                 onNameChange={props.onNameBChange}
                 points={props.pointsB}
                 sets={props.setB}
-                incrementPoints={() => props.onIncrement('pointsB')}
-                decrementPoints={() => props.onDecrement('pointsB')}
-                incrementSets={() => props.onIncrement('setB')}
-                decrementSets={() => props.onDecrement('setB')}
+                incrementPoints={props.onIncrement('pointsB')}
+                decrementPoints={props.onDecrement('pointsB')}
+                incrementSets={props.onIncrement('setB')}
+                decrementSets={props.onDecrement('setB')}
                 onLogoChange={props.onLogoBChange}
                 onColorChange={props.onColorBChange}
                 logo={props.logoB}
@@ -126,38 +141,39 @@ function ControlPanel(props) {
               />
             </div>
           </section>
-        </div>
-      }
-      </div>
+        </div>}
+    </div>
   );
 }
 
 ControlPanel.propTypes = {
-  onMatchIdChange: PropTypes.func,
-  onNameAChange: PropTypes.func,
-  onNameBChange: PropTypes.func,
-  onLogoAChange: PropTypes.func,
-  onLogoBChange: PropTypes.func,
-  onIncrement: PropTypes.func,
-  onDecrement: PropTypes.func,
-  onResetClick: PropTypes.func,
-  onLogoCheck: PropTypes.func,
-  onColorCheck: PropTypes.func,
+  onMatchIdChange: PropTypes.func.isRequired,
+  onNameAChange: PropTypes.func.isRequired,
+  onNameBChange: PropTypes.func.isRequired,
+  onLogoAChange: PropTypes.func.isRequired,
+  onLogoBChange: PropTypes.func.isRequired,
+  onColorAChange: PropTypes.func.isRequired,
+  onColorBChange: PropTypes.func.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  onResetClick: PropTypes.func.isRequired,
+  onLogoCheck: PropTypes.func.isRequired,
+  onColorCheck: PropTypes.func.isRequired,
   onFlipClick: PropTypes.func.isRequired,
-  matchId: PropTypes.string,
-  pointsA: PropTypes.number,
-  pointsB: PropTypes.number,
-  setA: PropTypes.number,
-  setB: PropTypes.number,
-  nameA: PropTypes.string,
-  nameB: PropTypes.string,
-  logoA: PropTypes.string,
-  logoB: PropTypes.string,
-  colorA: PropTypes.string,
-  colorB: PropTypes.string,
-  isFlipped: PropTypes.bool,
-  showLogos: PropTypes.bool,
-  showColors: PropTypes.bool,
+  matchId: PropTypes.string.isRequired,
+  pointsA: PropTypes.number.isRequired,
+  pointsB: PropTypes.number.isRequired,
+  setA: PropTypes.number.isRequired,
+  setB: PropTypes.number.isRequired,
+  nameA: PropTypes.string.isRequired,
+  nameB: PropTypes.string.isRequired,
+  logoA: PropTypes.string.isRequired,
+  logoB: PropTypes.string.isRequired,
+  colorA: PropTypes.string.isRequired,
+  colorB: PropTypes.string.isRequired,
+  isFlipped: PropTypes.bool.isRequired,
+  showLogos: PropTypes.bool.isRequired,
+  showColors: PropTypes.bool.isRequired,
 };
 
 export default ControlPanel;

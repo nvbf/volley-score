@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Animated from 'animated/lib/targets/react-dom';
 import SmallBar from './SmallBar';
@@ -25,11 +26,9 @@ const Image = styled.img`
   left: 0;
 `;
 
-const AnimatedImage = Animated.createAnimatedComponent(Image);
 const AnimatedImageContainer = Animated.createAnimatedComponent(ImageContainer);
 
 class PlayerImage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -46,21 +45,36 @@ class PlayerImage extends React.Component {
   }
 
   render() {
-    let { player } = this.props;
     return (
       <Container>
         <AnimatedImageContainer
           style={{
-            height: this.state.heightAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 450] }),
+            height: this.state.heightAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 450],
+            }),
             opacity: this.state.heightAnim,
           }}
         >
-          <Image src={player.image} />
+          <Image src={this.props.player.image} />
         </AnimatedImageContainer>
-        {this.props.isShowing  && <SmallBar number={player.number} name={player.name} /> }
+        {this.props.isShowing &&
+          <SmallBar
+            number={this.props.player.number}
+            name={this.props.player.name}
+          />}
       </Container>
     );
   }
 }
+
+PlayerImage.propTypes = {
+  isShowing: PropTypes.bool.isRequired,
+  player: PropTypes.shape({
+    image: PropTypes.string,
+    number: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+};
 
 export default PlayerImage;

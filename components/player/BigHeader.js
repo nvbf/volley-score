@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Animated from 'animated/lib/targets/react-dom';
 
@@ -43,7 +44,6 @@ const Text = styled.div`
 const AnimatedContainer = Animated.createAnimatedComponent(OuterContainer);
 
 class BigHeader extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +64,10 @@ class BigHeader extends React.Component {
       <AnimatedContainer
         style={{
           opacity: this.state.widthAnim,
-          width: this.state.widthAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 908] }),
+          width: this.state.widthAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 908],
+          }),
         }}
       >
         <Container>
@@ -76,5 +79,11 @@ class BigHeader extends React.Component {
     );
   }
 }
+
+BigHeader.propTypes = {
+  logo: PropTypes.string.isRequired,
+  isShowing: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
+};
 
 export default BigHeader;

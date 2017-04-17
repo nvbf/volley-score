@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TeamRow from './TeamRow';
 import { observer, inject } from 'mobx-react';
+import TeamRow from './TeamRow';
 
 const Container = styled.div`
   box-sizing: content-box;
@@ -26,6 +27,21 @@ export function Scoreboard({ homeTeam, awayTeam, showLogos, showColors }) {
     </Container>
   );
 }
+
+const TeamShape = PropTypes.shape({
+  name: PropTypes.string,
+  points: PropTypes.number,
+  sets: PropTypes.number,
+  logo: PropTypes.string,
+  color: PropTypes.string,
+});
+
+Scoreboard.propTypes = {
+  homeTeam: TeamShape.isRequired,
+  awayTeam: TeamShape.isRequired,
+  showLogos: PropTypes.bool.isRequired,
+  showColors: PropTypes.bool.isRequired,
+};
 
 Scoreboard.defaultProps = {
   matchId: 0,

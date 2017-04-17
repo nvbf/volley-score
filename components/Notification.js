@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class Notification extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -24,10 +24,14 @@ class Notification extends React.Component {
     return (
       <div className="notification">
         <button className="delete" onClick={this.hide} />
-        { this.props.children }
+        {this.props.children}
       </div>
     );
   }
 }
+
+Notification.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Notification;

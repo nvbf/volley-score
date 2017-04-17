@@ -2,7 +2,6 @@ import { observable, action } from 'mobx';
 import axios from 'axios';
 
 class ScoreStore {
-
   @observable matchId;
   @observable showColors = true;
   @observable showLogos = true;
@@ -32,15 +31,14 @@ class ScoreStore {
   @action startUpdates = () => {
     this.intervalId = setInterval(this.update, 2000);
     this.update();
-  }
+  };
 
   @action stopUpdates = () => {
     clearInterval(this.intervalId);
-  }
+  };
 
   update = () => {
-    axios.get(`/api/scores/${this.matchId}`)
-    .then(({ data }) => {
+    axios.get(`/api/scores/${this.matchId}`).then(({ data }) => {
       this.homeTeam = {
         points: data.pointsA || 0,
         sets: data.setA || 0,
@@ -58,8 +56,7 @@ class ScoreStore {
       this.showLogos = data.showLogos;
       this.showColors = data.showColors;
     });
-  }
-
+  };
 }
 
 export default ScoreStore;

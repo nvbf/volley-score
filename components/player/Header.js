@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -34,5 +35,10 @@ function Header(props) {
     </Container>
   );
 }
+
+Header.propTypes = {
+  logo: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 
 export default Header;

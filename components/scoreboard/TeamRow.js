@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Animated from 'animated/lib/targets/react-dom';
-import isEqual from 'lodash/isEqual';
 
 const Row = styled.div`
   width: 100%;
@@ -88,14 +87,14 @@ class TeamRow extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     return (
-       this.props.color !== nextProps.color
-    || this.props.name !== nextProps.name
-    || this.props.points !== nextProps.points
-    || this.props.sets !== nextProps.sets
-    || this.props.showColor !== nextProps.showColor
-    || this.props.showLogos !== nextProps.showLogos
+      this.props.color !== nextProps.color ||
+      this.props.name !== nextProps.name ||
+      this.props.points !== nextProps.points ||
+      this.props.sets !== nextProps.sets ||
+      this.props.showColor !== nextProps.showColor ||
+      this.props.showLogos !== nextProps.showLogos
     );
   }
 
@@ -108,7 +107,7 @@ class TeamRow extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     if (this.props.showColor) {
       Animated.spring(this.state.colorAnim, { toValue: 1 }).start();
     }
@@ -118,30 +117,39 @@ class TeamRow extends React.Component {
   }
 
   render() {
-    const { props } = this;
     return (
       <Row>
         <LeftContainer>
           <AnimatedLogo
             style={{
               opacity: this.state.logoAnim,
-              width: this.state.logoAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 33] }),
+              width: this.state.logoAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 33],
+              }),
             }}
-            src={props.logo} alt="Home Team Logo"
+            src={this.props.logo}
+            alt="Home Team Logo"
           />
           <AnimatedShirtColor
             style={{
               opacity: this.state.colorAnim,
-              width: this.state.colorAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 16] }),
-              marginLeft: this.state.colorAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 8 ]}),
+              width: this.state.colorAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 16],
+              }),
+              marginLeft: this.state.colorAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 8],
+              }),
             }}
-            hex={props.color}
+            hex={this.props.color}
           />
-          <Name>{props.name}</Name>
+          <Name>{this.props.name}</Name>
         </LeftContainer>
         <RightContainer>
-          <Sets>{props.sets}</Sets>
-          <Score>{props.points}</Score>
+          <Sets>{this.props.sets}</Sets>
+          <Score>{this.props.points}</Score>
         </RightContainer>
       </Row>
     );
@@ -156,7 +164,7 @@ TeamRow.propTypes = {
   sets: PropTypes.number,
   showColor: PropTypes.bool,
   showLogos: PropTypes.bool,
-}
+};
 
 TeamRow.defaultProps = {
   sets: 0,

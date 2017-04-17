@@ -1,31 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Bar from './Bar';
-import Header from './Header';
 
 const Container = styled.div`
   width: 600px;
   min-height: 48px;
 `;
 
-class BarList extends React.Component {
-
-  render() {
-    return (
-      <Container>
-      { this.props.isShowing && this.props.team.players.map((player, index) =>
+function BarList(props) {
+  return (
+    <Container>
+      {props.isShowing &&
+        props.team.players.map((player, index) => (
           <Bar
             key={player.num}
             animDelay={index * 60}
             number={player.num}
             name={player.name}
             position={player.position}
-            active={index === this.props.selectedIndex}
+            active={index === props.selectedIndex}
           />
-      )}
-      </Container>
-    );
-  }
+        ))}
+    </Container>
+  );
 }
+
+BarList.propTypes = {
+  isShowing: PropTypes.bool.isRequired,
+  selectedIndex: PropTypes.number.isRequired,
+  team: PropTypes.shape({
+    players: PropTypes.array,
+  }).isRequired,
+};
 
 export default BarList;

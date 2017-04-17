@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Animated from 'animated/lib/targets/react-dom';
 
@@ -16,8 +17,8 @@ const Container = styled.div`
 const NumContainer = styled.div`
   height: 100%;
   width: 72px;
-  background: ${props => props.active ?  '#FFDC00' : 'white'};
-  background: ${props => props.active ? 'linear-gradient(#FFDC00, #FFB54B)' : 'linear-gradient(#fff, #aaa)'};
+  background: ${props => (props.active ? '#FFDC00' : 'white')};
+  background: ${props => (props.active ? 'linear-gradient(#FFDC00, #FFB54B)' : 'linear-gradient(#fff, #aaa)')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +48,7 @@ const PositionContainer = styled.div`
   font-weight: 600;
   font-size: 20px;
   line-height: 48px;
-  color: ${props => props.libero ? '#FFDC00' : '#FFFFFF'};
+  color: ${props => (props.libero ? '#FFDC00' : '#FFFFFF')};
   text-transform: uppercase;
   text-align: center;
   position: relative;
@@ -86,7 +87,6 @@ const AnimatedPosition = Animated.createAnimatedComponent(Position);
 const AnimatedNum = Animated.createAnimatedComponent(Num);
 
 class Bar extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -106,36 +106,63 @@ class Bar extends React.Component {
 
   render() {
     return (
-      <AnimatedContainer style={{
-        height: this.state.firstAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 48] }),
-        opacity: this.state.firstAnim,
-      }}>
+      <AnimatedContainer
+        style={{
+          height: this.state.firstAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 48],
+          }),
+          opacity: this.state.firstAnim,
+        }}
+      >
         <NumContainer active={this.props.active}>
-          <AnimatedNum style={{
-            opacity: this.state.anim,
-          }}>
+          <AnimatedNum
+            style={{
+              opacity: this.state.anim,
+            }}
+          >
             {this.props.number}
           </AnimatedNum>
         </NumContainer>
         <NameContainer>
-          <AnimatedName style={{
-            left: this.state.anim.interpolate({ inputRange: [0, 1], outputRange: [-500, 16] })
-          }}>
+          <AnimatedName
+            style={{
+              left: this.state.anim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-500, 16],
+              }),
+            }}
+          >
             {this.props.name}
           </AnimatedName>
         </NameContainer>
-        <PositionContainer libero={this.props.position.toLowerCase() === 'libero'}>
-          <AnimatedPosition style={{
-            right: this.state.anim.interpolate({ inputRange: [0, 1], outputRange: [-250, 0] })
-          }}>
+        <PositionContainer
+          libero={this.props.position.toLowerCase() === 'libero'}
+        >
+          <AnimatedPosition
+            style={{
+              right: this.state.anim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-250, 0],
+              }),
+            }}
+          >
             {this.props.position}
           </AnimatedPosition>
         </PositionContainer>
         <Dangle />
       </AnimatedContainer>
-  );
+    );
   }
 }
+
+Bar.propTypes = {
+  animDelay: PropTypes.number.isRequired,
+  position: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+  number: PropTypes.number.isRequired,
+};
 
 Bar.defaultProps = {
   animDelay: 0,

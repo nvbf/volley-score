@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.button`
   width: 200px;
-  border: 1px solid ${props => props.checked ? '#00d1b2' : '#ff3860'};
+  border: 1px solid ${props => (props.checked ? '#00d1b2' : '#ff3860')};
   height: 48px;
   border-radius: 3px;
   text-align: center;
@@ -14,7 +14,7 @@ const Container = styled.button`
   cursor: pointer;
   background: transparent;
   text-transform: uppercase;
-  color: ${props => props.checked ? '#00d1b2' : '#ff3860'};
+  color: ${props => (props.checked ? '#00d1b2' : '#ff3860')};
 `;
 
 const CheckMark = styled.div`
@@ -29,9 +29,13 @@ const Label = styled.div`
 
 function CheckBox(props) {
   return (
-    <Container className={props.className} checked={props.checked} onClick={props.onCheck}>
-      <CheckMark>{ props.checked ? '✅' : '❌' }</CheckMark>
-      { !!props.label.length && <Label>{ props.label }</Label> }
+    <Container
+      className={props.className}
+      checked={props.checked}
+      onClick={props.onCheck}
+    >
+      <CheckMark>{props.checked ? '✅' : '❌'}</CheckMark>
+      {!!props.label.length && <Label>{props.label}</Label>}
     </Container>
   );
 }
@@ -45,6 +49,7 @@ CheckBox.propTypes = {
   checked: PropTypes.bool,
   label: PropTypes.string,
   onCheck: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default CheckBox;

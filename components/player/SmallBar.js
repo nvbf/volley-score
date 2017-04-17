@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Animated from 'animated/lib/targets/react-dom';
 
@@ -46,7 +47,6 @@ const AnimatedName = Animated.createAnimatedComponent(Name);
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 class SmallBar extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -63,22 +63,37 @@ class SmallBar extends React.Component {
 
   render() {
     return (
-      <AnimatedContainer style={{
-        height: this.state.anim.interpolate({ inputRange: [0, 1], outputRange: [0, 72] }),
-        opacity: this.state.anim,
-      }}>
+      <AnimatedContainer
+        style={{
+          height: this.state.anim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 72],
+          }),
+          opacity: this.state.anim,
+        }}
+      >
         <NameContainer>
-          <AnimatedName style={{
-            left: this.state.anim.interpolate({ inputRange: [0, 1], outputRange: [-500, 16] })
-          }}>
+          <AnimatedName
+            style={{
+              left: this.state.anim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-500, 16],
+              }),
+            }}
+          >
             {this.props.name}
           </AnimatedName>
         </NameContainer>
         <Dangle />
       </AnimatedContainer>
-  );
+    );
   }
 }
+
+SmallBar.propTypes = {
+  animDelay: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 SmallBar.defaultProps = {
   animDelay: 0,

@@ -46,15 +46,17 @@ class ScoreboardPanel extends React.Component {
   }
 
   increment(key) {
-    this.setState({
-      [key]: this.state[key] + 1,
-    });
+    return () =>
+      this.setState({
+        [key]: this.state[key] + 1,
+      });
   }
 
   decrement(key) {
-    this.setState({
-      [key]: this.state[key] - 1,
-    });
+    return () =>
+      this.setState({
+        [key]: this.state[key] - 1,
+      });
   }
 
   resetPoints() {
@@ -120,26 +122,27 @@ class ScoreboardPanel extends React.Component {
 
   saveToServer() {
     axios.post(`/api/update/${this.state.matchId}`, {
-      ...this.state
+      ...this.state,
     });
   }
 
   loadFromServer(matchId = this.state.matchId) {
-    axios.get(`/api/scores/${matchId}`)
-    .then(({ data })  => this.setState({
-      pointsA: data.pointsA || 0,
-      pointsB: data.pointsB || 0,
-      setA: data.setA || 0,
-      setB: data.setB || 0,
-      logoA: data.logoA || '',
-      logoB: data.logoB || '',
-      colorA: data.colorA || '',
-      colorB: data.colorB || '',
-      nameA: data.nameA || '',
-      nameB: data.nameB || '',
-      showColors: data.showColor,
-      showLogos: data.showLogos,
-    }));
+    axios.get(`/api/scores/${matchId}`).then(({ data }) =>
+      this.setState({
+        pointsA: data.pointsA || 0,
+        pointsB: data.pointsB || 0,
+        setA: data.setA || 0,
+        setB: data.setB || 0,
+        logoA: data.logoA || '',
+        logoB: data.logoB || '',
+        colorA: data.colorA || '',
+        colorB: data.colorB || '',
+        nameA: data.nameA || '',
+        nameB: data.nameB || '',
+        showColors: data.showColor,
+        showLogos: data.showLogos,
+      }),
+    );
   }
 
   render() {
@@ -148,8 +151,15 @@ class ScoreboardPanel extends React.Component {
         <Head>
           <meta charSet="utf-8" />
           <title>OBS Control Panel</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="stylesheet" href="/static/css/bulma.min.css" crossOrigin="anonymous" />
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+          <link
+            rel="stylesheet"
+            href="/static/css/bulma.min.css"
+            crossOrigin="anonymous"
+          />
           <link rel="stylesheet" href="/static/css/react-select.css" />
           <link rel="stylesheet" href="/static/css/control-panel.css" />
         </Head>
@@ -182,8 +192,8 @@ class ScoreboardPanel extends React.Component {
           showLogos={this.state.showLogos}
           showColors={this.state.showColors}
         />
-    </div>
-  );
+      </div>
+    );
   }
 }
 

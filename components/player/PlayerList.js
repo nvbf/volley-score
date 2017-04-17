@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BarList from './BarList';
 import BigHeader from './BigHeader';
-import BigFooter from './BigFooter';
 import PlayerImage from './PlayerImage';
-import SmallBar from './SmallBar';
 
 const Container = styled.div`
   width: 908px;
@@ -25,7 +24,6 @@ const RowContainer = styled.div`
 `;
 
 class PlayerList extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -37,12 +35,20 @@ class PlayerList extends React.Component {
     };
     this.updateSelected = this.updateSelected.bind(this);
     this.startUpdate = this.startUpdate.bind(this);
+  }
 
+  componentDidMount() {
+    setTimeout(this.startUpdate, 600);
+  }
+
+  startUpdate() {
+    const intervalId = setInterval(this.updateSelected, 2000);
+    this.setState({ intervalId, showList: true });
   }
 
   updateSelected() {
     const newIndex = this.state.selectedIndex + 1;
-    if (newIndex === (this.props.team.players.length)) {
+    if (newIndex === this.props.team.players.length) {
       clearInterval(this.state.intervalId);
       this.setState({
         showImage: false,
@@ -57,18 +63,13 @@ class PlayerList extends React.Component {
     }
   }
 
-  startUpdate() {
-    const intervalId = setInterval(this.updateSelected, 2000);
-    this.setState({ intervalId, showList: true });
-  }
-
-  componentDidMount() {
-    setTimeout(this.startUpdate, 600);
-  }
-
   render() {
-    const selectedPlayer = this.props.team.players[Math.max(this.state.selectedIndex, 0)];
-    const prevPlayer = this.props.team.players[Math.max(0, this.state.selectedIndex - 1)];
+    const selectedPlayer = this.props.team.players[
+      Math.max(this.state.selectedIndex, 0)
+    ];
+    const prevPlayer = this.props.team.players[
+      Math.max(0, this.state.selectedIndex - 1)
+    ];
 
     const { team } = this.props;
     return (
@@ -93,7 +94,12 @@ class PlayerList extends React.Component {
       </Container>
     );
   }
-
 }
+
+PlayerList.propTypes = {
+  team: PropTypes.shape({
+    players: PropTypes.array,
+  }).isRequired,
+};
 
 export default PlayerList;

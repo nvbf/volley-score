@@ -22,7 +22,7 @@ const colors = [
   '#DDDDDD',
 ];
 
-export function ColorPicker(props) {
+export function CustomColorPicker(props) {
   return (
     <TwitterPicker
       colors={colors}
@@ -32,12 +32,12 @@ export function ColorPicker(props) {
   );
 }
 
-ColorPicker.propTypes = {
+CustomColorPicker.propTypes = {
   triangle: PropTypes.oneOf(['hide', 'top-left', 'top-right']),
   onChangeComplete: PropTypes.func.isRequired,
 };
 
-ColorPicker.defaultProps = {
+CustomColorPicker.defaultProps = {
   triangle: 'top-left',
 };
 
@@ -45,7 +45,7 @@ export const ColorSelect = styled.button`
   width: 100%;
   height: 48px;
   border-radius: 3px;
-  background-color: ${props => props.background || '#DDDDDD' };
+  background-color: ${props => props.background || '#DDDDDD'};
   color: white;
   line-height: 48px;
   text-align: center;
@@ -60,7 +60,7 @@ export const PickerContainer = styled.div`
   margin-top: 10px;
 `;
 
-class Picker extends React.Component {
+class ColorPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,20 +86,27 @@ class Picker extends React.Component {
   render() {
     return (
       <div>
-        <ColorSelect background={this.props.color} onClick={this.toggleSelecting}>Pick shirt color</ColorSelect>
-        { this.state.isSelecting &&
+        <ColorSelect
+          background={this.props.color}
+          onClick={this.toggleSelecting}
+        >
+          Pick shirt color
+        </ColorSelect>
+        {this.state.isSelecting &&
           <PickerContainer>
-            <ColorPicker color={this.props.color} onChangeComplete={this.handleColorSelect} />
-          </PickerContainer>
-        }
+            <CustomColorPicker
+              color={this.props.color}
+              onChangeComplete={this.handleColorSelect}
+            />
+          </PickerContainer>}
       </div>
     );
   }
 }
 
-Picker.propTypes = {
-  onColorSelect: PropTypes.func,
-  color: PropTypes.string,
-}
+ColorPicker.propTypes = {
+  onColorSelect: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
-export default Picker;
+export default ColorPicker;

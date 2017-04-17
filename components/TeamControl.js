@@ -6,7 +6,9 @@ import ColorPicker from './form/ColorPicker';
 function TeamControl(props) {
   return (
     <div className="column">
-      <label className="label" htmlFor={props.nameLabel}>{props.nameLabel}</label>
+      <label className="label" htmlFor={props.nameLabel}>
+        {props.nameLabel}
+      </label>
       <p className="control">
         <input
           type="text"
@@ -17,39 +19,58 @@ function TeamControl(props) {
           onChange={props.onNameChange}
         />
       </p>
-      { props.showLogos &&
+      {props.showLogos &&
         <div className="control">
-          <LogoSelect
-            onChange={props.onLogoChange}
-            selected={props.logo}
-          />
-        </div>
-      }
-      { props.showColor &&
+          <LogoSelect onChange={props.onLogoChange} selected={props.logo} />
+        </div>}
+      {props.showColor &&
         <div className="control">
           <ColorPicker
             color={props.color}
             onColorSelect={props.onColorChange}
           />
-        </div>
-      }
+        </div>}
       <div className={classNames(props.isGreen ? 'grey-box' : 'light-box')}>
-        <div className={classNames('counters', { 'is-flipped-on-desktop': props.isFlipped })}>
+        <div
+          className={classNames('counters', {
+            'is-flipped-on-desktop': props.isFlipped,
+          })}
+        >
           <div className="counter is-big-on-desktop">
             <div className="point">
               <span className="desc">POINTS</span>
               <span id="pointsA">{props.points}</span>
             </div>
-            <a className="button is-large score-button right-margin-4" onClick={props.decrementPoints}>-</a>
-            <a className="button is-large score-button" onClick={props.incrementPoints}>+</a>
+            <button
+              className="button is-large score-button right-margin-4"
+              onClick={props.decrementPoints}
+            >
+              -
+            </button>
+            <button
+              className="button is-large score-button"
+              onClick={props.incrementPoints}
+            >
+              +
+            </button>
           </div>
           <div className="counter">
             <div className="point">
               <span className="desc">SET</span>
               <span id="setA">{props.sets}</span>
             </div>
-            <a className="button is-large score-button right-margin-4" onClick={props.decrementSets}>-</a>
-            <a className="button is-large score-button" onClick={props.incrementSets}>+</a>
+            <button
+              className="button is-large score-button right-margin-4"
+              onClick={props.decrementSets}
+            >
+              -
+            </button>
+            <button
+              className="button is-large score-button"
+              onClick={props.incrementSets}
+            >
+              +
+            </button>
           </div>
         </div>
       </div>
@@ -74,10 +95,12 @@ TeamControl.propTypes = {
   isFlipped: PropTypes.bool.isRequired,
   showLogos: PropTypes.bool.isRequired,
   showColor: PropTypes.bool.isRequired,
+  isGreen: PropTypes.bool,
 };
 
 TeamControl.defaultProps = {
   isFlipped: false,
-}
+  isGreen: false,
+};
 
 export default TeamControl;
