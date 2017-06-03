@@ -8,13 +8,19 @@ import Header from '../components/player/Header';
 import PlayerList from '../components/player/PlayerList';
 import BigHeader from '../components/player/BigHeader';
 
-const numberRange = (label, min, max) => number(label, 0, {
-   range: true,
-   min,
-   max,
-   step: 1,
-   default: 1,
-}, 1);
+const numberRange = (label, min, max) =>
+  number(
+    label,
+    0,
+    {
+      range: true,
+      min,
+      max,
+      step: 1,
+      default: 1,
+    },
+    1,
+  );
 
 const tromso = {
   name: 'BK Tromsø',
@@ -79,17 +85,7 @@ storiesOf('Bar', module)
       position={text('position', 'Libero')}
     />
   ))
-  .addWithInfo('BarList', () => (
-    <BarList
-      team={tromso}
-    />
-  ))
-  .addWithInfo('Header', () => (
-    <Header logo={tromso.logo} text={tromso.name} />
-  ))
-  .addWithInfo('BigHeader', () => (
-    <BigHeader logo={tromso.logo} text={tromso.name} />
-  ))
-  .addWithInfo('DoublePlayerList', () => (
-    <PlayerList team={tromso} />
-  ));
+  .addWithInfo('BarList', () => <BarList team={tromso} />)
+  .addWithInfo('Header', () => <Header logo={tromso.logo} text={tromso.name} />)
+  .addWithInfo('BigHeader', () => <BigHeader logo={tromso.logo} text={tromso.name} />)
+  .addWithInfo('DoublePlayerList', () => <PlayerList team={tromso} />);

@@ -5,6 +5,7 @@ class ScoreStore {
   @observable matchId;
   @observable showColors = true;
   @observable showLogos = true;
+  @observable isShowing = true;
 
   @observable homeTeam = {
     sets: 2,

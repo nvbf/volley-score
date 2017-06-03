@@ -17,8 +17,8 @@ class ScoreboardPanel extends React.Component {
       nameB: '',
       logoA: '',
       logoB: '',
-      colorA: '',
-      colorB: '',
+      colorA: '#ffffff',
+      colorB: '#ffffff',
       showLogos: false,
       showColors: false,
     };
@@ -135,8 +135,8 @@ class ScoreboardPanel extends React.Component {
         setB: data.setB || 0,
         logoA: data.logoA || '',
         logoB: data.logoB || '',
-        colorA: data.colorA || '',
-        colorB: data.colorB || '',
+        colorA: data.colorA || '#ffffff',
+        colorB: data.colorB || '#ffffff',
         nameA: data.nameA || '',
         nameB: data.nameB || '',
         showColors: data.showColor,
@@ -151,15 +151,8 @@ class ScoreboardPanel extends React.Component {
         <Head>
           <meta charSet="utf-8" />
           <title>OBS Control Panel</title>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-          <link
-            rel="stylesheet"
-            href="/static/css/bulma.min.css"
-            crossOrigin="anonymous"
-          />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <link rel="stylesheet" href="/static/css/bulma.min.css" crossOrigin="anonymous" />
           <link rel="stylesheet" href="/static/css/react-select.css" />
           <link rel="stylesheet" href="/static/css/control-panel.css" />
         </Head>
