@@ -7,21 +7,18 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-app.prepare()
-.then(() => {
+app.prepare().then(() => {
   const server = express();
   const port = process.env.PORT || 3000;
 
-  server.get('/test', (req, res) => {
-    return res.json({ message: 'testing' });
-  })
+  server.get('/test', (req, res) => res.json({ message: 'testing' }));
 
   server.post('/api/update/:matchId', bodyParser.json(), (req, res) => {
     const matchId = req.params.matchId;
     if (matchId.length < 3) {
-      return res.status(400).json(
-        { message: 'Match ID must be string with at least three characters' }
-      );
+      return res
+        .status(400)
+        .json({ message: 'Match ID must be string with at least three characters' });
     }
     updateScore(matchId, {
       pointsA: req.body.pointsA,
@@ -36,40 +33,40 @@ app.prepare()
       colorB: req.body.colorB,
       showLogos: req.body.showLogos,
       showColors: req.body.showColors,
-    })
-    .then(() => res.json({ message: 'Data received.'}));
+      isShowing: req.body.isShowing,
+    }).then(() => res.json({ message: 'Data received.' }));
   });
 
   server.get('/api/scores/:matchId', (req, res) => {
     const matchId = req.params.matchId;
     if (matchId.length < 3) {
-      return res.status(400).json(
-        { message: 'Match ID must be string with at least three characters' }
-      );
+      return res
+        .status(400)
+        .json({ message: 'Match ID must be string with at least three characters' });
     }
-    return fetchScore(matchId)
-    .then(data => res.json({
-      pointsA: data.pointsA,
-      pointsB: data.pointsB,
-      setA: data.setA,
-      setB: data.setB,
-      nameA: data.nameA,
-      nameB: data.nameB,
-      logoA: data.logoA,
-      logoB: data.logoB,
-      colorA: data.colorA,
-      colorB: data.colorB,
-      showLogos: data.showLogos,
-      showColors: data.showColors,
-    }));
+    return fetchScore(matchId).then(data =>
+      res.json({
+        pointsA: data.pointsA,
+        pointsB: data.pointsB,
+        setA: data.setA,
+        setB: data.setB,
+        nameA: data.nameA,
+        nameB: data.nameB,
+        logoA: data.logoA,
+        logoB: data.logoB,
+        colorA: data.colorA,
+        colorB: data.colorB,
+        showLogos: data.showLogos,
+        showColors: data.showColors,
+        isShowing: data.isShowing,
+      })
+    );
   });
 
-  server.get('*', (req, res) => {
-    return handle(req, res)
-  })
+  server.get('*', (req, res) => handle(req, res));
 
   server.listen(port, (err) => {
-    if (err) throw err
-    console.log(`> Ready on port ${port}`)
-  })
-})
+    if (err) throw err;
+    console.log(`> Ready on port ${port}`);
+  });
+});

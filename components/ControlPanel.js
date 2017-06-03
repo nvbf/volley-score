@@ -58,6 +58,11 @@ function ControlPanel(props) {
               Flip teams
             </button>
             <SuperCheckBox
+              checked={props.isShowing}
+              label="Show scoreboard"
+              onCheck={props.onShowCheck}
+            />
+            <SuperCheckBox
               checked={props.showLogos}
               label="Team logos"
               onCheck={props.onLogoCheck}
@@ -87,7 +92,7 @@ function ControlPanel(props) {
               }}
               showLogos={props.showLogos}
               showColors={props.showColors}
-              isShowing
+              isShowing={props.isShowing}
             />
           </section>
           <section id="controlPanel" className="section container">
@@ -169,6 +174,7 @@ ControlPanel.propTypes = {
   isFlipped: PropTypes.bool.isRequired,
   showLogos: PropTypes.bool.isRequired,
   showColors: PropTypes.bool.isRequired,
+  isShowing: PropTypes.bool.isRequired,
 };
 
 export default ControlPanel;

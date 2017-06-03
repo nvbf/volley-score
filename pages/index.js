@@ -21,6 +21,7 @@ class ScoreboardPanel extends React.Component {
       colorB: '#ffffff',
       showLogos: false,
       showColors: false,
+      isShowing: true,
     };
     this.handleMatchIdChange = this.handleMatchIdChange.bind(this);
     this.handleNameAChange = this.handleNameAChange.bind(this);
@@ -31,6 +32,7 @@ class ScoreboardPanel extends React.Component {
     this.handleColorBChange = this.handleColorBChange.bind(this);
     this.handleLogoCheck = this.handleLogoCheck.bind(this);
     this.handleColorCheck = this.handleColorCheck.bind(this);
+    this.handleShowCheck = this.handleShowCheck.bind(this);
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -120,6 +122,12 @@ class ScoreboardPanel extends React.Component {
     });
   }
 
+  handleShowCheck() {
+    this.setState({
+      isShowing: !this.state.isShowing,
+    })
+  }
+
   saveToServer() {
     axios.post(`/api/update/${this.state.matchId}`, {
       ...this.state,
@@ -141,6 +149,7 @@ class ScoreboardPanel extends React.Component {
         nameB: data.nameB || '',
         showColors: data.showColor,
         showLogos: data.showLogos,
+        isShowing: data.isShowing,
       }),
     );
   }
@@ -166,6 +175,7 @@ class ScoreboardPanel extends React.Component {
           onColorBChange={this.handleColorBChange}
           onLogoCheck={this.handleLogoCheck}
           onColorCheck={this.handleColorCheck}
+          onShowCheck={this.handleShowCheck}
           onIncrement={this.increment}
           onDecrement={this.decrement}
           onResetClick={this.resetPoints}
@@ -184,6 +194,7 @@ class ScoreboardPanel extends React.Component {
           isFlipped={this.state.teamsFlipped}
           showLogos={this.state.showLogos}
           showColors={this.state.showColors}
+          isShowing={this.state.isShowing}
         />
       </div>
     );

@@ -56,6 +56,7 @@ class ScoreStore {
       };
       this.showLogos = data.showLogos;
       this.showColors = data.showColors;
+      this.isShowing = data.isShowing;
     });
   };
 }
