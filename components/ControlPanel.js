@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TeamControl from './TeamControl';
 import CheckBox from './form/CheckBox';
 import Notification from './Notification';
-import { Scoreboard } from './scoreboard/Scoreboard';
+import { Scoreboard } from './scoreboard/new/Scoreboard';
 
 const SuperCheckBox = styled(CheckBox)`
   margin: 4px;
@@ -51,16 +51,10 @@ function ControlPanel(props) {
       {props.matchId.length > 2 &&
         <div>
           <section id="buttonList" className="section container is-flex-wrap">
-            <button
-              className="button is-large is-danger margin-4"
-              onClick={props.onResetClick}
-            >
+            <button className="button is-large is-danger margin-4" onClick={props.onResetClick}>
               Reset points
             </button>
-            <button
-              className="button is-large is-info margin-4"
-              onClick={props.onFlipClick}
-            >
+            <button className="button is-large is-info margin-4" onClick={props.onFlipClick}>
               Flip teams
             </button>
             <SuperCheckBox
@@ -93,6 +87,7 @@ function ControlPanel(props) {
               }}
               showLogos={props.showLogos}
               showColors={props.showColors}
+              isShowing
             />
           </section>
           <section id="controlPanel" className="section container">
