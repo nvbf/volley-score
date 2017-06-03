@@ -116,7 +116,6 @@ export type TeamRowState = {
   props: TeamRowProps;
 
   render() {
-    console.log('COLOR:', this.props.color);
     return (
       <Row>
         <AnimatedShirtColor
