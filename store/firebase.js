@@ -72,15 +72,11 @@ class FirebaseStore {
       .once('value')
       .then(dataSnapshot => dataSnapshot.val())
       .then((firebaseResult) => {
-        const matchArr = Object.keys(firebaseResult)
-          .map(key => JSON.parse(firebaseResult[key].match))
-          .filter(m => m.MATCH.MATCH_ID === wantedMatchId);
-
-        if (matchArr.length === 0) {
+        if (!(this.matchId in firebaseResult)) {
           return;
         }
 
-        const match = matchArr[0].MATCH;
+        const match = JSON.parse(firebaseResult[wantedMatchId].match).MATCH;
 
         this.homeTeam = {
           points: getHomeTeamPoints(match),
