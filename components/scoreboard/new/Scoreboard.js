@@ -4,9 +4,6 @@ import { darken } from 'polished';
 import { inject, observer } from 'mobx-react';
 import TeamRow from './TeamRow';
 import color from './color';
-import DoubleTriangle from './svgs/DoubleTriangle';
-import DoubleShadowTriangle from './svgs/DoubleShadowTriangle';
-import TriangleDangle from './svgs/TriangleDangle';
 import OpacityContainer from './OpacityContainer';
 
 const boardColors = {
@@ -31,11 +28,12 @@ const Container = styled.div`
   flex-direction: row;
   font-family: 'Source Sans Pro', sans-serif;
   border-radius: 5px;
+  overflow: hidden;
 `;
 
 const TeamRowContainer = styled.div`
   background: linear-gradient(${boardColors.nameTop}, ${boardColors.nameBottom});
-  padding: 0px 0px;
+  padding: 0px 36px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,9 +44,12 @@ const TeamRowContainer = styled.div`
 
 const SetsContainer = styled.div`
   background: linear-gradient(${boardColors.setsTop}, ${boardColors.setsBottom});
-  width: 16px;
-  height: 100%;
+  width: 48px;
+  height: 120%;
   display: flex;
+  margin-top: -8px;
+  margin-left: -12px;
+  transform: rotate(12deg);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -57,17 +58,20 @@ const SetsContainer = styled.div`
 
 const SetScore = styled.span`
   font-size: 24px;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
+  transform: rotate(-12deg);
   margin-left: ${props => (props.offset ? '-16px' : '4px')};
-  font-weight: 400;
 `;
 
 const PointsContainer = styled.div`
   background: linear-gradient(${boardColors.pointsTop}, ${boardColors.pointsBottom});
-  width: 32px;
+  width: 64px;
   height: 100%;
+  height: 120%;
   display: flex;
+  margin-top: -8px;
+  transform: rotate(12deg);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -76,11 +80,20 @@ const PointsContainer = styled.div`
 const Points = styled.span`
   text-shadow: 1px 1px ${color.black};
   color: ${boardColors.points};
-  font-size: 28px;
-  height: 40px;
-  line-height: 40px;
-  font-weight: 400;
+  font-size: 24px;
+  transform: rotate(-12deg);
+  height: 50px;
+  line-height: 50px;
   margin-left: ${props => (props.offset ? '-16px' : '4px')};
+`;
+
+const Dangle = styled.div`
+  width: 8px;
+  background: linear-gradient(${boardColors.nameTop}, ${boardColors.nameBottom});
+  transform: rotate(12deg);
+  height: 120%;
+  margin-top: -4px;
+  margin-left: -1px;
 `;
 
 export type TeamPoints = {
@@ -121,39 +134,15 @@ export function Scoreboard(props: ScoreboardProps) {
             textColor={boardColors.nameText}
           />
         </TeamRowContainer>
-        <DoubleShadowTriangle
-          leftGradient={{ start: boardColors.nameTop, stop: boardColors.nameBottom }}
-          rightGradient={{ start: boardColors.setsTop, stop: boardColors.setsBottom }}
-          width={30}
-          height={100}
-        />
         <SetsContainer>
           <SetScore>{props.homeTeam.sets}</SetScore>
-          <SetScore offset>{props.awayTeam.sets}</SetScore>
+          <SetScore>{props.awayTeam.sets}</SetScore>
         </SetsContainer>
-        <DoubleTriangle
-          leftGradient={{ start: boardColors.setsTop, stop: boardColors.setsBottom }}
-          rightGradient={{ start: boardColors.pointsTop, stop: boardColors.pointsBottom }}
-          width={30}
-          height={100}
-        />
         <PointsContainer>
           <Points>{props.homeTeam.points}</Points>
-          <Points offset>{props.awayTeam.points}</Points>
+          <Points>{props.awayTeam.points}</Points>
         </PointsContainer>
-        <TriangleDangle
-          triangleWidth={30}
-          dangleWidth={6}
-          height={100}
-          dangleGradient={{
-            start: boardColors.nameTop,
-            stop: boardColors.nameBottom,
-          }}
-          triangleGradient={{
-            start: boardColors.pointsTop,
-            stop: boardColors.pointsBottom,
-          }}
-        />
+        <Dangle />
       </Container>
     </OpacityContainer>
   );
@@ -176,7 +165,7 @@ Scoreboard.defaultProps = {
   },
 };
 
-export default inject((stores, props) => {
+export default inject((stores) => {
   const store = stores.store;
   return {
     isShowing: store.isShowing,
