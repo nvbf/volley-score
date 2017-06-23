@@ -7,8 +7,8 @@ import {
   getAwayTeamSets,
   getHomeTeamColor,
   getAwayTeamColor,
-  getHomeTeamString,
-  getAwayTeamString,
+  getHomeTeamLastNameString,
+  getAwayTeamLastNameString,
 } from './logic';
 
 class FirebaseStore {
@@ -82,14 +82,14 @@ class FirebaseStore {
           points: getHomeTeamPoints(match),
           sets: getHomeTeamSets(match),
           logo: '',
-          name: getHomeTeamString(match),
+          name: getHomeTeamLastNameString(match),
           color: getHomeTeamColor(match) || '#ff0000',
         };
         this.awayTeam = {
           points: getAwayTeamPoints(match),
           sets: getAwayTeamSets(match),
           logo: '',
-          name: getAwayTeamString(match),
+          name: getAwayTeamLastNameString(match),
           color: getAwayTeamColor(match) || '#00ffff',
         };
         this.showLogos = false;

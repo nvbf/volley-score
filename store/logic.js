@@ -20,6 +20,27 @@ export function getHomeTeamString(state) {
   return `${aFirstPlayer} / ${aSecondPlayer}`;
 }
 
+function getLastName(name) {
+  if (!name.includes(' ')) {
+    return name;
+  }
+
+  const names = name.split(' ');
+  return names[names.length - 1];
+}
+
+export function getHomeTeamLastNameString(state) {
+  const firstPlayer = getLastName(state.HOMETEAM_FIRST_PLAYER_NAME);
+  const secondPlayer = getLastName(state.HOMETEAM_SECOND_PLAYER_NAME);
+  return `${firstPlayer} / ${secondPlayer}`;
+}
+
+export function getAwayTeamLastNameString(state) {
+  const firstPlayer = getLastName(state.AWAYTEAM_FIRST_PLAYER_NAME);
+  const secondPlayer = getLastName(state.AWAYTEAM_SECOND_PLAYER_NAME);
+  return `${firstPlayer} / ${secondPlayer}`;
+}
+
 function hasAwayteamWonSet(aSet, limit) {
   const point1 = aSet.HOMETEAM_POINT;
   const point2 = aSet.AWAYTEAM_POINT;

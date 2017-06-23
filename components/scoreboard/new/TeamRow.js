@@ -35,9 +35,9 @@ const ShirtColor = styled.div`
 
 const Name = styled.div`
   letter-spacing: 1px;
-  font-size: 24px;
+  font-size: 20px;
   min-width: 100px;
-  max-width: 200px;
+  max-width: 220px;
   text-transform: uppercase;
   margin-left: 8px;
   height: 22px;
@@ -67,7 +67,8 @@ export type TeamRowState = {
   colorAnim: any,
 };
 
-@observer class TeamRow extends React.Component {
+@observer
+class TeamRow extends React.Component {
   static defaultProps = {
     logo: '',
     name: '',
