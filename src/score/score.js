@@ -15,7 +15,7 @@ function updateScore(matchId, data) {
     Redis.set(`${prefix}-colorB`, data.colorB || ''),
     Redis.set(`${prefix}-showLogos`, data.showLogos || false),
     Redis.set(`${prefix}-showColors`, data.showColors || false),
-    Redis.set(`${prefix}-isShowing`, data.isShowing || false)
+    Redis.set(`${prefix}-isShowing`, data.isShowing || false),
   ]);
 }
 
@@ -36,23 +36,23 @@ function fetchScore(matchId) {
     Redis.get(`${prefix}-showColors`),
     Redis.get(`${prefix}-isShowing`),
   ]).then(data => ({
-      pointsA: data[0],
-      pointsB: data[1],
-      setA: data[2],
-      setB: data[3],
-      nameA: data[4],
-      nameB: data[5],
-      logoA: data[6],
-      logoB: data[7],
-      colorA: data[8],
-      colorB: data[9],
-      showLogos: data[10],
-      showColors: data[11],
-      isShowing: data[12],
+    pointsA: data[0],
+    pointsB: data[1],
+    setA: data[2],
+    setB: data[3],
+    nameA: data[4],
+    nameB: data[5],
+    logoA: data[6],
+    logoB: data[7],
+    colorA: data[8],
+    colorB: data[9],
+    showLogos: data[10],
+    showColors: data[11],
+    isShowing: data[12],
   }));
 }
 
 module.exports = {
   updateScore,
-  fetchScore
-}
+  fetchScore,
+};
