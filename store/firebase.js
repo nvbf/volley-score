@@ -35,8 +35,6 @@ class FirebaseStore {
     color: '#00ffff',
   };
 
-  intervalId;
-
   constructor(matchId) {
     this.matchId = matchId;
     if (!firebase.apps.length) {
@@ -45,14 +43,8 @@ class FirebaseStore {
   }
 
   @action
-  startUpdates = () => {
-    this.intervalId = setInterval(this.update, 2000);
-    this.update();
-  };
-
-  @action
   stopUpdates = () => {
-    clearInterval(this.intervalId);
+    // TODO: Implement firebase unsubscribe
   };
 
   config = {
@@ -63,39 +55,37 @@ class FirebaseStore {
     storageBucket: 'beachvolleyball-scoreboard.appspot.com',
   };
 
-  update = () => {
+  @action
+  startUpdates = () => {
     const wantedMatchId = this.matchId || '0';
 
-    firebase
-      .database()
-      .ref('/matches/')
-      .once('value')
-      .then(dataSnapshot => dataSnapshot.val())
-      .then((firebaseResult) => {
-        if (!(this.matchId in firebaseResult)) {
-          return;
-        }
+    const ref = firebase.database().ref('/matches/');
+    ref.on('value', (res) => {
+      const firebaseResult = res.val();
+      if (!(this.matchId in firebaseResult)) {
+        return;
+      }
 
-        const match = JSON.parse(firebaseResult[wantedMatchId].match).MATCH;
+      const match = JSON.parse(firebaseResult[wantedMatchId].match).MATCH;
 
-        this.homeTeam = {
-          points: getHomeTeamPoints(match),
-          sets: getHomeTeamSets(match),
-          logo: '',
-          name: getHomeTeamLastNameString(match),
-          color: getHomeTeamColor(match) || '#ff0000',
-        };
-        this.awayTeam = {
-          points: getAwayTeamPoints(match),
-          sets: getAwayTeamSets(match),
-          logo: '',
-          name: getAwayTeamLastNameString(match),
-          color: getAwayTeamColor(match) || '#00ffff',
-        };
-        this.showLogos = false;
-        this.showColors = true;
-        this.isShowing = true;
-      });
+      this.homeTeam = {
+        points: getHomeTeamPoints(match),
+        sets: getHomeTeamSets(match),
+        logo: '',
+        name: getHomeTeamLastNameString(match),
+        color: getHomeTeamColor(match) || '#ff0000',
+      };
+      this.awayTeam = {
+        points: getAwayTeamPoints(match),
+        sets: getAwayTeamSets(match),
+        logo: '',
+        name: getAwayTeamLastNameString(match),
+        color: getAwayTeamColor(match) || '#00ffff',
+      };
+      this.showLogos = false;
+      this.showColors = true;
+      this.isShowing = true;
+    });
   };
 }
 
