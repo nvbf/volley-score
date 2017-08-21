@@ -16,14 +16,15 @@ function ControlPanel(props) {
       <section className="section is-medium container">
         <h1 className="title is-1">Volleyball Scoreboard</h1>
         <Notification>
-          Please insert a match code of your choice.
-          Remember it for later if you want to come back to the same game.<br />
-          If you pick something common, like `123`,
-          chances are high someone else i going to do the same.
-          <br />
+          Please insert a match code of your choice. Remember it for later if you want to come back
+          to the same game.<br />
+          If you pick something common, like `123`, chances are high someone else i going to do the
+          same. <br />
           <strong>Example</strong>: `dragvoll-court-1`.
         </Notification>
-        <label className="label" htmlFor="matchId">Match Code</label>
+        <label className="label" htmlFor="matchId">
+          Match Code
+        </label>
         <p className="control">
           <input
             type="text"
@@ -35,7 +36,9 @@ function ControlPanel(props) {
         </p>
         {props.matchId.length > 2 &&
           <div>
-            <label className="label" htmlFor="scoreLink">OBS Link</label>
+            <label className="label" htmlFor="scoreLink">
+              OBS Link
+            </label>
             <p className="control">
               <input
                 type="text"
@@ -156,6 +159,7 @@ ControlPanel.propTypes = {
   onColorBChange: PropTypes.func.isRequired,
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired,
+  onShowCheck: PropTypes.func.isRequired,
   onResetClick: PropTypes.func.isRequired,
   onLogoCheck: PropTypes.func.isRequired,
   onColorCheck: PropTypes.func.isRequired,

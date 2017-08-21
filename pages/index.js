@@ -125,7 +125,7 @@ class ScoreboardPanel extends React.Component {
   handleShowCheck() {
     this.setState({
       isShowing: !this.state.isShowing,
-    })
+    });
   }
 
   saveToServer() {

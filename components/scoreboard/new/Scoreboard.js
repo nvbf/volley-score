@@ -135,12 +135,20 @@ export function Scoreboard(props: ScoreboardProps) {
           />
         </TeamRowContainer>
         <SetsContainer>
-          <SetScore>{props.homeTeam.sets}</SetScore>
-          <SetScore>{props.awayTeam.sets}</SetScore>
+          <SetScore>
+            {props.homeTeam.sets}
+          </SetScore>
+          <SetScore>
+            {props.awayTeam.sets}
+          </SetScore>
         </SetsContainer>
         <PointsContainer>
-          <Points>{props.homeTeam.points}</Points>
-          <Points>{props.awayTeam.points}</Points>
+          <Points>
+            {props.homeTeam.points}
+          </Points>
+          <Points>
+            {props.awayTeam.points}
+          </Points>
         </PointsContainer>
         <Dangle />
       </Container>
