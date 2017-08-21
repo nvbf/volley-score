@@ -35,7 +35,8 @@ class FirebaseStore {
     color: '#00ffff',
   };
 
-  constructor(matchId) {
+  constructor(tournamentId, matchId) {
+    this.tournamentId = tournamentId;
     this.matchId = matchId;
     if (!firebase.apps.length) {
       firebase.initializeApp(this.config);
@@ -57,30 +58,26 @@ class FirebaseStore {
 
   @action
   startUpdates = () => {
-    const wantedMatchId = this.matchId || '0';
-
-    const ref = firebase.database().ref('/matches/');
+    const ref = firebase.database().ref(`/tournament_matches/${this.tournamentId}/${this.matchId}`);
     ref.on('value', (res) => {
-      const firebaseResult = res.val();
-      if (!(this.matchId in firebaseResult)) {
+      const match = res.val();
+      if (!('isFinished' in match)) {
         return;
       }
 
-      const match = JSON.parse(firebaseResult[wantedMatchId].match).MATCH;
-
       this.homeTeam = {
-        points: getHomeTeamPoints(match),
-        sets: getHomeTeamSets(match),
+        points: match.pointsInCurrentSet[0],
+        sets: match.setsWonByHomeTeam,
         logo: '',
-        name: getHomeTeamLastNameString(match),
-        color: getHomeTeamColor(match) || '#ff0000',
+        name: `${match.h1Player} / ${match.h2Player}`,
+        color: match.homeTeamColor || '#ff0000',
       };
       this.awayTeam = {
-        points: getAwayTeamPoints(match),
-        sets: getAwayTeamSets(match),
+        points: match.pointsInCurrentSet[1],
+        sets: match.setsWonByAwayTeam,
         logo: '',
-        name: getAwayTeamLastNameString(match),
-        color: getAwayTeamColor(match) || '#00ffff',
+        name: `${match.b1Player} / ${match.b2Player}`,
+        color: match.awayTeamColor || '#00ffff',
       };
       this.showLogos = false;
       this.showColors = true;

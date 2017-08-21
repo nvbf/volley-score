@@ -6,15 +6,16 @@ import Score from '../components/scoreboard/new/Scoreboard';
 import FirebaseStore from '../store/firebase';
 
 class Scoreboard extends React.Component {
-  static async getInitialProps(context) {
+  static async getInitialProps({ query }) {
     return {
-      query: context.query,
+      tournament: query.tournament,
+      match: query.match,
     };
   }
 
   constructor(props) {
     super(props);
-    this.store = new FirebaseStore(props.query.matchKey);
+    this.store = new FirebaseStore(props.tournament, props.match);
   }
 
   componentDidMount() {
@@ -43,9 +44,8 @@ class Scoreboard extends React.Component {
 }
 
 Scoreboard.propTypes = {
-  query: PropTypes.shape({
-    matchKey: PropTypes.string,
-  }).isRequired,
+  tournament: PropTypes.string.isRequired,
+  match: PropTypes.string.isRequired,
 };
 
 export default Scoreboard;

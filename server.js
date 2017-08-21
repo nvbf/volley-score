@@ -1,8 +1,8 @@
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
-
 const { updateScore, fetchScore } = require('./src/score/score');
+
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -20,7 +20,7 @@ app.prepare().then(() => {
         .status(400)
         .json({ message: 'Match ID must be string with at least three characters' });
     }
-    updateScore(matchId, {
+    return updateScore(matchId, {
       pointsA: req.body.pointsA,
       pointsB: req.body.pointsB,
       setA: req.body.setA,
@@ -59,7 +59,7 @@ app.prepare().then(() => {
         showLogos: data.showLogos,
         showColors: data.showColors,
         isShowing: data.isShowing,
-      })
+      }),
     );
   });
 
