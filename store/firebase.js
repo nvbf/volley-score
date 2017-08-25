@@ -36,9 +36,11 @@ class FirebaseStore {
     color: '#00ffff',
   };
 
-  constructor(tournamentId, matchId) {
+  constructor(tournamentId, matchId, homeColor, awayColor) {
     this.tournamentId = tournamentId;
     this.matchId = matchId;
+    this.homeColor = homeColor;
+    this.awayColor = awayColor;
     if (!firebase.apps.length) {
       firebase.initializeApp(this.config);
     }
@@ -71,14 +73,14 @@ class FirebaseStore {
         sets: match.setsWonByHomeTeam,
         logo: '',
         name: `${getLastName(match.h1Player)} / ${getLastName(match.h2Player)}`,
-        color: match.homeTeamColor || '#ff0000',
+        color: this.homeColor || match.homeTeamColor || '#ff0000',
       };
       this.awayTeam = {
         points: match.pointsInCurrentSet[1],
         sets: match.setsWonByAwayTeam,
         logo: '',
         name: `${getLastName(match.b1Player)} / ${getLastName(match.b2Player)}`,
-        color: match.awayTeamColor || '#00ffff',
+        color: this.awayColor || match.awayTeamColor || '#00ffff',
       };
       this.showLogos = false;
       this.showColors = true;

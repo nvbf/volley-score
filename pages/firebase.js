@@ -10,12 +10,14 @@ class Scoreboard extends React.Component {
     return {
       tournament: query.tournament,
       match: query.match,
+      homeColor: query.homeColor || '',
+      awayColor: query.awayColor || '',
     };
   }
 
   constructor(props) {
     super(props);
-    this.store = new FirebaseStore(props.tournament, props.match);
+    this.store = new FirebaseStore(props.tournament, props.match, props.homeColor, props.awayColor);
   }
 
   componentDidMount() {
@@ -46,6 +48,8 @@ class Scoreboard extends React.Component {
 Scoreboard.propTypes = {
   tournament: PropTypes.string.isRequired,
   match: PropTypes.string.isRequired,
+  homeColor: PropTypes.string.isRequired,
+  awayColor: PropTypes.string.isRequired,
 };
 
 export default Scoreboard;
