@@ -20,7 +20,7 @@ export function getHomeTeamString(state) {
   return `${aFirstPlayer} / ${aSecondPlayer}`;
 }
 
-function getLastName(name) {
+export function getLastName(name) {
   if (!name.includes(' ')) {
     return name;
   }
