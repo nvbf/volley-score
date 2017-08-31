@@ -25,9 +25,19 @@ export function getLastName(name) {
     return name;
   }
 
-  const names = name.split(' ');
+  const names = removeCountry(name).split(" ");
   return names[names.length - 1];
 }
+
+function removeCountry(name) {
+  const countryStartPos = name.indexOf("(");
+  if (countryStartPos === -1) {
+    return name;
+  }
+  const endOfLastNameIndex = countryStartPos - 1;
+  return name.substring(0, endOfLastNameIndex);
+}
+
 
 export function getHomeTeamLastNameString(state) {
   const firstPlayer = getLastName(state.HOMETEAM_FIRST_PLAYER_NAME);
