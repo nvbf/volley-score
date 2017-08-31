@@ -20,17 +20,8 @@ export function getHomeTeamString(state) {
   return `${aFirstPlayer} / ${aSecondPlayer}`;
 }
 
-export function getLastName(name) {
-  if (!name.includes(' ')) {
-    return name;
-  }
-
-  const names = removeCountry(name).split(" ");
-  return names[names.length - 1];
-}
-
 function removeCountry(name) {
-  const countryStartPos = name.indexOf("(");
+  const countryStartPos = name.indexOf('(');
   if (countryStartPos === -1) {
     return name;
   }
@@ -38,6 +29,14 @@ function removeCountry(name) {
   return name.substring(0, endOfLastNameIndex);
 }
 
+export function getLastName(name) {
+  if (!name.includes(' ')) {
+    return name;
+  }
+
+  const names = removeCountry(name).split(' ');
+  return names[names.length - 1];
+}
 
 export function getHomeTeamLastNameString(state) {
   const firstPlayer = getLastName(state.HOMETEAM_FIRST_PLAYER_NAME);
