@@ -20,12 +20,21 @@ export function getHomeTeamString(state) {
   return `${aFirstPlayer} / ${aSecondPlayer}`;
 }
 
+function removeCountry(name) {
+  const countryStartPos = name.indexOf('(');
+  if (countryStartPos === -1) {
+    return name;
+  }
+  const endOfLastNameIndex = countryStartPos - 1;
+  return name.substring(0, endOfLastNameIndex);
+}
+
 export function getLastName(name) {
   if (!name.includes(' ')) {
     return name;
   }
 
-  const names = name.split(' ');
+  const names = removeCountry(name).split(' ');
   return names[names.length - 1];
 }
 
