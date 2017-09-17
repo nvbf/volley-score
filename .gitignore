@@ -3,3 +3,4 @@ lib/redis/redis
 npm-debug.log
 .next
 dump.rdp
+redis

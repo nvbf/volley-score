@@ -13,7 +13,7 @@ function TeamControl(props) {
         <input
           type="text"
           className="input is-large"
-          placeholder="Home Team"
+          placeholder="Team Name"
           id={props.nameLabel}
           value={props.name}
           onChange={props.onNameChange}
@@ -25,10 +25,7 @@ function TeamControl(props) {
         </div>}
       {props.showColor &&
         <div className="control">
-          <ColorPicker
-            color={props.color}
-            onColorSelect={props.onColorChange}
-          />
+          <ColorPicker color={props.color} onColorSelect={props.onColorChange} />
         </div>}
       <div className={classNames(props.isGreen ? 'grey-box' : 'light-box')}>
         <div
@@ -37,38 +34,36 @@ function TeamControl(props) {
           })}
         >
           <div className="counter is-big-on-desktop">
-            <div className="point">
+            <button className="point" onClick={props.incrementPoints}>
               <span className="desc">POINTS</span>
-              <span id="pointsA">{props.points}</span>
-            </div>
+              <span id="pointsA">
+                {props.points}
+              </span>
+            </button>
             <button
               className="button is-large score-button right-margin-4"
               onClick={props.decrementPoints}
             >
               -
             </button>
-            <button
-              className="button is-large score-button"
-              onClick={props.incrementPoints}
-            >
+            <button className="button is-large score-button" onClick={props.incrementPoints}>
               +
             </button>
           </div>
           <div className="counter">
-            <div className="point">
+            <button className="point" onClick={props.incrementSets}>
               <span className="desc">SET</span>
-              <span id="setA">{props.sets}</span>
-            </div>
+              <span id="setA">
+                {props.sets}
+              </span>
+            </button>
             <button
               className="button is-large score-button right-margin-4"
               onClick={props.decrementSets}
             >
               -
             </button>
-            <button
-              className="button is-large score-button"
-              onClick={props.incrementSets}
-            >
+            <button className="button is-large score-button" onClick={props.incrementSets}>
               +
             </button>
           </div>
