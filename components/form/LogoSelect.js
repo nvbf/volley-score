@@ -87,6 +87,11 @@ const options = [
   { imgName: 'svelgen', value: '/static/logo/svelgen.svg', label: 'Svelgen' },
   { imgName: 'tbk', value: '/static/logo/tbk.svg', label: 'TBK' },
   {
+    imgName: 'gdansk',
+    value: '/static/logo/gdansk.svg',
+    label: 'Trefl Gdańsk',
+  },
+  {
     imgName: 'tonsberg',
     value: '/static/logo/tonsberg.svg',
     label: 'Tønsberg',
@@ -101,7 +106,9 @@ function renderOption(option) {
   return (
     <div className="select-logo-option">
       <img className="select-logo-image" src={option.value} alt="Team Logo" />
-      <span>{option.label}</span>
+      <span>
+        {option.label}
+      </span>
     </div>
   );
 }
