@@ -29,11 +29,7 @@ const Label = styled.div`
 
 function CheckBox(props) {
   return (
-    <Container
-      className={props.className}
-      checked={props.checked}
-      onClick={props.onCheck}
-    >
+    <Container className={props.className} checked={props.checked} onClick={props.onCheck}>
       <CheckMark>{props.checked ? '✅' : '❌'}</CheckMark>
       {!!props.label.length && <Label>{props.label}</Label>}
     </Container>

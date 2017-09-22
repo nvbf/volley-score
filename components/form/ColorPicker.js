@@ -87,10 +87,11 @@ class ColorPicker extends React.Component {
         <ColorSelect background={this.props.color} onClick={this.toggleSelecting}>
           Pick shirt color
         </ColorSelect>
-        {this.state.isSelecting &&
+        {this.state.isSelecting && (
           <PickerContainer>
             <CustomColorPicker color={this.props.color} onChangeComplete={this.handleColorSelect} />
-          </PickerContainer>}
+          </PickerContainer>
+        )}
       </div>
     );
   }

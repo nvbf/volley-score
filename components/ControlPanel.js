@@ -6,9 +6,7 @@ import CheckBox from './form/CheckBox';
 import Notification from './Notification';
 import { Scoreboard } from './scoreboard/new/Scoreboard';
 
-const SuperCheckBox = styled(CheckBox)`
-  margin: 4px;
-`;
+const SuperCheckBox = styled(CheckBox)`margin: 4px;`;
 
 function ControlPanel(props) {
   return (
@@ -34,7 +32,7 @@ function ControlPanel(props) {
             id="matchId"
           />
         </p>
-        {props.matchId.length > 2 &&
+        {props.matchId.length > 2 && (
           <div>
             <label className="label" htmlFor="scoreLink">
               OBS Link
@@ -49,9 +47,10 @@ function ControlPanel(props) {
                 value={`${window.location.href}scoreboard?matchId=${props.matchId}`}
               />
             </p>
-          </div>}
+          </div>
+        )}
       </section>
-      {props.matchId.length > 2 &&
+      {props.matchId.length > 2 && (
         <div>
           <section id="buttonList" className="section container is-flex-wrap">
             <button className="button is-large is-danger margin-4" onClick={props.onResetClick}>
@@ -144,7 +143,8 @@ function ControlPanel(props) {
               />
             </div>
           </section>
-        </div>}
+        </div>
+      )}
     </div>
   );
 }

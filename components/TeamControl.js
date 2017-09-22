@@ -19,14 +19,16 @@ function TeamControl(props) {
           onChange={props.onNameChange}
         />
       </p>
-      {props.showLogos &&
+      {props.showLogos && (
         <div className="control">
           <LogoSelect onChange={props.onLogoChange} selected={props.logo} />
-        </div>}
-      {props.showColor &&
+        </div>
+      )}
+      {props.showColor && (
         <div className="control">
           <ColorPicker color={props.color} onColorSelect={props.onColorChange} />
-        </div>}
+        </div>
+      )}
       <div className={classNames(props.isGreen ? 'grey-box' : 'light-box')}>
         <div
           className={classNames('counters', {
@@ -36,9 +38,7 @@ function TeamControl(props) {
           <div className="counter is-big-on-desktop">
             <button className="point" onClick={props.incrementPoints}>
               <span className="desc">POINTS</span>
-              <span id="pointsA">
-                {props.points}
-              </span>
+              <span id="pointsA">{props.points}</span>
             </button>
             <button
               className="button is-large score-button right-margin-4"
@@ -53,9 +53,7 @@ function TeamControl(props) {
           <div className="counter">
             <button className="point" onClick={props.incrementSets}>
               <span className="desc">SET</span>
-              <span id="setA">
-                {props.sets}
-              </span>
+              <span id="setA">{props.sets}</span>
             </button>
             <button
               className="button is-large score-button right-margin-4"

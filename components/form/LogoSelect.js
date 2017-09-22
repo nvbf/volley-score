@@ -106,9 +106,7 @@ function renderOption(option) {
   return (
     <div className="select-logo-option">
       <img className="select-logo-image" src={option.value} alt="Team Logo" />
-      <span>
-        {option.label}
-      </span>
+      <span>{option.label}</span>
     </div>
   );
 }
