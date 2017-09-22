@@ -39,16 +39,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@kadira/react-storybook-addon-info": "^3.3.0",
-    "@kadira/storybook": "^2.21.0",
-    "@kadira/storybook-addon-knobs": "^1.7.1",
+    "@storybook/addon-info": "^3.2.9",
+    "@storybook/addon-knobs": "^3.2.8",
+    "@storybook/react": "3.2.8",
     "babel-eslint": "^7.2.2",
     "babel-preset-env": "^1.2.2",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
-    "eslint-plugin-react": "6.9.0",
-    "storybook-host": "^1.0.14"
+    "eslint-plugin-react": "6.9.0"
   }
 }
