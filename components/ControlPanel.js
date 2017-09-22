@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TeamControl from './TeamControl';
 import CheckBox from './form/CheckBox';
 import Notification from './Notification';
-import { Scoreboard } from './scoreboard/new/Scoreboard';
+import { Scoreboard } from './scoreboard/Scoreboard';
 
 const SuperCheckBox = styled(CheckBox)`margin: 4px;`;
 

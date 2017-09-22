@@ -1,22 +1,25 @@
-// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 import Animated from 'animated/lib/targets/react-dom';
 
-export type OpacityProps = {
-  isShowing: boolean,
-};
-
 class OpacityContainer extends React.PureComponent {
-  constructor(props: OpacityProps) {
+  static propTypes = {
+    isShowing: PropTypes.bool,
+    children: PropTypes.node.isRequired,
+  };
+
+  static defaultProps = {
+    isShowing: false,
+  };
+
+  constructor(props) {
     super(props);
     this.state = {
       opacity: new Animated.Value(this.props.isShowing ? 1 : 0),
     };
   }
 
-  state: { opacity: any };
-
-  componentWillUpdate(nextProps: OpacityProps) {
+  componentWillUpdate(nextProps) {
     if (!nextProps.isShowing) {
       Animated.spring(this.state.opacity, { toValue: 0 }).start();
     }
@@ -27,8 +30,6 @@ class OpacityContainer extends React.PureComponent {
       Animated.spring(this.state.opacity, { toValue: 1 }).start();
     }
   }
-
-  props: { children: any };
 
   render() {
     return (
