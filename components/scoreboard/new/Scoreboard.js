@@ -45,17 +45,17 @@ const TeamRowContainer = styled.div`
 const SetsContainer = styled.div`
   background: linear-gradient(${boardColors.setsTop}, ${boardColors.setsBottom});
   width: 48px;
-  height: 150%;
+  height: 200%;
   display: flex;
-  margin-top: -23px;
-  margin-left: -12px;
+  margin-top: -48px;
+  margin-left: -24px;
   transform: rotate(12deg);
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: ${color.darkBlue};
   font-weight: 400;
-  box-shadow: inset 0px 0px 15px 2px #000000;
+  box-shadow: inset 0px 0px 4px 2px rgba(0, 0, 0, 0.9);
   -webkit-backface-visibility: hidden;
 `;
 
