@@ -1,15 +1,15 @@
 const ioredis = require('ioredis');
 
 class Redis {
-
   constructor() {
     this.client = ioredis(process.env.REDIS_URL || 'redis://127.0.0.1:6379');
   }
 
   get(key, fallbackValue = 0) {
-    return this.client.get(key)
-    .then(value => JSON.parse(value))
-    .catch(() => fallbackValue)
+    return this.client
+      .get(key)
+      .then(value => JSON.parse(value))
+      .catch(() => fallbackValue);
   }
 
   getAll() {
@@ -35,7 +35,6 @@ class Redis {
   purge() {
     return this.client.flushall();
   }
-
 }
 
 module.exports = new Redis();

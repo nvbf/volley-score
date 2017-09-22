@@ -56,9 +56,7 @@ export const ColorSelect = styled.button`
   overflow: hidden;
 `;
 
-export const PickerContainer = styled.div`
-  margin-top: 10px;
-`;
+export const PickerContainer = styled.div`margin-top: 10px;`;
 
 class ColorPicker extends React.Component {
   constructor(props) {
@@ -86,19 +84,14 @@ class ColorPicker extends React.Component {
   render() {
     return (
       <div>
-        <ColorSelect
-          background={this.props.color}
-          onClick={this.toggleSelecting}
-        >
+        <ColorSelect background={this.props.color} onClick={this.toggleSelecting}>
           Pick shirt color
         </ColorSelect>
-        {this.state.isSelecting &&
+        {this.state.isSelecting && (
           <PickerContainer>
-            <CustomColorPicker
-              color={this.props.color}
-              onChangeComplete={this.handleColorSelect}
-            />
-          </PickerContainer>}
+            <CustomColorPicker color={this.props.color} onChangeComplete={this.handleColorSelect} />
+          </PickerContainer>
+        )}
       </div>
     );
   }

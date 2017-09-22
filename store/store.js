@@ -3,14 +3,14 @@ import axios from 'axios';
 
 class ScoreStore {
   @observable matchId;
-  @observable showColors = true;
-  @observable showLogos = true;
-  @observable isShowing = true;
+  @observable showColors = false;
+  @observable showLogos = false;
+  @observable isShowing = false;
 
   @observable
   homeTeam = {
-    sets: 2,
-    points: 23,
+    sets: 0,
+    points: 0,
     name: '',
     logo: '',
     color: 'green',
@@ -18,8 +18,8 @@ class ScoreStore {
 
   @observable
   awayTeam = {
-    sets: 1,
-    points: 2,
+    sets: 0,
+    points: 0,
     name: '',
     logo: '',
     color: 'blue',
