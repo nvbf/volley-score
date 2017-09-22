@@ -7,19 +7,21 @@ class ScoreStore {
   @observable showLogos = true;
   @observable isShowing = true;
 
-  @observable homeTeam = {
+  @observable
+  homeTeam = {
     sets: 2,
     points: 23,
-    name: 'NTNUI',
-    logo: '/static/logo/ntnui.svg',
+    name: '',
+    logo: '',
     color: 'green',
   };
 
-  @observable awayTeam = {
+  @observable
+  awayTeam = {
     sets: 1,
     points: 2,
-    name: 'KSK',
-    logo: '/static/logo/ksk.svg',
+    name: '',
+    logo: '',
     color: 'blue',
   };
 
@@ -29,12 +31,14 @@ class ScoreStore {
     this.matchId = matchId;
   }
 
-  @action startUpdates = () => {
+  @action
+  startUpdates = () => {
     this.intervalId = setInterval(this.update, 2000);
     this.update();
   };
 
-  @action stopUpdates = () => {
+  @action
+  stopUpdates = () => {
     clearInterval(this.intervalId);
   };
 

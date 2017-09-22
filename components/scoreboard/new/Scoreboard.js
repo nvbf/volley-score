@@ -45,15 +45,18 @@ const TeamRowContainer = styled.div`
 const SetsContainer = styled.div`
   background: linear-gradient(${boardColors.setsTop}, ${boardColors.setsBottom});
   width: 48px;
-  height: 120%;
+  height: 150%;
   display: flex;
-  margin-top: -8px;
+  margin-top: -23px;
   margin-left: -12px;
   transform: rotate(12deg);
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: ${color.darkBlue};
+  font-weight: 400;
+  box-shadow: inset 0px 0px 15px 2px #000000;
+  -webkit-backface-visibility: hidden;
 `;
 
 const SetScore = styled.span`
@@ -62,6 +65,7 @@ const SetScore = styled.span`
   line-height: 50px;
   transform: rotate(-12deg);
   margin-left: ${props => (props.offset ? '-16px' : '4px')};
+  -webkit-backface-visibility: hidden;
 `;
 
 const PointsContainer = styled.div`
@@ -75,6 +79,7 @@ const PointsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  -webkit-backface-visibility: hidden;
 `;
 
 const Points = styled.span`
@@ -85,6 +90,7 @@ const Points = styled.span`
   height: 50px;
   line-height: 50px;
   margin-left: ${props => (props.offset ? '-16px' : '4px')};
+  -webkit-backface-visibility: hidden;
 `;
 
 const Dangle = styled.div`
@@ -94,6 +100,7 @@ const Dangle = styled.div`
   height: 120%;
   margin-top: -4px;
   margin-left: -1px;
+  -webkit-backface-visibility: hidden;
 `;
 
 export type TeamPoints = {
