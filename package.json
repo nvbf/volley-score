@@ -9,7 +9,8 @@
     "build-storybook": "build-storybook",
     "install-redis": "./lib/redis/install.sh",
     "redis": "./redis/src/redis-server",
-    "lint": "node ./node_modules/eslint/bin/eslint.js ./components/** -c ./.eslintrc.json --fix"
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./components/** -c ./.eslintrc.json --fix",
+    "prettier": "prettier-eslint --single-quote --trailing-comma all '{components,pages,src}/**/*.js' --write"
   },
   "engines": {
     "node": "8.2.1",
@@ -48,6 +49,9 @@
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
-    "eslint-plugin-react": "6.9.0"
+    "eslint-plugin-react": "6.9.0",
+    "prettier": "^1.5.2",
+    "prettier-eslint": "^6.4.2",
+    "prettier-eslint-cli": "^4.1.1"
   }
 }
