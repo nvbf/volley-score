@@ -133,7 +133,7 @@ class TeamRow extends React.Component {
             }),
           }}
           src={this.props.logo}
-          alt="Team Logo"
+          alt=""
         />
 
         <Name color={this.props.textColor}>{this.props.name}</Name>
