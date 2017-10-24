@@ -40,6 +40,7 @@ const options = [
     label: 'Haugesund',
   },
   { imgName: 'holstad', value: '/static/logo/holstad.svg', label: 'Holstad' },
+  { imgName: 'hvidovre', value: '/static/logo/hvidovre.svg', label: 'Hvidovre' },
   {
     imgName: 'kfumstavanger',
     value: '/static/logo/kfumstavanger.svg',
