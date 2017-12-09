@@ -10,25 +10,25 @@
     "install-redis": "./lib/redis/install.sh",
     "redis": "./redis/src/redis-server",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./components/** -c ./.eslintrc.json --fix",
-    "prettier":
-      "prettier-eslint --single-quote --trailing-comma all '{components,pages,src}/**/*.js' --write"
+    "prettier": "prettier-eslint --single-quote --trailing-comma all '{components,pages,src}/**/*.js' --write"
   },
   "engines": {
-    "node": "8.6.0",
-    "yarn": "1.2.1"
+    "node": "8.9.1",
+    "yarn": "1.3.2"
   },
   "dependencies": {
     "animated": "^0.2.0",
     "axios": "^0.15.3",
-    "bluebird": "^3.4.7",
     "babel-eslint": "^7.2.2",
-    "babel-preset-env": "^1.6.1",
     "babel-plugin-styled-components": "^1.2.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-env": "^1.6.1",
+    "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
     "express": "^4.14.0",
     "firebase": "^4.1.3",
+    "graphql-request": "^1.4.0",
     "ioredis": "^2.5.0",
     "lodash": "^4.17.4",
     "mobx": "^3.1.7",
