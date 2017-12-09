@@ -79,7 +79,7 @@ class DataVolleyStore {
         }
       }
     `;
-    request('http://localhost:5000/graphql', query, {
+    request('http://api.volleystream.no/graphql', query, {
       matchId: this.matchId,
     })
       .then(({ liveData }) => {
