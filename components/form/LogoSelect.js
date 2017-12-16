@@ -9,6 +9,7 @@ const options = [
     value: '/static/logo/austratt.svg',
     label: 'Austrått',
   },
+  { imgName: 'bergkameratene', value: '/static/logo/bergkameratene.svg', label: 'Bergkameratene' },
   {
     imgName: 'bktromso',
     value: '/static/logo/bktromso.svg',
