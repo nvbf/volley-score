@@ -33,6 +33,7 @@ const options = [
     value: '/static/logo/egersund.svg',
     label: 'Egersund',
   },
+  { imgName: 'farsund', value: '/static/logo/farsund.svg', label: 'Farsund' },
   { imgName: 'forde', value: '/static/logo/forde.svg', label: 'Førde' },
   { imgName: 'gneist', value: '/static/logo/gneist.svg', label: 'Gneist' },
   {
@@ -51,6 +52,7 @@ const options = [
   { imgName: 'koll', value: '/static/logo/koll.svg', label: 'Koll' },
   { imgName: 'ksk', value: '/static/logo/ksk.svg', label: 'KSK' },
   { imgName: 'lierne', value: '/static/logo/lierne.svg', label: 'Lierne' },
+  { imgName: 'molde', value: '/static/logo/molde.svg', label: 'Molde' },
   { imgName: 'ntnui', value: '/static/logo/ntnui.svg', label: 'NTNUI' },
   { imgName: 'oskil', value: '/static/logo/oksil.svg', label: 'ØKSIL' },
   { imgName: 'osi', value: '/static/logo/osi.svg', label: 'OSI' },
@@ -93,6 +95,7 @@ const options = [
     value: '/static/logo/gdansk.svg',
     label: 'Trefl Gdańsk',
   },
+  { imgName: 'tsi', value: '/static/logo/tsi.svg', label: 'TSI' },
   {
     imgName: 'tonsberg',
     value: '/static/logo/tonsberg.svg',
