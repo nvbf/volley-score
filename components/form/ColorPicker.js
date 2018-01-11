@@ -54,9 +54,13 @@ export const ColorSelect = styled.button`
   border: none;
   text-transform: uppercase;
   overflow: hidden;
+  border: 1px solid #222b38;
+  text-shadow: 1px 1px 2px #222b38;
 `;
 
-export const PickerContainer = styled.div`margin-top: 10px;`;
+export const PickerContainer = styled.div`
+  margin-top: 10px;
+`;
 
 class ColorPicker extends React.Component {
   constructor(props) {

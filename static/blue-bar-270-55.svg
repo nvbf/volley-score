@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="270px" height="55px" viewBox="0 0 270 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>bottom-bg/blue</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="101.257813%" y1="49.7500002%" x2="0.25781251%" y2="49.7500002%" id="linearGradient-1">
+            <stop stop-color="#31B9EB" offset="0%"></stop>
+            <stop stop-color="#1F9AE1" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="270" height="55"></rect>
+    </defs>
+    <g id="StatisticsRow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-255.000000, 0.000000)">
+        <g id="bottom-bg/blue" transform="translate(255.000000, 0.000000)">
+            <g id="Rectangle-6">
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <rect stroke="#209BE2" stroke-width="1" x="0.5" y="0.5" width="269" height="54"></rect>
+            </g>
+            <path d="M0,0 C3.32865877,1.21551853e-13 92.9953254,0.354526525 269,1.06357958 L269,11 C200.598354,5.36617357 110.931688,1.6995069 0,0 Z" id="shadow" fill="#209BE2" fill-rule="evenodd"></path>
+        </g>
+    </g>
+</svg>
