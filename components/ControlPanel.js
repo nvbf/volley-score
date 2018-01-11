@@ -6,7 +6,9 @@ import CheckBox from './form/CheckBox';
 import Notification from './Notification';
 import { Scoreboard } from './scoreboard/Scoreboard';
 
-const SuperCheckBox = styled(CheckBox)`margin: 4px;`;
+const SuperCheckBox = styled(CheckBox)`
+  margin: 4px;
+`;
 
 function ControlPanel(props) {
   return (

@@ -1,13 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { darken } from 'polished';
 import { observer } from 'mobx-react';
 import Animated from 'animated/lib/targets/react-dom';
 
+const fadeIn = keyframes`
+  0% { opacity: 0; }
+  66% { opacity: 0; }
+  100% { opacity: 1; }
+`;
+
+const fadeOut = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+`;
+
+const GrowRight = keyframes`
+  from {
+    width: 0%;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1
+  }
+`;
+
+const ShrinkLeft = keyframes`
+  0% { width: 100%; opacity: 1; }
+  66% { width: 100%; opacity: 1; }
+  100% { width: 0%; opacity: 0; }
+`;
+
+const GrowRightDiv = styled.div`
+  width: ${props => (props.isShowing ? '100%' : '0%')};
+  animation: ${props =>
+    props.isShowing ? `${GrowRight} 0.3s linear` : `${ShrinkLeft} 0.6s linear`};
+`;
+
+const FadeInDiv = styled.div`
+  opacity: ${props => (props.isShowing ? 1 : 0)};
+  animation: ${props => (props.isShowing ? `${fadeIn} 0.5s linear` : `${fadeOut} 0.2s linear`)};
+`;
+
 const Row = styled.div`
   width: 100%;
-  height: 50px;
+  height: 57px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -16,42 +55,116 @@ const Row = styled.div`
   overflow: hidden;
 `;
 
-const ImageLogo = styled.img`
-  width: 34px;
-  height: 34px;
+const LogoContainer = styled.div`
+  min-height: 57px;
+  height: 57px;
+  margin-right: 8px;
+  background-color: #222b38;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: ${props => (props.isShowing ? '57' : '0')}px;
+  width: ${props => (props.isShowing ? '57' : '0')}px;
+  opacity: ${props => (props.isShowing ? 1 : 0)};
 `;
 
-const ShirtColor = styled.div`
-  border-radius: 0px;
-  background-color: ${props => props.hex};
-  background: linear-gradient(
-    ${props => darken(0.15, props.hex)},
-    ${props => props.hex},
-    ${props => darken(0.15, props.hex)}
-  );
-  width: 8px;
-  height: 50px;
+const Logo = styled.img`
+  width: 36px;
+  height: 36px;
 `;
 
-const Name = styled.div`
-  letter-spacing: 1px;
-  font-size: 20px;
-  min-width: 100px;
-  max-width: 220px;
-  text-transform: uppercase;
-  margin-left: 8px;
-  height: 22px;
-  line-height: 22px;
-  text-overflow: ellipsis;
+const NameAndPointContainer = styled.div`
+  height: 57px;
+  font-family: 'Open Sans';
+  font-size: 36px;
+  color: #222b38;
+  background-color: white;
   overflow: hidden;
+  line-height: 55px;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 400;
+  border-bottom: ${props => (props.showBorder ? '2px solid #222b38' : 'none')};
+`;
+
+const TeamName = styled.div`
+  text-indent: 16px;
+  width: 260px;
+  margin-right: 16px;
+  text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${props => props.color};
-  text-shadow: 1px 1px #000;
+  overflow: hidden;
+`;
+
+const TeamSets = styled.div`
+  width: 45px;
+  height: 45px;
+  color: white;
+  background-color: #222b38;
+  line-height: 45px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-right: 16px;
   font-weight: 400;
 `;
 
-const AnimatedLogo = Animated.createAnimatedComponent(ImageLogo);
-const AnimatedShirtColor = Animated.createAnimatedComponent(ShirtColor);
+const TeamPoints = styled.div`
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  font-weight: 700;
+  margin-right: 8px;
+  margin-left: 8px;
+`;
+
+const GrowRight203 = keyframes`
+  from {
+    width: 0px;
+    opacity: 0;
+    border: none;
+  }
+  to {
+    width: 203px;
+    opacity: 1;
+    border: 1px solid rgba(31, 154, 225, 1);
+  }
+`;
+
+const ShrinkLeft203 = keyframes`
+  0% { width: 203px; opacity: 1; border: 1px solid rgba(31, 154, 225, 1); }
+  66% { width: 203px; opacity: 1; border: 1px solid rgba(31, 154, 225, 1); }
+  100% { width: 0px; opacity: 0; border: none; }
+`;
+
+const PrevSetsContainer = styled.div`
+  background: url('/static/blue-bar-270-55.svg');
+  box-sizing: border-box;
+  border: ${props => (props.isShowing ? '1px solid rgba(31, 154, 225, 1)' : 'none')};
+  color: white;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  font-size: 32px;
+  width: ${props => (props.isShowing ? '203px' : '0px')};
+  animation: ${props =>
+    props.isShowing ? `${GrowRight203} 0.3s linear` : `${ShrinkLeft203} 0.6s linear`};
+`;
+
+const PrevSet = FadeInDiv.extend`
+  width: 67px;
+  text-align: center;
+`;
+/*
+const AnimPrevSetsContainer = Animated.createAnimatedComponent(PrevSetsContainer);
+const AnimPrevSet = Animated.createAnimatedComponent(PrevSet);
+const AnimatedLogo = Animated.createAnimatedComponent(LogoContainer);
+*/
 
 class TeamRow extends React.Component {
   static propTypes = {
@@ -69,74 +182,30 @@ class TeamRow extends React.Component {
     color: '',
     showLogo: false,
     showColor: false,
+    showPrevSets: false,
     textColor: '#ffffff',
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      logoAnim: new Animated.Value(props.showLogo ? 1 : 0),
-      colorAnim: new Animated.Value(props.showColor ? 1 : 0),
-    };
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return (
-      this.props.color !== nextProps.color ||
-      this.props.name !== nextProps.name ||
-      this.props.showColor !== nextProps.showColor ||
-      this.props.showLogo !== nextProps.showLogo
-    );
-  }
-
-  componentWillUpdate(nextProps) {
-    if (!nextProps.showColor) {
-      Animated.spring(this.state.colorAnim, { toValue: 0 }).start();
-    }
-    if (!nextProps.showLogo) {
-      Animated.spring(this.state.logoAnim, { toValue: 0 }).start();
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.props.showColor) {
-      Animated.spring(this.state.colorAnim, { toValue: 1 }).start();
-    }
-    if (this.props.showLogo) {
-      Animated.spring(this.state.logoAnim, { toValue: 1 }).start();
-    }
   }
 
   render() {
     return (
       <Row>
-        <AnimatedShirtColor
-          style={{
-            opacity: this.state.colorAnim,
-            width: this.state.colorAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 8],
-            }),
-          }}
-          hex={this.props.color}
-        />
-        <AnimatedLogo
-          style={{
-            opacity: this.state.logoAnim,
-            width: this.state.logoAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 33],
-            }),
-            marginLeft: this.state.logoAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 8],
-            }),
-          }}
-          src={this.props.logo}
-          alt=""
-        />
-
-        <Name color={this.props.textColor}>{this.props.name}</Name>
+        <LogoContainer isShowing={this.props.showLogo}>
+          <Logo src={this.props.logo} />
+        </LogoContainer>
+        <NameAndPointContainer showBorder={this.props.showBorder}>
+          <TeamName>{this.props.name}</TeamName>
+          <TeamSets>{this.props.sets}</TeamSets>
+          {/* }<PrevSetsContainer isShowing={this.props.showPrevSets}>
+            <PrevSet isShowing={this.props.showPrevSets}>21</PrevSet>
+            <PrevSet isShowing={this.props.showPrevSets}>25</PrevSet>
+            <PrevSet isShowing={this.props.showPrevSets}>19</PrevSet>
+          </PrevSetsContainer> */}
+          <TeamPoints>{this.props.points}</TeamPoints>
+        </NameAndPointContainer>
       </Row>
     );
   }
