@@ -77,7 +77,7 @@ function ControlPanel(props) {
               onCheck={props.onColorCheck}
             />
           </section>
-          <section className="section container">
+          <section className="section container is-dark">
             <h3 className="title is-3">Preview</h3>
             <Scoreboard
               homeTeam={{
