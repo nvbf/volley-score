@@ -75,7 +75,7 @@ const Logo = styled.img`
 
 const NameAndPointContainer = styled.div`
   height: 57px;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', 'Source Sans Pro', sans-serif;
   font-size: 36px;
   color: #222b38;
   background-color: white;
