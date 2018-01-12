@@ -13,6 +13,10 @@ export default class MyDocument extends Document {
           <title>Scoreboard</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800"
+            rel="stylesheet"
+          />
           <link rel="stylesheet" type="text/css" href="static/css/base.css" />
           {styleTags}
         </Head>
