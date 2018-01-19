@@ -52,6 +52,7 @@ const options = [
   { imgName: 'koll', value: '/static/logo/koll.svg', label: 'Koll' },
   { imgName: 'ksk', value: '/static/logo/ksk.svg', label: 'KSK' },
   { imgName: 'lierne', value: '/static/logo/lierne.svg', label: 'Lierne' },
+  { imgName: 'marienlyst', value: '/static/logo/marienlyst.svg', label: 'Marienlyst' },
   { imgName: 'molde', value: '/static/logo/molde.svg', label: 'Molde' },
   { imgName: 'ntnui', value: '/static/logo/ntnui.svg', label: 'NTNUI' },
   { imgName: 'oskil', value: '/static/logo/oksil.svg', label: 'ØKSIL' },
@@ -103,7 +104,7 @@ const options = [
   },
   { imgName: 'tvn', value: '/static/logo/tvn.svg', label: 'TVN' },
   { imgName: 'vestli', value: '/static/logo/vestli.svg', label: 'Vestli' },
-  { imgName: 'viking', value: '/static/logo/viking.svg', label: 'Viking' },
+  { imgName: 'viking', value: '/static/logo/viking.svg', label: 'TIF Viking' },
   { imgName: 'volda', value: '/static/logo/volda.svg', label: 'KFUM Volda' },
 ];
 
