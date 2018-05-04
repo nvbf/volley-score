@@ -1,6 +1,7 @@
 body {
-  background: rgba(0, 0, 0, 0) !important;
-  font-family: 'Source Sans Pro', sans-serif;
+  background: #f9f8fc !important;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   font-weight: 300;
   margin: 0;
   padding: 0;
@@ -9,4 +10,3 @@ body {
 .is-dark {
   background: #b0b6be;
 }
-
