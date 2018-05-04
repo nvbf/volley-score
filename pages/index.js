@@ -159,7 +159,7 @@ class ScoreboardPanel extends React.Component {
       <div>
         <Head>
           <meta charSet="utf-8" />
-          <title>OBS Control Panel</title>
+          <title>Volley Score</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="stylesheet" href="/static/css/bulma.min.css" crossOrigin="anonymous" />
           <link rel="stylesheet" href="/static/css/react-select.css" />

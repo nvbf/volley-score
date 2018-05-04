@@ -7,9 +7,16 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const schema = require('./src/graphql/schema');
+
 app.prepare().then(() => {
   const server = express();
   const port = process.env.PORT || 3000;
+
+  // GraphQL
+  server.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+  server.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
   server.get('/test', (req, res) => res.json({ message: 'testing' }));
 
