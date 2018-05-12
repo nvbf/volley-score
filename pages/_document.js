@@ -12,6 +12,7 @@ export default class MyDocument extends Document {
         <Head>
           <title>Scoreboard</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <link rel="stylesheet" href="/_next/static/style.css" />
           <link rel="stylesheet" type="text/css" href="static/css/base.css" />
           {styleTags}
         </Head>

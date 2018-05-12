@@ -22,6 +22,7 @@ const Container = styled.div`
   box-sizing: content-box;
   margin-top: 16px;
   margin-left: 16px;
+  margin-right: 16px;
   min-width: 400px;
   height: 116px;
   color: white;
@@ -29,6 +30,10 @@ const Container = styled.div`
   flex-direction: row;
   font-family: 'Source Sans Pro', sans-serif;
   overflow: hidden;
+
+  @media (max-width: 600px) {
+    min-width: 300px;
+  }
 `;
 
 const TeamRowContainer = styled.div`

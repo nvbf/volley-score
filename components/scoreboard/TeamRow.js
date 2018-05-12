@@ -98,6 +98,10 @@ const TeamName = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+
+  @media (max-width: 600px) {
+    width: 120px;
+  }
 `;
 
 const TeamSets = styled.div`

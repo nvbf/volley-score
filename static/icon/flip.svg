@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="ion-arrow-swap" transform="translate(5.000000, 5.000000)" fill="#a70f7f" fill-rule="nonzero">
+      <path d="M0,37.125 L0,43.875 C0,44.49375 0.50625,45 1.125,45 L36,45 L36,54 L54,40.5 L36,27 L36,36 L1.125,36 C0.50625,36 0,36.50625 0,37.125 Z M54,16.875 L54,10.125 C54,9.50625 53.49375,9 52.875,9 L18,9 L18,0 L0,13.5 L18,27 L18,18 L52.875,18 C53.49375,18 54,17.49375 54,16.875 Z" id="Shape"></path>
+  </g>
+</svg>

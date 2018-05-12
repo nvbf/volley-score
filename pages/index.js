@@ -1,204 +1,252 @@
 import React from 'react';
-import Head from 'next/head';
-import axios from 'axios';
-import ControlPanel from '../components/ControlPanel';
+import styled from 'styled-components';
+import 'react-toggle/style.css'; // for ES6 modules
+import Toggle from 'react-toggle';
+import Box from '../components/Box';
+import ToggleBox from '../components/ToggleBox';
+import SelectBox from '../components/SelectBox';
+import { Scoreboard } from '../components/scoreboard/Scoreboard';
+import ControlPanel from '../components/NewControlPanel';
 
-class ScoreboardPanel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      matchId: '',
-      teamsFlipped: false,
-      pointsA: 0,
-      pointsB: 0,
-      setA: 0,
-      setB: 0,
-      nameA: '',
-      nameB: '',
-      logoA: '',
-      logoB: '',
-      colorA: '#ffffff',
-      colorB: '#ffffff',
-      showLogos: false,
-      showColors: false,
-      isShowing: true,
-    };
-    this.handleMatchIdChange = this.handleMatchIdChange.bind(this);
-    this.handleNameAChange = this.handleNameAChange.bind(this);
-    this.handleNameBChange = this.handleNameBChange.bind(this);
-    this.handleLogoAChange = this.handleLogoAChange.bind(this);
-    this.handleLogoBChange = this.handleLogoBChange.bind(this);
-    this.handleColorAChange = this.handleColorAChange.bind(this);
-    this.handleColorBChange = this.handleColorBChange.bind(this);
-    this.handleLogoCheck = this.handleLogoCheck.bind(this);
-    this.handleColorCheck = this.handleColorCheck.bind(this);
-    this.handleShowCheck = this.handleShowCheck.bind(this);
+const Container = styled.div`
+  background-color: #f9f8fc;
+  display: flex;
+  flex-direction: column;
 
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-    this.resetPoints = this.resetPoints.bind(this);
-    this.flipTeams = this.flipTeams.bind(this);
-    this.saveToServer = this.saveToServer.bind(this);
+  @media (min-width: 800px) {
+    width: 800px;
+    margin: auto;
+    flex-wrap: wrap;
+  }
+`;
+
+const SectionContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
+const PreTitle = styled.div`
+  font-size: 18px;
+  color: #a70f7f;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 16px;
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  font-size: 39px;
+  font-weight: bold;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 39px;
+  width: 100%;
+`;
+
+const MatchIdContainer = styled.div`
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
+  padding: 16px;
+  box-sizing: border-box;
+
+  @media (min-width: 800px) {
+    border-left: 1px solid #e9e9e9;
+    border-right: 1px solid #e9e9e9;
+  }
+`;
+
+const InputLabel = styled.label`
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  text-indent: 4px;
+`;
+
+const TextInput = styled.input`
+  margin-top: 8px;
+  width: 100%;
+  height: 48px;
+  font-size: 24px;
+  text-indent: 16px;
+  border: 1px solid #c9c9c9;
+  border-radius: 4px;
+  box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  margin: 0;
+  margin-bottom: 16px;
+
+  &:disabled {
+    background-color: #e9e9e9;
+  }
+`;
+
+const SubSectionTitle = styled.h3`
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+const SectionGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const ScoreContainer = styled.div`
+  padding-bottom: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 100px;
+  background-color: #d8d8d9;
+  box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+`;
+
+const Image = styled.img`
+  height: 36px;
+  width: 36px;
+  min-width: 36px;
+  margin-right: 16px;
+`;
+
+const ButtonContainer = styled.button`
+  height: 64px;
+  font-weight: bolder;
+  border: none;
+  color: #a70f7f;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  font-size: 24px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.matchId === this.state.matchId) {
-      this.saveToServer();
-    }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
+`;
 
-  increment(key) {
-    return () =>
-      this.setState({
-        [key]: this.state[key] + 1,
-      });
-  }
+const Footer = styled.div`
+  width: 100%;
+  height: 150px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-  decrement(key) {
-    return () =>
-      this.setState({
-        [key]: this.state[key] - 1,
-      });
-  }
-
-  resetPoints() {
-    this.setState({
-      pointsA: 0,
-      pointsB: 0,
-    });
-  }
-
-  flipTeams() {
-    this.setState({ teamsFlipped: !this.state.teamsFlipped });
-  }
-
-  handleLogoAChange(selected) {
-    this.setState({
-      nameA: selected.label,
-      logoA: selected.value,
-    });
-  }
-
-  handleLogoBChange(selected) {
-    this.setState({
-      nameB: selected.label,
-      logoB: selected.value,
-    });
-  }
-
-  handleNameAChange(event) {
-    this.setState({ nameA: event.target.value });
-  }
-
-  handleNameBChange(event) {
-    this.setState({ nameB: event.target.value });
-  }
-
-  handleColorAChange(color) {
-    this.setState({ colorA: color.hex });
-  }
-
-  handleColorBChange(color) {
-    this.setState({ colorB: color.hex });
-  }
-
-  handleMatchIdChange(event) {
-    const matchId = event.target.value;
-    this.setState({ matchId });
-    if (matchId.length > 2) {
-      this.loadFromServer(matchId);
-    }
-  }
-
-  handleLogoCheck() {
-    this.setState({
-      showLogos: !this.state.showLogos,
-    });
-  }
-
-  handleColorCheck() {
-    this.setState({
-      showColors: !this.state.showColors,
-    });
-  }
-
-  handleShowCheck() {
-    this.setState({
-      isShowing: !this.state.isShowing,
-    });
-  }
-
-  saveToServer() {
-    axios.post(`/api/update/${this.state.matchId}`, {
-      ...this.state,
-    });
-  }
-
-  loadFromServer(matchId = this.state.matchId) {
-    axios.get(`/api/scores/${matchId}`).then(({ data }) =>
-      this.setState({
-        pointsA: data.pointsA || 0,
-        pointsB: data.pointsB || 0,
-        setA: data.setA || 0,
-        setB: data.setB || 0,
-        logoA: data.logoA || '',
-        logoB: data.logoB || '',
-        colorA: data.colorA || '#ffffff',
-        colorB: data.colorB || '#ffffff',
-        nameA: data.nameA || '',
-        nameB: data.nameB || '',
-        showColors: data.showColor,
-        showLogos: data.showLogos,
-        isShowing: data.isShowing,
-      }),
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <Head>
-          <meta charSet="utf-8" />
-          <title>Volley Score</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="stylesheet" href="/static/css/bulma.min.css" crossOrigin="anonymous" />
-          <link rel="stylesheet" href="/static/css/react-select.css" />
-          <link rel="stylesheet" href="/static/css/control-panel.css" />
-        </Head>
-        <ControlPanel
-          onMatchIdChange={this.handleMatchIdChange}
-          onNameAChange={this.handleNameAChange}
-          onNameBChange={this.handleNameBChange}
-          onLogoAChange={this.handleLogoAChange}
-          onLogoBChange={this.handleLogoBChange}
-          onColorAChange={this.handleColorAChange}
-          onColorBChange={this.handleColorBChange}
-          onLogoCheck={this.handleLogoCheck}
-          onColorCheck={this.handleColorCheck}
-          onShowCheck={this.handleShowCheck}
-          onIncrement={this.increment}
-          onDecrement={this.decrement}
-          onResetClick={this.resetPoints}
-          onFlipClick={this.flipTeams}
-          matchId={this.state.matchId}
-          pointsA={this.state.pointsA}
-          pointsB={this.state.pointsB}
-          setA={this.state.setA}
-          setB={this.state.setB}
-          nameA={this.state.nameA}
-          nameB={this.state.nameB}
-          logoA={this.state.logoA}
-          logoB={this.state.logoB}
-          colorA={this.state.colorA}
-          colorB={this.state.colorB}
-          isFlipped={this.state.teamsFlipped}
-          showLogos={this.state.showLogos}
-          showColors={this.state.showColors}
-          isShowing={this.state.isShowing}
-        />
-      </div>
-    );
-  }
+function ShitButton(props) {
+  return (
+    <ButtonContainer>
+      <Image src={props.icon} alt={props.text} />
+      {props.text}
+    </ButtonContainer>
+  );
 }
 
-export default ScoreboardPanel;
+function ScorePage() {
+  return (
+    <Container>
+      <PreTitle>Volleystream.no</PreTitle>
+      <Title>Volley Score</Title>
+
+      <SectionTitle>Match ID</SectionTitle>
+      <MatchIdContainer>
+        <InputLabel>Insert match ID</InputLabel>
+        <TextInput value="midtnordisk18" />
+        <InputLabel>Stream overlay link</InputLabel>
+        <TextInput value="http://score.volleystream.no/scoreboard?matchId=midtnordisk18" disabled />
+      </MatchIdContainer>
+
+      <SectionTitle>Settings</SectionTitle>
+      <SectionContainer>
+        <ToggleBox label="Show shirt colors" />
+        <ToggleBox label="Show logos" />
+      </SectionContainer>
+      <SectionContainer>
+        <SectionGroup>
+          <SubSectionTitle>Home Team</SubSectionTitle>
+          <SelectBox
+            text="Trondheim Ballklubb"
+            logo="http://volleystream.no/static/logo/tbk.svg"
+            selectText="Select club"
+          />
+          <SelectBox text="Coral Blue" color="lightblue" selectText="Select color" />
+        </SectionGroup>
+        <SectionGroup>
+          <SubSectionTitle>Guest Team</SubSectionTitle>
+          <SelectBox
+            text="Askim VBK"
+            logo="http://volleystream.no/static/logo/askim.svg"
+            selectText="Select club"
+          />
+          <SelectBox text="Crazy Yellow" color="orange" selectText="Select color" />
+        </SectionGroup>
+      </SectionContainer>
+
+      <PreTitle>midtnordisk18</PreTitle>
+      <Title>Scoreboard</Title>
+      <SubSectionTitle>Preview</SubSectionTitle>
+      <ScoreContainer>
+        <Scoreboard
+          homeTeam={{
+            name: 'TBK',
+            points: 16,
+            sets: 1,
+            logo: 'http://volleystream.no/static/logo/tbk.svg',
+            color: '#22194D',
+          }}
+          awayTeam={{
+            name: 'Askim',
+            points: 9,
+            sets: 2,
+            logo: 'http://volleystream.no/static/logo/askim.svg',
+            color: '#22194D',
+          }}
+          showLogos
+          showColors
+          isShowing
+        />
+      </ScoreContainer>
+      <SubSectionTitle>Control Panel</SubSectionTitle>
+      <ControlPanel
+        flipped={false}
+        homeTeam={{
+          name: 'TBK',
+          points: 16,
+          sets: 1,
+          logo: 'http://volleystream.no/static/logo/tbk.svg',
+        }}
+        guestTeam={{
+          name: 'Askim',
+          points: 9,
+          sets: 2,
+          logo: 'http://volleystream.no/static/logo/askim.svg',
+        }}
+      />
+      {/* <SectionContainer>
+        <ShitButton icon="/static/icon/flip.svg" text="Flip teams" />
+        <ShitButton icon="/static/icon/reset.svg" text="Reset points" />
+      </SectionContainer> */}
+      {/* <Footer>Laget av Thor Even Tutturen, NTNUI Volleyball</Footer> */}
+    </Container>
+  );
+}
+
+export default ScorePage;
