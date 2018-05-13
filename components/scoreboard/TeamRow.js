@@ -98,6 +98,7 @@ const TeamName = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-size: ${props => props.size || '32'}px;
 `;
 
 const TeamSets = styled.div`
@@ -190,6 +191,17 @@ class TeamRow extends React.Component {
     super(props);
   }
 
+  getNameSize() {
+    const len = this.props.name.length;
+    if (len > 15) {
+      return 20;
+    }
+    if (len > 12) {
+      return 24;
+    }
+    return 32;
+  }
+
   render() {
     return (
       <Row>
@@ -197,7 +209,7 @@ class TeamRow extends React.Component {
           <Logo src={this.props.logo} />
         </LogoContainer>
         <NameAndPointContainer showBorder={this.props.showBorder}>
-          <TeamName>{this.props.name}</TeamName>
+          <TeamName size={this.getNameSize()}>{this.props.name}</TeamName>
           <TeamSets>{this.props.sets}</TeamSets>
           {/* }<PrevSetsContainer isShowing={this.props.showPrevSets}>
             <PrevSet isShowing={this.props.showPrevSets}>21</PrevSet>
