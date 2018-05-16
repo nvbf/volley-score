@@ -12,8 +12,8 @@ const Container = styled.div`
 `;
 
 const MainContainer = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 138px;
+  height: 138px;
   background-color: white;
   border-radius: 4px;
   border-bottom-right-radius: 0;
@@ -22,6 +22,16 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  @media (max-width: 720px) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media (max-width: 500px) {
+    width: 60px;
+    height: 60px;
+  }
 
   &:hover {
     background-color: #e1eafd;

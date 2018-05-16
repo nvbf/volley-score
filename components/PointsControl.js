@@ -4,6 +4,11 @@ const Container = styled.div`
   width: 191px;
   height: 245px;
 
+  @media (max-width: 720px) {
+    width: 120px;
+    height: 245px;
+  }
+
   @media (max-width: 500px) {
     width: 83px;
     height: 106px;
@@ -24,6 +29,11 @@ const MainContainer = styled.div`
 
   &:hover {
     background-color: #ffeffa;
+  }
+
+  @media (max-width: 720px) {
+    width: 120px;
+    height: 120px;
   }
 
   @media (max-width: 500px) {
@@ -50,6 +60,10 @@ const Points = styled.div`
   font-size: 112px;
   color: #000000;
   font-weight: bolder;
+
+  @media (max-width: 720px) {
+    font-size: 64px;
+  }
 
   @media (max-width: 500px) {
     font-size: 48px;

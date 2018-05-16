@@ -240,11 +240,11 @@ function ScorePage() {
           logo: 'http://volleystream.no/static/logo/askim.svg',
         }}
       />
-      {/* <SectionContainer>
+      <SectionContainer>
         <ShitButton icon="/static/icon/flip.svg" text="Flip teams" />
         <ShitButton icon="/static/icon/reset.svg" text="Reset points" />
-      </SectionContainer> */}
-      {/* <Footer>Laget av Thor Even Tutturen, NTNUI Volleyball</Footer> */}
+      </SectionContainer>
+      <Footer>Laget av Thor Even Tutturen, NTNUI Volleyball</Footer>
     </Container>
   );
 }
