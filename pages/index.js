@@ -6,6 +6,7 @@ import MatchId from '../components/matchId';
 import Settings from '../components/settings';
 import ScoreControl from '../components/scoreControl';
 import Footer from '../components/footer';
+import withData from '../src/apollo/withData';
 
 function ScorePage() {
   return (
@@ -20,4 +21,4 @@ function ScorePage() {
   );
 }
 
-export default ScorePage;
+export default withData(ScorePage);

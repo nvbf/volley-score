@@ -13,10 +13,11 @@ const typeDefs = `
 `;
 
 const defaultState = {
-  matchId: '',
+  matchId: '123',
 };
 
 const updateMatchIdResolver = (_, args, context) => {
+  console.log('ARGS', args);
   const query = gql`
     query {
       matchId @client

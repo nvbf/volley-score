@@ -1,57 +1,55 @@
 import React from 'react';
 import { SectionTitle } from '../shared/Title';
 import styled from 'styled-components';
+import TextInput from './TextInput';
+import Container from './Container';
+import InputLabel from './InputLabel';
+import gql from 'graphql-tag';
+import { Query, Mutation } from 'react-apollo';
 
-const MatchIdContainer = styled.div`
-  width: 100%;
-  background-color: white;
-  border-top: 1px solid #e9e9e9;
-  border-bottom: 1px solid #e9e9e9;
-  padding: 16px;
-  box-sizing: border-box;
-
-  @media (min-width: 800px) {
-    border-left: 1px solid #e9e9e9;
-    border-right: 1px solid #e9e9e9;
+const GET_MATCH_ID = gql`
+  query GetMatchID {
+    matchId @client
   }
 `;
 
-const InputLabel = styled.label`
-  font-weight: bold;
-  display: block;
-  width: 100%;
-  font-size: 20px;
-  text-indent: 4px;
-`;
-
-const TextInput = styled.input`
-  margin-top: 8px;
-  width: 100%;
-  height: 48px;
-  font-size: 24px;
-  text-indent: 16px;
-  border: 1px solid #c9c9c9;
-  border-radius: 4px;
-  box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
-  margin: 0;
-  margin-bottom: 16px;
-
-  &:disabled {
-    background-color: #e9e9e9;
+const SET_MATCH_ID = gql`
+  mutation SetMatchId($id: String!) {
+    updateMatchId(id: $id) @client
   }
 `;
 
 function MatchId(props) {
   return (
-    <React.Fragment>
-      <SectionTitle>Match ID</SectionTitle>
-      <MatchIdContainer>
-        <InputLabel>Insert match ID</InputLabel>
-        <TextInput value="midtnordisk18" onChange={props.onChange} />
-        <InputLabel>Stream overlay link</InputLabel>
-        <TextInput value="http://score.volleystream.no/scoreboard?matchId=midtnordisk18" disabled />
-      </MatchIdContainer>
-    </React.Fragment>
+    <Query query={GET_MATCH_ID}>
+      {({ loading, error, data }) => {
+        if (loading) return 'Loading...';
+        if (error) return 'Error...';
+        return (
+          <React.Fragment>
+            <SectionTitle>Match ID</SectionTitle>
+            <Mutation mutation={SET_MATCH_ID}>
+              {setMatchId => (
+                <Container>
+                  <InputLabel>Insert match ID</InputLabel>
+                  <TextInput
+                    value={data.matchId}
+                    onChange={(e) => {
+                      setMatchId({ variables: { id: e.target.value } });
+                    }}
+                  />
+                  <InputLabel>Stream overlay link</InputLabel>
+                  <TextInput
+                    value={`http://score.volleystream.no/scoreboard?matchId=${data.matchId}`}
+                    disabled
+                  />
+                </Container>
+              )}
+            </Mutation>
+          </React.Fragment>
+        );
+      }}
+    </Query>
   );
 }
 
