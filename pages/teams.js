@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import 'react-toggle/style.css'; // for ES6 modules
 import Toggle from 'react-toggle';
-import Box, { LabelBox } from '../components/Box';
+import Box, { LabelBox } from '../components/shared/Box';
 
 const Container = styled.div`
   background-color: #f9f8fc;

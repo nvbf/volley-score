@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { LabelBox } from './Box';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
@@ -12,9 +14,18 @@ function ToggleBox(props) {
   return (
     <LabelBox>
       <Label>{props.label}</Label>
-      <Toggle defaultChecked={false} icons={false} onChange={() => null} />
+      <Toggle checked={props.checked} icons={false} onChange={e => props.onChange(e)} />
     </LabelBox>
   );
 }
+
+ToggleBox.defaultProps = {
+  checked: false,
+};
+
+ToggleBox.propTypes = {
+  checked: PropTypes.bool,
+  onChange: PropTypes.func,
+};
 
 export default ToggleBox;

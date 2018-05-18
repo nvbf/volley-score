@@ -12,8 +12,8 @@ function ScorePage() {
     <PageContainer>
       <PreTitle>Volleystream.no</PreTitle>
       <Title>Volley Score</Title>
-      <MatchId />
-      <Settings />
+      <MatchId onChange={console.log} />
+      <Settings showColors={false} showLogos />
       <ScoreControl />
       <Footer>Laget av Thor Even Tutturen, NTNUI Volleyball</Footer>
     </PageContainer>

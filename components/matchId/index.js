@@ -47,7 +47,7 @@ function MatchId(props) {
       <SectionTitle>Match ID</SectionTitle>
       <MatchIdContainer>
         <InputLabel>Insert match ID</InputLabel>
-        <TextInput value="midtnordisk18" />
+        <TextInput value="midtnordisk18" onChange={props.onChange} />
         <InputLabel>Stream overlay link</InputLabel>
         <TextInput value="http://score.volleystream.no/scoreboard?matchId=midtnordisk18" disabled />
       </MatchIdContainer>
