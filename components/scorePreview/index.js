@@ -1,6 +1,8 @@
 import React from 'react';
 import { Scoreboard } from '../scoreboard/Scoreboard';
 import styled from 'styled-components';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
 
 const ScoreContainer = styled.div`
   padding-bottom: 12px;
@@ -12,29 +14,73 @@ const ScoreContainer = styled.div`
   box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
 `;
 
+const TEAMS_QUERY = gql`
+  query GetTeams($id: ID!) {
+    localScoreboard(id: $id) {
+      id
+      homeTeam {
+        name
+        color
+        logo
+      }
+      guestTeam {
+        name
+        color
+        logo
+      }
+      homeTeamPoints
+      guestTeamPoints
+      homeTeamSets
+      guestTeamSets
+    }
+  }
+`;
+
 function scorePreview(props) {
   return (
-    <ScoreContainer>
-      <Scoreboard
-        homeTeam={{
-          name: 'TBK',
-          points: 16,
-          sets: 1,
-          logo: 'http://volleystream.no/static/logo/tbk.svg',
-          color: '#22194D',
-        }}
-        awayTeam={{
-          name: 'Askim',
-          points: 9,
-          sets: 2,
-          logo: 'http://volleystream.no/static/logo/askim.svg',
-          color: '#22194D',
-        }}
-        showLogos
-        showColors
-        isShowing
-      />
-    </ScoreContainer>
+    <Query query={TEAMS_QUERY} variables={{ id: props.matchId }}>
+      {({ loading, error, data }) => {
+        if (loading) {
+          return 'loading';
+        }
+        if (error) {
+          console.log('error', error);
+          return 'error';
+        }
+        const {
+          homeTeam,
+          guestTeam,
+          homeTeamPoints,
+          homeTeamSets,
+          guestTeamPoints,
+          guestTeamSets,
+        } = data.localScoreboard;
+
+        return (
+          <ScoreContainer>
+            <Scoreboard
+              homeTeam={{
+                name: homeTeam.name,
+                points: homeTeamPoints,
+                sets: homeTeamSets,
+                logo: homeTeam.logo,
+                color: homeTeam.color,
+              }}
+              awayTeam={{
+                name: guestTeam.name,
+                points: guestTeamPoints,
+                sets: guestTeamSets,
+                logo: guestTeam.logo,
+                color: guestTeam.color,
+              }}
+              showLogos
+              showColors
+              isShowing
+            />
+          </ScoreContainer>
+        );
+      }}
+    </Query>
   );
 }
 

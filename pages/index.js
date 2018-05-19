@@ -29,7 +29,7 @@ function ScorePage() {
             <Title>Volley Score</Title>
             <MatchId onChange={console.log} />
             <Settings matchId={matchId} />
-            <ScoreControl />
+            <ScoreControl matchId={matchId} />
             <Footer>Laget av Thor Even Tutturen, NTNUI Volleyball</Footer>
           </PageContainer>
         );

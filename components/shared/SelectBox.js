@@ -27,7 +27,7 @@ const Color = styled.div`
 
 function SelectBox(props) {
   return (
-    <Box noMargin>
+    <Box noMargin onClick={props.onClick}>
       {props.logo && <Image src={props.logo} alt={props.text} />}
       {props.color && <Color code={props.color} />}
       <Label>{props.text}</Label>

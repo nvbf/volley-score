@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>logo/aalesund</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="logo/aalesund" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="alesund" transform="translate(68.000000, 0.000000)" fill="#FEFEFE" fill-rule="nonzero">
+            <path d="M37.68,5.16 C68.76,-8.64 110.28,10.08 116.88,44.32 C125.36,77 97.2,110.88 64.04,111.12 C37,113.52 9.2,94.44 4.04,67.32 C-2.04,41.92 13.48,14.36 37.68,5.16 Z M46.04,10.96 C33.2,14.64 21.88,23.8 15.96,35.8 C3.36,58.04 15.64,87.44 37.88,97.96 C66.08,113.28 105.56,94.36 109.68,62.12 C115.08,28.44 77.48,-0.12 46.04,10.96 Z" id="Shape"></path>
+            <path d="M15.56,107.44 C35.04,128.6 52,154.36 53.68,183.88 C55.32,214.32 38.76,243.12 15.76,262.04 C30.52,231.8 41.32,197.96 35.48,164 C33.2,143.84 24.4,125.4 15.56,107.44 Z" id="Shape"></path>
+            <path d="M67.96,191.88 C66.48,160.52 83.4,131.32 104.8,109.6 C89.8,136.96 81.64,168.28 85.6,199.56 C87.76,221.52 96.72,241.84 105.52,261.8 C84.92,244.32 68.88,219.52 67.96,191.88 Z" id="Shape"></path>
+            <path d="M50.16,121.4 C59.64,114.12 76.08,119.64 76.64,132.4 C78.24,145.68 60.6,154.24 50.6,145.88 C42.44,140.32 42.44,127.36 50.16,121.4 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

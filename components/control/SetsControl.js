@@ -132,8 +132,8 @@ function SetsControl(props) {
         <Sets>{props.sets}</Sets>
       </MainContainer>
       <ButtonContainer>
-        <MinusButton>-</MinusButton>
-        <PlusButton>+</PlusButton>
+        <MinusButton onClick={props.onMinusClick}>-</MinusButton>
+        <PlusButton onClick={props.onPlusClick}>+</PlusButton>
       </ButtonContainer>
     </Container>
   );

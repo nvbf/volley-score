@@ -4,35 +4,198 @@ import { PreTitle, Title, SubSectionTitle } from '../shared/Title';
 import ControlPanel from '../control/NewControlPanel';
 import SectionContainer from '../shared/SectionContainer';
 import IconButton from '../shared/IconButton';
+import gql from 'graphql-tag';
+import { Query, Mutation } from 'react-apollo';
+
+const GET_TEAMS = gql`
+  query GetTeams($id: ID!) {
+    localScoreboard(id: $id) {
+      id
+      homeTeam {
+        name
+        color
+        logo
+      }
+      guestTeam {
+        name
+        color
+        logo
+      }
+      homeTeamPoints
+      guestTeamPoints
+      homeTeamSets
+      guestTeamSets
+    }
+  }
+`;
+
+const UPDATE_SCOREBOARD = gql`
+  mutation UpdateScoreboard(
+    $id: ID!
+    $homeTeamPoints: Int
+    $homeTeamSets: Int
+    $guestTeamPoints: Int
+    $guestTeamSets: Int
+  ) {
+    updateLocalScoreboard(
+      input: {
+        id: $id
+        homeTeamPoints: $homeTeamPoints
+        homeTeamSets: $homeTeamSets
+        guestTeamPoints: $guestTeamPoints
+        guestTeamSets: $guestTeamSets
+      }
+    ) {
+      id
+      homeTeam {
+        name
+        color
+        logo
+      }
+      guestTeam {
+        name
+        color
+        logo
+      }
+      homeTeamPoints
+      guestTeamPoints
+      homeTeamSets
+      guestTeamSets
+    }
+  }
+`;
 
 function ScoreControl(props) {
   return (
-    <React.Fragment>
-      <PreTitle>midtnordisk18</PreTitle>
-      <Title>Scoreboard</Title>
-      <SubSectionTitle>Preview</SubSectionTitle>
-      <ScorePreview />
-      <SubSectionTitle>Control Panel</SubSectionTitle>
-      <ControlPanel
-        flipped={false}
-        homeTeam={{
-          name: 'TBK',
-          points: 16,
-          sets: 1,
-          logo: 'http://volleystream.no/static/logo/tbk.svg',
-        }}
-        guestTeam={{
-          name: 'Askim',
-          points: 9,
-          sets: 2,
-          logo: 'http://volleystream.no/static/logo/askim.svg',
-        }}
-      />
-      <SectionContainer>
-        <IconButton icon="/static/icon/flip.svg" text="Flip teams" />
-        <IconButton icon="/static/icon/reset.svg" text="Reset points" />
-      </SectionContainer>
-    </React.Fragment>
+    <Query query={GET_TEAMS} variables={{ id: props.matchId }}>
+      {({ loading, error, data }) => {
+        if (loading) {
+          return 'loading';
+        }
+        if (error) {
+          return 'error';
+        }
+
+        let scoreData;
+        if (loading) {
+          scoreData = {
+            homeTeam: {
+              name: '...',
+              logo: '',
+            },
+            guestTeam: {
+              name: '...',
+              logo: '',
+            },
+            homeTeamPoints: 0,
+            guestTeamPoints: 0,
+            homeTeamSets: 0,
+            guestTeamSets: 0,
+          };
+        } else {
+          scoreData = data.localScoreboard;
+        }
+        console.log(scoreData);
+
+        return (
+          <React.Fragment>
+            <PreTitle>{props.matchId}</PreTitle>
+            <Title>Scoreboard</Title>
+            <SubSectionTitle>Preview</SubSectionTitle>
+            <SectionContainer>
+              <ScorePreview matchId={props.matchId} />
+            </SectionContainer>
+            <SectionContainer>
+              <SubSectionTitle>Control Panel</SubSectionTitle>
+              <Mutation mutation={UPDATE_SCOREBOARD}>
+                {updateScoreboard => (
+                  <ControlPanel
+                    flipped={false}
+                    {...scoreData}
+                    onHomeTeamPointsPlusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          homeTeamPoints: scoreData.homeTeamPoints + 1,
+                        },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            homeTeamPoints: scoreData.homeTeamPoints + 1,
+                          },
+                        },
+                      })
+                    }
+                    onHomeTeamPointsMinusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          homeTeamPoints: scoreData.homeTeamPoints - 1,
+                        },
+                      })
+                    }
+                    onGuestTeamPointsPlusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          guestTeamPoints: scoreData.guestTeamPoints + 1,
+                        },
+                      })
+                    }
+                    onGuestTeamPointsMinusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          guestTeamPoints: scoreData.guestTeamPoints - 1,
+                        },
+                      })
+                    }
+                    onHomeTeamSetsPlusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          homeTeamSets: scoreData.homeTeamSets + 1,
+                        },
+                      })
+                    }
+                    onHomeTeamSetsMinusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          homeTeamSets: scoreData.homeTeamSets - 1,
+                        },
+                      })
+                    }
+                    onGuestTeamSetsPlusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          guestTeamSets: scoreData.guestTeamSets + 1,
+                        },
+                      })
+                    }
+                    onGuestTeamSetsMinusClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          guestTeamSets: scoreData.guestTeamSets - 1,
+                        },
+                      })
+                    }
+                  />
+                )}
+              </Mutation>
+            </SectionContainer>
+            <SectionContainer>
+              <IconButton icon="/static/icon/flip.svg" text="Flip teams" />
+              <IconButton icon="/static/icon/reset.svg" text="Reset points" />
+            </SectionContainer>
+          </React.Fragment>
+        );
+      }}
+    </Query>
   );
 }
 

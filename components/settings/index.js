@@ -7,6 +7,7 @@ import SectionContainer from '../shared/SectionContainer';
 import SelectBox from '../shared/SelectBox';
 import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
+import Link from 'next/link';
 
 const SectionGroup = styled.div`
   display: flex;
@@ -15,10 +16,11 @@ const SectionGroup = styled.div`
 `;
 
 const GET_SETTINGS = gql`
-  query GetMatchSettings($matchId: String) {
+  query GetMatchSettings($matchId: ID!) {
     localScoreboard(id: $matchId) {
-      showLogo
-      showColor
+      id
+      showLogos
+      showColors
       homeTeam {
         name
         logo
@@ -34,29 +36,31 @@ const GET_SETTINGS = gql`
 `;
 
 const SET_COLOR_VISIBILITY = gql`
-  mutation SetColorVisibility($id: String, $show: Boolean) {
+  mutation SetColorVisibility($id: ID!, $show: Boolean!) {
     setColorVisibility(matchId: $id, show: $show) {
+      id
       showColors
     }
   }
 `;
 
 const SET_LOGO_VISIBILITY = gql`
-  mutation SetLogoVisibility($id: String, $show: Boolean) {
+  mutation SetLogoVisibility($id: ID!, $show: Boolean!) {
     setLogoVisibility(matchId: $id, show: $show) {
+      id
       showLogos
     }
   }
 `;
 
 function Settings(props) {
-  console.log(props);
   return (
     <Query query={GET_SETTINGS} variables={{ matchId: props.matchId }}>
       {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) return 'Error...';
-        const { showColors, showLogos, homeTeam, guestTeam } = data;
+        console.log('data', data.localScoreboard);
+        const { showColors, showLogos, homeTeam, guestTeam } = data.localScoreboard;
         return (
           <React.Fragment>
             <SectionTitle>Settings</SectionTitle>
@@ -91,12 +95,16 @@ function Settings(props) {
             <SectionContainer>
               <SectionGroup>
                 <SubSectionTitle>Home Team</SubSectionTitle>
-                <SelectBox text={homeTeam.name} logo={homeTeam.logo} selectText="Select club" />
+                <Link href={{ pathname: '/teams', query: { team: 'home', id: props.matchId } }}>
+                  <SelectBox text={homeTeam.name} logo={homeTeam.logo} selectText="Select name" />
+                </Link>
                 <SelectBox text={homeTeam.color} color={homeTeam.color} selectText="Select color" />
               </SectionGroup>
               <SectionGroup>
                 <SubSectionTitle>Guest Team</SubSectionTitle>
-                <SelectBox text={guestTeam.name} logo={guestTeam.logo} selectText="Select club" />
+                <Link href={{ pathname: '/teams', query: { team: 'guest', id: props.matchId } }}>
+                  <SelectBox text={guestTeam.name} logo={guestTeam.logo} selectText="Select name" />
+                </Link>
                 <SelectBox
                   text={guestTeam.color}
                   color={guestTeam.color}

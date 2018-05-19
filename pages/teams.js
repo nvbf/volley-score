@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import 'react-toggle/style.css'; // for ES6 modules
 import Toggle from 'react-toggle';
 import Box, { LabelBox } from '../components/shared/Box';
+import ToggleBox from '../components/shared/ToggleBox';
+import withData from '../src/apollo/withData';
+import { Query, Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import Link from 'next/link';
 
 const Container = styled.div`
   background-color: #f9f8fc;
@@ -63,112 +68,20 @@ const ShortName = styled.div`
   color: #525f7f;
 `;
 
-const mizuno = [
-  {
-    name: 'NTNUI Volleyball',
-    shortName: 'NTNUI',
-    logo: 'http://volleystream.no/static/logo/ntnui.svg',
-  },
-  {
-    name: 'Førde',
-    shortName: 'Førde',
-    logo: 'http://volleystream.no/static/logo/forde.svg',
-  },
-  {
-    name: 'TIF Viking',
-    shortName: 'Viking',
-    logo: 'http://volleystream.no/static/logo/viking.svg',
-  },
-  {
-    name: 'ToppVolley Norge',
-    shortName: 'TVN',
-    logo: 'http://volleystream.no/static/logo/tvn.svg',
-  },
-  {
-    name: 'Randaberg IL',
-    shortName: 'Randaberg',
-    logo: 'http://volleystream.no/static/logo/randaberg.svg',
-  },
-  {
-    name: 'Koll',
-    shortName: 'Koll',
-    logo: 'http://volleystream.no/static/logo/koll.svg',
-  },
-  {
-    name: 'OSI',
-    shortName: 'OSI',
-    logo: 'http://volleystream.no/static/logo/osi.svg',
-  },
-  {
-    name: 'Stod IL',
-    shortName: 'Stod',
-    logo: 'http://volleystream.no/static/logo/stod.svg',
-  },
-  {
-    name: 'Lierne IL',
-    shortName: 'Lierne',
-    logo: 'http://volleystream.no/static/logo/lierne.svg',
-  },
-];
-
-const firstDiv = [
-  {
-    name: 'Vestli IL',
-    shortName: 'Vestli',
-    logo: 'http://volleystream.no/static/logo/vestli.svg',
-  },
-
-  {
-    name: 'Sandnes VBK',
-    shortName: 'Sandnes',
-    logo: 'http://volleystream.no/static/logo/sandnes.svg',
-  },
-  {
-    name: 'Blindheim IL',
-    shortName: 'Blindheim',
-    logo: 'http://volleystream.no/static/logo/blindheim.svg',
-  },
-  {
-    name: 'BSI',
-    shortName: 'BSI',
-    logo: 'http://volleystream.no/static/logo/bsi.svg',
-  },
-  {
-    name: 'Askim VBK',
-    shortName: 'Askim',
-    logo: 'http://volleystream.no/static/logo/askim.svg',
-  },
-  {
-    name: 'Sunnfjord IL',
-    shortName: 'Sunnfjord',
-    logo: 'http://volleystream.no/static/logo/sunnfjord.svg',
-  },
-  {
-    name: 'KSK',
-    shortName: 'KSK',
-    logo: 'http://volleystream.no/static/logo/ksk.svg',
-  },
-  {
-    name: 'Blussuvoll',
-    shortName: 'Blussuvoll',
-    logo: 'http://volleystream.no/static/logo/blussuvoll.svg',
-  },
-  {
-    name: 'Tønsberg Volley',
-    shortName: 'Tønsberg',
-    logo: 'http://volleystream.no/static/logo/tonsberg.svg',
-  },
-  {
-    name: 'TBK',
-    shortName: 'TBK',
-    logo: 'http://volleystream.no/static/logo/tbk.svg',
-  },
-];
+const GET_CLUBS = gql`
+  query GetAllClubs {
+    allClubs {
+      name
+      shortName
+      logo
+    }
+  }
+`;
 
 function TeamBox(props) {
   return (
-    <Box>
-      <Image src={props.logo} alt={props.name} />
+    <Box onClick={props.onClick}>
+      <Image src={props.logo} alt={props.name} onerror="this.src='/static/logo/ntnui.svg'" />
       <Name>{props.name}</Name>
       <ShortName>{props.shortName}</ShortName>
     </Box>
@@ -215,45 +128,183 @@ const NameInput = styled.input`
   border: none;
 `;
 
+function getTeamType(team) {
+  if (team === 'home') {
+    return 'home';
+  }
+  if (team === 'guest') {
+    return 'guest';
+  }
+  return 'unkown';
+}
+
+const SET_LOGO_VISIBILITY = gql`
+  mutation SetLogoVisibility($id: ID!, $show: Boolean!) {
+    setLogoVisibility(matchId: $id, show: $show) {
+      id
+      showLogos
+    }
+  }
+`;
+
+const SET_HOME_TEAM_NAME_AND_LOGO = gql`
+  mutation SetHomeTeamNameAndLogo($id: ID!, $name: String!, $logo: String) {
+    updateLocalScoreboard(input: { id: $id, homeTeamName: $name, homeTeamLogo: $logo }) {
+      id
+      homeTeam {
+        name
+        logo
+      }
+    }
+  }
+`;
+
+const SET_GUEST_TEAM_NAME_AND_LOGO = gql`
+  mutation SetGuestTeamNameAndLogo($id: ID!, $name: String!, $logo: String) {
+    updateLocalScoreboard(input: { id: $id, guestTeamName: $name, guestTeamLogo: $logo }) {
+      id
+      guestTeam {
+        name
+        logo
+      }
+    }
+  }
+`;
+
+const GET_SCOREBOARD = gql`
+  query GetMatchSettings($matchId: ID!) {
+    localScoreboard(id: $matchId) {
+      id
+      showLogos
+      showColors
+      homeTeam {
+        name
+        logo
+        color
+      }
+      guestTeam {
+        name
+        logo
+        color
+      }
+    }
+  }
+`;
+
+function getTeamMutation(team) {
+  if (team === 'guest') {
+    console.log('getting guest query!');
+    return SET_GUEST_TEAM_NAME_AND_LOGO;
+  }
+  console.log('getting SHIT query');
+  return SET_HOME_TEAM_NAME_AND_LOGO;
+}
+
 class Teams extends React.Component {
+  static async getInitialProps({ query }) {
+    return {
+      matchId: query.id,
+      teamType: getTeamType(query.team),
+    };
+  }
+
   render() {
+    const { matchId, teamType } = this.props;
     return (
       <Container>
         <FlexColumn>
-          <PreTitle>midtnordisk18</PreTitle>
+          <PreTitle>{matchId}</PreTitle>
           <TitleRow>
-            <Title>Home Team</Title>
-            <Button>Done</Button>
+            {teamType !== 'guest' && <Title>Home Team</Title>}
+            {teamType === 'guest' && <Title>Guest Team</Title>}
+            <Link href="/">
+              <Button>Done</Button>
+            </Link>
           </TitleRow>
         </FlexColumn>
 
-        <TeamContainer>
-          <Box>
-            <Image src="http://volleystream.no/static/logo/ntnui.svg" alt="ntnui" />
-            <NameInput value="NTNUI" />
-          </Box>
-          <LabelBox>
-            <Name>Use logo</Name>
-            <Toggle defaultChecked={false} icons={false} onChange={() => null} />
-          </LabelBox>
-        </TeamContainer>
+        <Query query={GET_SCOREBOARD} variables={{ matchId }}>
+          {({ loading, error, data }) => {
+            if (loading) return 'Loading...';
+            if (error) return 'Error...';
+            const { showLogos, homeTeam, guestTeam } = data.localScoreboard;
+            const team = teamType === 'guest' ? guestTeam : homeTeam;
+            return (
+              <TeamContainer>
+                <Box>
+                  <Image src={team.logo} alt={team.name} />
+                  <Mutation mutation={getTeamMutation(teamType)}>
+                    {setTeamName => (
+                      <NameInput
+                        value={team.name}
+                        onChange={e =>
+                          setTeamName({
+                            variables: { id: matchId, name: e.target.value },
+                            optimisticResponse: {
+                              __typename: 'Mutation',
+                              updateLocalScoreboard: {
+                                id: matchId,
+                                __typename: 'Scoreboard',
+                                [teamType === 'guest' ? 'guestTeam' : 'homeTeam']: {
+                                  __typename: 'Team',
+                                  name: e.target.value,
+                                },
+                              },
+                            },
+                          })
+                        }
+                      />
+                    )}
+                  </Mutation>
+                </Box>
+                <Mutation mutation={SET_LOGO_VISIBILITY}>
+                  {setLogoVisibility => (
+                    <ToggleBox
+                      label="Use logo"
+                      checked={showLogos}
+                      onChange={e =>
+                        setLogoVisibility({ variables: { id: matchId, show: e.target.checked } })
+                      }
+                    />
+                  )}
+                </Mutation>
+              </TeamContainer>
+            );
+          }}
+        </Query>
 
         <SectionTitle>Mizunoligaen</SectionTitle>
         <TeamContainer>
-          {mizuno.map(team => (
-            <TeamBox logo={team.logo} name={team.name} shortName={team.shortName} />
-          ))}
-        </TeamContainer>
-
-        <SectionTitle>1. Divisjon</SectionTitle>
-        <TeamContainer>
-          {firstDiv.map(team => (
-            <TeamBox logo={team.logo} name={team.name} shortName={team.shortName} />
-          ))}
+          <Query query={GET_CLUBS}>
+            {({ loading, error, data }) => {
+              if (loading) {
+                return 'loading';
+              }
+              if (error) {
+                return 'error';
+              }
+              return data.allClubs.map(team => (
+                <Mutation
+                  key={team.name}
+                  mutation={getTeamMutation(teamType)}
+                  variables={{ id: matchId, name: team.shortName, logo: team.logo }}
+                >
+                  {update => (
+                    <TeamBox
+                      logo={team.logo}
+                      name={team.name}
+                      shortName={team.shortName}
+                      onClick={update}
+                    />
+                  )}
+                </Mutation>
+              ));
+            }}
+          </Query>
         </TeamContainer>
       </Container>
     );
   }
 }
 
-export default Teams;
+export default withData(Teams);

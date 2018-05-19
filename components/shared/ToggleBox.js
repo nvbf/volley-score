@@ -21,9 +21,11 @@ function ToggleBox(props) {
 
 ToggleBox.defaultProps = {
   checked: false,
+  label: '',
 };
 
 ToggleBox.propTypes = {
+  label: PropTypes.string,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
 };

@@ -136,13 +136,13 @@ const PlusButton = styled.button`
 function PointsControl(props) {
   return (
     <Container>
-      <MainContainer>
+      <MainContainer onClick={props.onPlusClick}>
         <Label>Points</Label>
         <Points>{props.points}</Points>
       </MainContainer>
       <ButtonContainer>
-        <MinusButton>-</MinusButton>
-        <PlusButton>+</PlusButton>
+        <MinusButton onClick={props.onMinusClick}>-</MinusButton>
+        <PlusButton onClick={props.onPlusClick}>+</PlusButton>
       </ButtonContainer>
     </Container>
   );

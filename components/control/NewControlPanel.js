@@ -75,8 +75,16 @@ function ControlPanel(props) {
           <Name>{props.homeTeam.name}</Name>
         </ControlRow>
         <ControlRow flipped={props.flipped}>
-          <SetsControl sets={1} />
-          <PointsControl points={24} />
+          <SetsControl
+            sets={props.homeTeamSets}
+            onPlusClick={props.onHomeTeamSetsPlusClick}
+            onMinusClick={props.onHomeTeamSetsMinusClick}
+          />
+          <PointsControl
+            points={props.homeTeamPoints}
+            onPlusClick={props.onHomeTeamPointsPlusClick}
+            onMinusClick={props.onHomeTeamPointsMinusClick}
+          />
         </ControlRow>
       </TeamContainer>
       <TeamContainer flipped={!props.flipped}>
@@ -85,8 +93,16 @@ function ControlPanel(props) {
           <Name>{props.guestTeam.name}</Name>
         </ControlRow>
         <ControlRow flipped={!props.flipped}>
-          <SetsControl sets={2} />
-          <PointsControl points={19} />
+          <SetsControl
+            sets={props.guestTeamSets}
+            onPlusClick={props.onGuestTeamSetsPlusClick}
+            onMinusClick={props.onGuestTeamSetsMinusClick}
+          />
+          <PointsControl
+            points={props.guestTeamPoints}
+            onPlusClick={props.onGuestTeamPointsPlusClick}
+            onMinusClick={props.onGuestTeamPointsMinusClick}
+          />
         </ControlRow>
       </TeamContainer>
     </Container>
