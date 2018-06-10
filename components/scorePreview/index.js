@@ -32,6 +32,9 @@ const TEAMS_QUERY = gql`
       guestTeamPoints
       homeTeamSets
       guestTeamSets
+      showLogos
+      showColors
+      showBoard
     }
   }
 `;
@@ -54,6 +57,9 @@ function scorePreview(props) {
           homeTeamSets,
           guestTeamPoints,
           guestTeamSets,
+          showLogos,
+          showColors,
+          showBoard,
         } = data.localScoreboard;
 
         return (
@@ -73,9 +79,9 @@ function scorePreview(props) {
                 logo: guestTeam.logo,
                 color: guestTeam.color,
               }}
-              showLogos
-              showColors
-              isShowing
+              showLogos={showLogos}
+              showColors={showColors}
+              isShowing={showBoard}
             />
           </ScoreContainer>
         );

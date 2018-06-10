@@ -9,6 +9,7 @@ import { Query, Mutation } from 'react-apollo';
 
 const GET_TEAMS = gql`
   query GetTeams($id: ID!) {
+    isFlipped @client
     localScoreboard(id: $id) {
       id
       homeTeam {
@@ -65,6 +66,12 @@ const UPDATE_SCOREBOARD = gql`
   }
 `;
 
+const FLIP_SCORE = gql`
+  mutation FlipScore {
+    flipScore @client
+  }
+`;
+
 function ScoreControl(props) {
   return (
     <Query query={GET_TEAMS} variables={{ id: props.matchId }}>
@@ -110,7 +117,7 @@ function ScoreControl(props) {
               <Mutation mutation={UPDATE_SCOREBOARD}>
                 {updateScoreboard => (
                   <ControlPanel
-                    flipped={false}
+                    flipped={data.isFlipped}
                     {...scoreData}
                     onHomeTeamPointsPlusClick={() =>
                       updateScoreboard({
@@ -245,33 +252,35 @@ function ScoreControl(props) {
               </Mutation>
             </SectionContainer>
             <SectionContainer>
-              <IconButton icon="/static/icon/flip.svg" text="Flip teams" />
+              <Mutation mutation={FLIP_SCORE}>
+                {flipScore => (
+                  <IconButton onClick={flipScore} icon="/static/icon/flip.svg" text="Flip teams" />
+                )}
+              </Mutation>
               <Mutation mutation={UPDATE_SCOREBOARD}>
                 {updateScoreboard => (
-                  <React.Fragment>
-                    <IconButton
-                      icon="/static/icon/reset.svg"
-                      text="Reset points"
-                      onClick={() =>
-                        updateScoreboard({
-                          variables: {
+                  <IconButton
+                    icon="/static/icon/reset.svg"
+                    text="Reset points"
+                    onClick={() =>
+                      updateScoreboard({
+                        variables: {
+                          id: props.matchId,
+                          homeTeamPoints: 0,
+                          guestTeamPoints: 0,
+                        },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
                             id: props.matchId,
+                            __typename: 'Scoreboard',
                             homeTeamPoints: 0,
                             guestTeamPoints: 0,
                           },
-                          optimisticResponse: {
-                            __typename: 'Mutation',
-                            updateLocalScoreboard: {
-                              id: props.matchId,
-                              __typename: 'Scoreboard',
-                              homeTeamPoints: 0,
-                              guestTeamPoints: 0,
-                            },
-                          },
-                        })
-                      }
-                    />
-                  </React.Fragment>
+                        },
+                      })
+                    }
+                  />
                 )}
               </Mutation>
             </SectionContainer>

@@ -21,6 +21,7 @@ const GET_SETTINGS = gql`
       id
       showLogos
       showColors
+      showBoard
       homeTeam {
         name
         logo
@@ -53,6 +54,15 @@ const SET_LOGO_VISIBILITY = gql`
   }
 `;
 
+const SET_BOARD_VISIBILITY = gql`
+  mutation SetBoardVisibility($id: ID!, $show: Boolean!) {
+    setBoardVisibility(matchId: $id, show: $show) {
+      id
+      showBoard
+    }
+  }
+`;
+
 function Settings(props) {
   return (
     <Query query={GET_SETTINGS} variables={{ matchId: props.matchId }}>
@@ -60,11 +70,24 @@ function Settings(props) {
         if (loading) return 'Loading...';
         if (error) return 'Error...';
         console.log('data', data.localScoreboard);
-        const { showColors, showLogos, homeTeam, guestTeam } = data.localScoreboard;
+        const { showColors, showLogos, showBoard, homeTeam, guestTeam } = data.localScoreboard;
         return (
           <React.Fragment>
             <SectionTitle>Settings</SectionTitle>
             <SectionContainer>
+              <Mutation mutation={SET_BOARD_VISIBILITY}>
+                {setVisibility => (
+                  <ToggleBox
+                    onChange={val =>
+                      setVisibility({
+                        variables: { id: props.matchId, show: val.target.checked },
+                      })
+                    }
+                    checked={showBoard}
+                    label="Show board"
+                  />
+                )}
+              </Mutation>
               <Mutation mutation={SET_COLOR_VISIBILITY}>
                 {setColorVisibility => (
                   <ToggleBox
