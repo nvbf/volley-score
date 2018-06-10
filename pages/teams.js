@@ -118,14 +118,24 @@ const Button = styled.button`
 `;
 
 const NameInput = styled.input`
-  font-size: 36px;
-  margin-left: 16px;
+  font-size: 28px;
   box-sizing: border-box;
-  height: 100%;
-  margin: 4px 8px;
+  margin: 4px 0 4px 16px;
   flex-grow: 1;
   min-width: 100px;
-  border: none;
+
+  min-height: 34px;
+  padding: 6px 8px;
+  line-height: 20px;
+  color: #111;
+  vertical-align: middle;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  outline: none;
+  box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
 `;
 
 function getTeamType(team) {
@@ -263,7 +273,9 @@ class Teams extends React.Component {
                       label="Use logo"
                       checked={showLogos}
                       onChange={e =>
-                        setLogoVisibility({ variables: { id: matchId, show: e.target.checked } })
+                        setLogoVisibility({
+                          variables: { id: matchId, show: e.target.checked },
+                        })
                       }
                     />
                   )}
@@ -287,7 +299,11 @@ class Teams extends React.Component {
                 <Mutation
                   key={team.name}
                   mutation={getTeamMutation(teamType)}
-                  variables={{ id: matchId, name: team.shortName, logo: team.logo }}
+                  variables={{
+                    id: matchId,
+                    name: team.shortName,
+                    logo: team.logo,
+                  }}
                 >
                   {update => (
                     <TeamBox

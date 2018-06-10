@@ -134,6 +134,14 @@ function ScoreControl(props) {
                           id: props.matchId,
                           homeTeamPoints: scoreData.homeTeamPoints - 1,
                         },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            homeTeamPoints: scoreData.homeTeamPoints - 1,
+                          },
+                        },
                       })
                     }
                     onGuestTeamPointsPlusClick={() =>
@@ -141,6 +149,14 @@ function ScoreControl(props) {
                         variables: {
                           id: props.matchId,
                           guestTeamPoints: scoreData.guestTeamPoints + 1,
+                        },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            guestTeamPoints: scoreData.guestTeamPoints + 1,
+                          },
                         },
                       })
                     }
@@ -150,6 +166,14 @@ function ScoreControl(props) {
                           id: props.matchId,
                           guestTeamPoints: scoreData.guestTeamPoints - 1,
                         },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            guestTeamPoints: scoreData.guestTeamPoints - 1,
+                          },
+                        },
                       })
                     }
                     onHomeTeamSetsPlusClick={() =>
@@ -157,6 +181,14 @@ function ScoreControl(props) {
                         variables: {
                           id: props.matchId,
                           homeTeamSets: scoreData.homeTeamSets + 1,
+                        },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            homeTeamSets: scoreData.homeTeamSets + 1,
+                          },
                         },
                       })
                     }
@@ -166,6 +198,14 @@ function ScoreControl(props) {
                           id: props.matchId,
                           homeTeamSets: scoreData.homeTeamSets - 1,
                         },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            homeTeamSets: scoreData.homeTeamSets - 1,
+                          },
+                        },
                       })
                     }
                     onGuestTeamSetsPlusClick={() =>
@@ -173,6 +213,14 @@ function ScoreControl(props) {
                         variables: {
                           id: props.matchId,
                           guestTeamSets: scoreData.guestTeamSets + 1,
+                        },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            guestTeamSets: scoreData.guestTeamSets + 1,
+                          },
                         },
                       })
                     }
@@ -182,6 +230,14 @@ function ScoreControl(props) {
                           id: props.matchId,
                           guestTeamSets: scoreData.guestTeamSets - 1,
                         },
+                        optimisticResponse: {
+                          __typename: 'Mutation',
+                          updateLocalScoreboard: {
+                            id: props.matchId,
+                            __typename: 'Scoreboard',
+                            guestTeamSets: scoreData.guestTeamSets - 1,
+                          },
+                        },
                       })
                     }
                   />
@@ -190,7 +246,34 @@ function ScoreControl(props) {
             </SectionContainer>
             <SectionContainer>
               <IconButton icon="/static/icon/flip.svg" text="Flip teams" />
-              <IconButton icon="/static/icon/reset.svg" text="Reset points" />
+              <Mutation mutation={UPDATE_SCOREBOARD}>
+                {updateScoreboard => (
+                  <React.Fragment>
+                    <IconButton
+                      icon="/static/icon/reset.svg"
+                      text="Reset points"
+                      onClick={() =>
+                        updateScoreboard({
+                          variables: {
+                            id: props.matchId,
+                            homeTeamPoints: 0,
+                            guestTeamPoints: 0,
+                          },
+                          optimisticResponse: {
+                            __typename: 'Mutation',
+                            updateLocalScoreboard: {
+                              id: props.matchId,
+                              __typename: 'Scoreboard',
+                              homeTeamPoints: 0,
+                              guestTeamPoints: 0,
+                            },
+                          },
+                        })
+                      }
+                    />
+                  </React.Fragment>
+                )}
+              </Mutation>
             </SectionContainer>
           </React.Fragment>
         );

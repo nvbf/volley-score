@@ -38,7 +38,7 @@ const ButtonContainer = styled.button`
 
 function IconButton(props) {
   return (
-    <ButtonContainer>
+    <ButtonContainer onClick={props.onClick}>
       <Image src={props.icon} alt={props.text} />
       {props.text}
     </ButtonContainer>
