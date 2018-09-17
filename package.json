@@ -13,8 +13,8 @@
     "prettier": "prettier-eslint --single-quote --trailing-comma all '{components,pages,src}/**/*.js' --write"
   },
   "engines": {
-    "node": "10.0.0",
-    "yarn": "1.6.0"
+    "node": "10.8.0",
+    "yarn": "1.9.4"
   },
   "dependencies": {
     "animated": "^0.2.0",
