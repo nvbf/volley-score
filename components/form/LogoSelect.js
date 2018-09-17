@@ -35,6 +35,7 @@ const options = [
   },
   { imgName: 'farsund', value: '/static/logo/farsund.svg', label: 'Farsund' },
   { imgName: 'forde', value: '/static/logo/forde.svg', label: 'Førde' },
+  { imgName: 'gjesdal', value: '/static/logo/gjesdal.svg', label: 'Gjesdal' },
   { imgName: 'gneist', value: '/static/logo/gneist.svg', label: 'Gneist' },
   {
     imgName: 'haugesund',
