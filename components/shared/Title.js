@@ -6,22 +6,38 @@ export const PreTitle = styled.div`
   font-weight: bolder;
   text-transform: uppercase;
   padding-top: 16px;
+
+  @media (max-width: 800px) {
+    padding-left: 12px;
+  }
 `;
 
 export const Title = styled.h1`
   margin: 0;
   font-size: 39px;
   font-weight: bold;
+
+  @media (max-width: 800px) {
+    padding-left: 12px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
   font-size: 39px;
   width: 100%;
+
+  @media (max-width: 800px) {
+    padding-left: 12px;
+  }
 `;
 
 export const SubSectionTitle = styled.h3`
   font-size: 24px;
   font-weight: bold;
+
+  @media (max-width: 800px) {
+    padding-left: 12px;
+  }
 `;
 
 export default Title;

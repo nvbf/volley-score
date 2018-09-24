@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import 'react-toggle/style.css'; // for ES6 modules
-import Toggle from 'react-toggle';
-import Box, { LabelBox } from '../components/shared/Box';
-import ToggleBox from '../components/shared/ToggleBox';
-import withData from '../src/apollo/withData';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Link from 'next/link';
+import Box from '../components/shared/Box';
+import ToggleBox from '../components/shared/ToggleBox';
+import withData from '../src/apollo/withData';
 
 const Container = styled.div`
   background-color: #f9f8fc;
@@ -42,6 +40,9 @@ const Title = styled.h1`
   font-size: 39px;
   font-weight: bold;
   margin-bottom: 24px;
+  @media (max-width: 400px) {
+    font-size: 30px;
+  }
 `;
 
 const TeamContainer = styled.div`
@@ -61,11 +62,16 @@ const Image = styled.img`
 const Name = styled.div`
   text-indent: 16px;
   flex-grow: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const ShortName = styled.div`
   text-transform: uppercase;
   color: #525f7f;
+  min-width: 120px;
+  text-align: right;
 `;
 
 const GET_CLUBS = gql`
@@ -87,8 +93,6 @@ function TeamBox(props) {
     </Box>
   );
 }
-
-const BigName = styled.div``;
 
 const SectionTitle = styled.h2`
   font-size: 24px;

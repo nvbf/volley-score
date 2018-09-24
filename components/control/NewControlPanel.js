@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Box from '../shared/Box';
+import React from 'react';
 import SetsControl from './SetsControl';
 import PointsControl from './PointsControl';
 

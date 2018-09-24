@@ -11,7 +11,7 @@ const Container = styled.div`
   }
 `;
 
-const MainContainer = styled.div`
+const MainContainer = styled.button`
   width: 138px;
   height: 138px;
   background-color: white;
@@ -22,6 +22,8 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-weight: 300;
+  border: none;
 
   @media (max-width: 720px) {
     width: 100px;
@@ -127,7 +129,7 @@ const PlusButton = styled.button`
 function SetsControl(props) {
   return (
     <Container>
-      <MainContainer>
+      <MainContainer onClick={props.onPlusClick}>
         <Label>Sets</Label>
         <Sets>{props.sets}</Sets>
       </MainContainer>

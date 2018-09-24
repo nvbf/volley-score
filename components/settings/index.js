@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import gql from 'graphql-tag';
+import { Query, Mutation } from 'react-apollo';
+import Link from 'next/link';
 import ToggleBox from '../shared/ToggleBox';
 import { SectionTitle, SubSectionTitle } from '../shared/Title';
 import SectionContainer from '../shared/SectionContainer';
 import SelectBox from '../shared/SelectBox';
-import gql from 'graphql-tag';
-import { Query, Mutation } from 'react-apollo';
-import Link from 'next/link';
 
 const SectionGroup = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 const GET_SETTINGS = gql`
@@ -69,7 +71,6 @@ function Settings(props) {
       {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) return 'Error...';
-        console.log('data', data.localScoreboard);
         const { showColors, showLogos, showBoard, homeTeam, guestTeam } = data.localScoreboard;
         return (
           <React.Fragment>

@@ -15,7 +15,7 @@ const Container = styled.div`
   }
 `;
 
-const MainContainer = styled.div`
+const MainContainer = styled.button`
   width: 191px;
   height: 191px;
   background-color: white;
@@ -26,6 +26,8 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-weight: 300;
+  border: none;
 
   &:hover {
     background-color: #ffeffa;
