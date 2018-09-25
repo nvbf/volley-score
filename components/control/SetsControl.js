@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+  flex-basis: 25%;
+  margin-left: 8px;
+  margin-right: 8px;
   box-sizing: border-box;
-  width: 138px
   height: 185px;
 
   @media (max-width: 500px) {
-    width: 60px;
     height: 81px;
   }
 `;
 
 const MainContainer = styled.button`
-  width: 138px;
+  width: 100%;
   height: 138px;
   background-color: white;
   border-radius: 4px;
@@ -26,12 +27,10 @@ const MainContainer = styled.button`
   border: none;
 
   @media (max-width: 720px) {
-    width: 100px;
     height: 100px;
   }
 
   @media (max-width: 500px) {
-    width: 60px;
     height: 60px;
   }
 

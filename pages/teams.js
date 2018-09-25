@@ -53,10 +53,17 @@ const TeamContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const NoPadBox = styled(Box)`
+  padding-left: 0;
+  padding-right: 16px;
+`;
+
 const Image = styled.img`
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
   min-width: 36px;
+  background-color: #222b38;
+  padding: 7px;
 `;
 
 const Name = styled.div`
@@ -86,11 +93,11 @@ const GET_CLUBS = gql`
 
 function TeamBox(props) {
   return (
-    <Box onClick={props.onClick}>
+    <NoPadBox onClick={props.onClick}>
       <Image src={props.logo} alt={props.name} onerror="this.src='/static/logo/ntnui.svg'" />
       <Name>{props.name}</Name>
       <ShortName>{props.shortName}</ShortName>
-    </Box>
+    </NoPadBox>
   );
 }
 
@@ -245,7 +252,7 @@ class Teams extends React.Component {
             const team = teamType === 'guest' ? guestTeam : homeTeam;
             return (
               <TeamContainer>
-                <Box>
+                <NoPadBox>
                   <Image src={team.logo} alt={team.name} />
                   <Mutation mutation={getTeamMutation(teamType)}>
                     {setTeamName => (
@@ -270,7 +277,7 @@ class Teams extends React.Component {
                       />
                     )}
                   </Mutation>
-                </Box>
+                </NoPadBox>
                 <Mutation mutation={SET_LOGO_VISIBILITY}>
                   {setLogoVisibility => (
                     <ToggleBox

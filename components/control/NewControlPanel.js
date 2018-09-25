@@ -13,8 +13,13 @@ const Container = styled.div`
   flex-direction: ${props => (props.flipped ? 'row-reverse' : 'row')};
   box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.45);
 
-  @media (max-width: 800px) {
+  @media (max-width: 720px) {
     border-radius: 0px;
+    height: 300px;
+  }
+
+  @media (max-width: 500px) {
+    height: 250px;
   }
 `;
 

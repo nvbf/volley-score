@@ -1,22 +1,20 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 191px;
+  flex-basis: 50%;
   height: 245px;
+  box-sizing: border-box;
 
   @media (max-width: 720px) {
-    width: 120px;
     height: 245px;
   }
 
   @media (max-width: 500px) {
-    width: 83px;
     height: 106px;
   }
 `;
 
 const MainContainer = styled.button`
-  width: 191px;
   height: 191px;
   background-color: white;
   border-radius: 4px;
@@ -33,13 +31,13 @@ const MainContainer = styled.button`
     background-color: #ffeffa;
   }
 
+  width: 100%;
+
   @media (max-width: 720px) {
-    width: 120px;
     height: 120px;
   }
 
   @media (max-width: 500px) {
-    width: 83px;
     height: 83px;
   }
 `;
