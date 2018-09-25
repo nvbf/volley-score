@@ -1,8 +1,8 @@
 import React from 'react';
-import { Scoreboard } from '../scoreboard/Scoreboard';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import { Scoreboard } from '../scoreboard/Scoreboard';
 
 const ScoreContainer = styled.div`
   padding-bottom: 12px;
@@ -12,6 +12,10 @@ const ScoreContainer = styled.div`
   min-width: 100px;
   background-color: #d8d8d9;
   box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const TEAMS_QUERY = gql`
@@ -47,7 +51,6 @@ function scorePreview(props) {
           return 'loading';
         }
         if (error) {
-          console.log('error', error);
           return 'error';
         }
         const {

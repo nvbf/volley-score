@@ -1,11 +1,11 @@
 import React from 'react';
+import gql from 'graphql-tag';
+import { Query, Mutation } from 'react-apollo';
 import ScorePreview from '../scorePreview';
 import { PreTitle, Title, SubSectionTitle } from '../shared/Title';
 import ControlPanel from '../control/NewControlPanel';
 import SectionContainer from '../shared/SectionContainer';
 import IconButton from '../shared/IconButton';
-import gql from 'graphql-tag';
-import { Query, Mutation } from 'react-apollo';
 
 const GET_TEAMS = gql`
   query GetTeams($id: ID!) {
@@ -102,7 +102,6 @@ function ScoreControl(props) {
         } else {
           scoreData = data.localScoreboard;
         }
-        console.log(scoreData);
 
         return (
           <React.Fragment>
