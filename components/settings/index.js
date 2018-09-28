@@ -120,14 +120,14 @@ function Settings(props) {
               <SectionGroup>
                 <SubSectionTitle>Home Team</SubSectionTitle>
                 <Link href={{ pathname: '/teams', query: { team: 'home', id: props.matchId } }}>
-                  <SelectBox text={homeTeam.name} logo={homeTeam.logo} selectText="Select name" />
+                  <SelectBox text={homeTeam.name} logo={homeTeam.logo} selectText="Select team" />
                 </Link>
                 {/* <SelectBox text={homeTeam.color} color={homeTeam.color} selectText="Select color" /> */}
               </SectionGroup>
               <SectionGroup>
                 <SubSectionTitle>Guest Team</SubSectionTitle>
                 <Link href={{ pathname: '/teams', query: { team: 'guest', id: props.matchId } }}>
-                  <SelectBox text={guestTeam.name} logo={guestTeam.logo} selectText="Select name" />
+                  <SelectBox text={guestTeam.name} logo={guestTeam.logo} selectText="Select team" />
                 </Link>
                 {/* <SelectBox
                   text={guestTeam.color}

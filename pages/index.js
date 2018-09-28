@@ -1,40 +1,32 @@
 import React from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import Router from 'next/router';
 import PageContainer from '../components/shared/PageContainer';
-import { PreTitle, Title } from '../components/shared/Title';
 import MatchId from '../components/matchId';
 import Settings from '../components/settings';
 import ScoreControl from '../components/scoreControl';
 import Foot from '../components/footer';
-import withData from '../src/apollo/withData';
+import ScoreLogo from '../components/scoreLogo';
+import withData from '../apollo/withData';
 
-const GET_MATCH_ID = gql`
-  query GetMatchID {
-    matchId @client
+class ScorePage extends React.Component {
+  static async getInitialProps({ query }) {
+    return {
+      matchId: query.id || '',
+    };
   }
-`;
 
-function ScorePage() {
-  return (
-    <Query query={GET_MATCH_ID}>
-      {({ loading, error, data }) => {
-        if (loading) return 'Loading...';
-        if (error) return 'Error...';
-        const { matchId } = data;
-        return (
-          <PageContainer>
-            <PreTitle>Volleystream.no</PreTitle>
-            <Title>Volley Score</Title>
-            <MatchId onChange={console.log} />
-            <Settings matchId={matchId} />
-            <ScoreControl matchId={matchId} />
-            <Foot />
-          </PageContainer>
-        );
-      }}
-    </Query>
-  );
+  render() {
+    const { matchId } = this.props;
+    return (
+      <PageContainer>
+        <ScoreLogo />
+        <MatchId id={matchId} onChange={(id) => Router.replace({ pathname: '/', query: { id } })} />
+        {matchId.length > 2 && <Settings matchId={matchId} />}
+        {matchId.length > 2 && <ScoreControl matchId={matchId} />}
+        <Foot />
+      </PageContainer>
+    );
+  }
 }
 
 export default withData(ScorePage);

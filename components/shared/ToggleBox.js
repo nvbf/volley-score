@@ -11,10 +11,11 @@ const Label = styled.span`
 `;
 
 function ToggleBox(props) {
+  const checked = props.checked || false;
   return (
     <LabelBox>
       <Label>{props.label}</Label>
-      <Toggle checked={props.checked} icons={false} onChange={e => props.onChange(e)} />
+      <Toggle checked={checked} icons={false} onChange={(e) => props.onChange(e)} />
     </LabelBox>
   );
 }
@@ -27,7 +28,7 @@ ToggleBox.defaultProps = {
 ToggleBox.propTypes = {
   label: PropTypes.string,
   checked: PropTypes.bool,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ToggleBox;

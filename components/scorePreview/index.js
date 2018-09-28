@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { Scoreboard } from '../scoreboard/Scoreboard';
+import Scoreboard from '../scoreboard/Scoreboard';
 
 const ScoreContainer = styled.div`
   padding-bottom: 12px;

@@ -10,7 +10,7 @@ const Container = styled.div`
   border-radius: 6px;
   margin-bottom: 16px;
   display: flex;
-  flex-direction: ${props => (props.flipped ? 'row-reverse' : 'row')};
+  flex-direction: ${(props) => (props.flipped ? 'row-reverse' : 'row')};
   box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.45);
 
   @media (max-width: 720px) {
@@ -30,7 +30,7 @@ const TeamContainer = styled.div`
 
 const ControlRow = styled.div`
   display: flex;
-  flex-direction: ${props => (props.flipped ? 'row-reverse' : 'row')};
+  flex-direction: ${(props) => (props.flipped ? 'row-reverse' : 'row')};
   align-items: flex-start;
   width: 100%;
   padding-top: 12px;
@@ -72,17 +72,17 @@ function ControlPanel(props) {
     <Container flipped={props.flipped}>
       <TeamContainer flipped={props.flipped}>
         <ControlRow flipped={props.flipped}>
-          <Logo src={props.homeTeam.logo} alt={props.homeTeam.name} />
+          <Logo src={props.homeTeam.logo || '/static/logo/vs.svg'} alt={props.homeTeam.name} />
           <Name>{props.homeTeam.name}</Name>
         </ControlRow>
         <ControlRow flipped={props.flipped}>
           <SetsControl
-            sets={props.homeTeamSets}
+            sets={props.homeTeamSets || 0}
             onPlusClick={props.onHomeTeamSetsPlusClick}
             onMinusClick={props.onHomeTeamSetsMinusClick}
           />
           <PointsControl
-            points={props.homeTeamPoints}
+            points={props.homeTeamPoints || 0}
             onPlusClick={props.onHomeTeamPointsPlusClick}
             onMinusClick={props.onHomeTeamPointsMinusClick}
           />
@@ -90,17 +90,17 @@ function ControlPanel(props) {
       </TeamContainer>
       <TeamContainer flipped={!props.flipped}>
         <ControlRow flipped={!props.flipped}>
-          <Logo src={props.guestTeam.logo} alt={props.guestTeam.name} />
+          <Logo src={props.guestTeam.logo || '/static/logo/vs.svg'} alt={props.guestTeam.name} />
           <Name>{props.guestTeam.name}</Name>
         </ControlRow>
         <ControlRow flipped={!props.flipped}>
           <SetsControl
-            sets={props.guestTeamSets}
+            sets={props.guestTeamSets || 0}
             onPlusClick={props.onGuestTeamSetsPlusClick}
             onMinusClick={props.onGuestTeamSetsMinusClick}
           />
           <PointsControl
-            points={props.guestTeamPoints}
+            points={props.guestTeamPoints || 0}
             onPlusClick={props.onGuestTeamPointsPlusClick}
             onMinusClick={props.onGuestTeamPointsMinusClick}
           />

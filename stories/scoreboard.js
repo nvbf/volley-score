@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, number, select, boolean } from '@storybook/addon-knobs';
-import { Scoreboard } from '../components/scoreboard/Scoreboard';
+import Scoreboard from '../components/scoreboard/Scoreboard';
 
-const numberFromZeroToNinetyNine = label =>
+const numberFromZeroToNinetyNine = (label) =>
   number(label, 0, {
     range: true,
     min: 0,
@@ -11,7 +11,7 @@ const numberFromZeroToNinetyNine = label =>
     step: 1,
   });
 
-const numberFromZeroToNine = label =>
+const numberFromZeroToNine = (label) =>
   number(label, 0, {
     range: true,
     min: 0,
@@ -19,7 +19,7 @@ const numberFromZeroToNine = label =>
     step: 1,
   });
 
-const logoSelect = label =>
+const logoSelect = (label) =>
   select(
     label,
     {
@@ -30,23 +30,25 @@ const logoSelect = label =>
     '/logo/ntnui.svg',
   );
 
-storiesOf('Scoreboard', module).addDecorator(withKnobs).addWithInfo('with no props', () =>
-  <Scoreboard
-    homeTeam={{
-      name: text('homeTeam name'),
-      logo: logoSelect('logo'),
-      points: numberFromZeroToNinetyNine('points'),
-      sets: numberFromZeroToNine('sets'),
-      color: text('color'),
-    }}
-    awayTeam={{
-      name: text('awayTeam name'),
-      logo: logoSelect('awayteam logo'),
-      points: numberFromZeroToNinetyNine('awayteam points'),
-      sets: numberFromZeroToNine('awayteam sets'),
-      color: text('awayteam color'),
-    }}
-    showColors={boolean('show color')}
-    showLogos={boolean('show logos')}
-  />,
-);
+storiesOf('Scoreboard', module)
+  .addDecorator(withKnobs)
+  .addWithInfo('with no props', () => (
+    <Scoreboard
+      homeTeam={{
+        name: text('homeTeam name'),
+        logo: logoSelect('logo'),
+        points: numberFromZeroToNinetyNine('points'),
+        sets: numberFromZeroToNine('sets'),
+        color: text('color'),
+      }}
+      awayTeam={{
+        name: text('awayTeam name'),
+        logo: logoSelect('awayteam logo'),
+        points: numberFromZeroToNinetyNine('awayteam points'),
+        sets: numberFromZeroToNine('awayteam sets'),
+        color: text('awayteam color'),
+      }}
+      showColors={boolean('show color')}
+      showLogos={boolean('show logos')}
+    />
+  ));

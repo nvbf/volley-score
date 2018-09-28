@@ -41,17 +41,18 @@ const TeamRowContainer = styled.div`
   flex-direction: column;
 `;
 
-export function Scoreboard(props) {
+export default function Scoreboard(props) {
+  console.log('SCOREBOARDF PROPS', props);
   return (
     <OpacityContainer isShowing={props.isShowing}>
       <Container>
         <TeamRowContainer>
           <TeamRow
-            name={props.homeTeam.name}
+            name={props.homeTeam.name || '(home team)'}
             logo={props.homeTeam.logo}
             color={props.homeTeam.color}
-            points={props.homeTeam.points}
-            sets={props.homeTeam.sets}
+            points={props.homeTeam.points || 0}
+            sets={props.homeTeam.sets || 0}
             showLogo={props.showLogos}
             showColor={props.showColors}
             textColor={boardColors.nameText}
@@ -59,11 +60,11 @@ export function Scoreboard(props) {
             showPrevSets={(props.homeTeam.points + props.awayTeam.points) % 2 === 0}
           />
           <TeamRow
-            name={props.awayTeam.name}
+            name={props.awayTeam.name || '(away team)'}
             logo={props.awayTeam.logo}
             color={props.awayTeam.color}
-            points={props.awayTeam.points}
-            sets={props.awayTeam.sets}
+            points={props.awayTeam.points || 0}
+            sets={props.awayTeam.sets || 0}
             showLogo={props.showLogos}
             showColor={props.showColors}
             textColor={boardColors.nameText}
@@ -110,14 +111,3 @@ Scoreboard.defaultProps = {
   showColors: false,
   isShowing: false,
 };
-
-export default inject(stores => {
-  const store = stores.store;
-  return {
-    isShowing: store.isShowing,
-    showLogos: store.showLogos,
-    showColors: store.showColors,
-    homeTeam: store.homeTeam,
-    awayTeam: store.awayTeam,
-  };
-})(observer(Scoreboard));

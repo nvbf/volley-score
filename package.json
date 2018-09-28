@@ -4,14 +4,13 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next build && node server.js",
+    "start": "next start",
     "storybook": "start-storybook -p 9001 -s ./static",
     "build-storybook": "build-storybook",
     "install-redis": "./lib/redis/install.sh",
-    "redis": "./lib/redis/redis/src/redis-server",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./components/** -c ./.eslintrc.json --fix",
     "prettier":
-      "prettier-eslint --single-quote --trailing-comma all '{components,pages,src}/**/*.js' --write"
+      "prettier-eslint --single-quote --trailing-comma all '{components,pages,apollo}/**/*.js' --write"
   },
   "engines": {
     "node": "10.8.0",
@@ -23,7 +22,8 @@
     "useTabs": false,
     "semi": true,
     "singleQuote": true,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "arrowParens": "always"
   },
   "dependencies": {
     "@zeit/next-css": "^0.1.5",

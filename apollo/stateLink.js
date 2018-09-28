@@ -4,12 +4,10 @@ import cache from './cache';
 
 const typeDefs = `
   type Query {
-    matchId: String
     isFlipped: Boolean
   }
 
   type Mutation {
-    updateMatchId(id: String): String
     flipScore: Boolean
   }
 `;
@@ -17,20 +15,6 @@ const typeDefs = `
 const defaultState = {
   matchId: '123',
   isFlipped: false,
-};
-
-const updateMatchIdResolver = (_, args, context) => {
-  const query = gql`
-    query {
-      matchId @client
-    }
-  `;
-  const previous = context.cache.readQuery({ query });
-  const newData = {
-    matchId: args.id,
-  };
-  context.cache.writeData({ data: newData });
-  return newData;
 };
 
 const flipScoreResolver = (_, args, context) => {
@@ -49,7 +33,6 @@ const stateLink = withClientState({
   cache,
   resolvers: {
     Mutation: {
-      updateMatchId: updateMatchIdResolver,
       flipScore: flipScoreResolver,
     },
   },
