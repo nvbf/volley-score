@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import { inject, observer } from 'mobx-react';
 import TeamRow from './TeamRow';
 import color from './color';
 import OpacityContainer from './OpacityContainer';
