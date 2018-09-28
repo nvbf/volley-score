@@ -42,7 +42,6 @@ const TeamRowContainer = styled.div`
 `;
 
 export default function Scoreboard(props) {
-  console.log('SCOREBOARDF PROPS', props);
   return (
     <OpacityContainer isShowing={props.isShowing}>
       <Container>
