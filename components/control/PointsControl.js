@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  flex-basis: 50%;
+  flex-basis: 55%;
   height: 245px;
   box-sizing: border-box;
 
@@ -50,7 +50,14 @@ const Label = styled.div`
   left: 6px;
   font-size: 20px;
 
+  @media (max-width: 800px) {
+    top: 4px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
   @media (max-width: 500px) {
+    top: 4px;
     font-size: 10px;
     font-weight: bold;
   }

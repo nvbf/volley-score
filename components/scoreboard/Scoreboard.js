@@ -31,7 +31,7 @@ const Container = styled.div`
   font-family: 'Source Sans Pro', sans-serif;
   overflow: hidden;
 
-  @media (max-width: 600px) {
+  @media (max-width: 300px) {
     min-width: 300px;
   }
 `;
@@ -111,7 +111,7 @@ Scoreboard.defaultProps = {
   isShowing: false,
 };
 
-export default inject((stores) => {
+export default inject(stores => {
   const store = stores.store;
   return {
     isShowing: store.isShowing,

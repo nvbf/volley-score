@@ -99,8 +99,8 @@ const TeamName = styled.div`
   white-space: nowrap;
   overflow: hidden;
 
-  @media (max-width: 600px) {
-    width: 120px;
+  @media (max-width: 500px) {
+    width: 180px;
   }
 `;
 

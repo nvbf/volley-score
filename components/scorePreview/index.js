@@ -13,7 +13,7 @@ const ScoreContainer = styled.div`
   background-color: #d8d8d9;
   box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
 
-  @media (max-width: 500px) {
+  @media (max-width: 800px) {
     width: 100%;
   }
 `;

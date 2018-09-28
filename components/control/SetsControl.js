@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import React from 'react';
 
 const Container = styled.div`
-  flex-basis: 25%;
+  flex-basis: 30%;
   margin-left: 8px;
   margin-right: 8px;
   box-sizing: border-box;
@@ -47,6 +48,12 @@ const Label = styled.div`
   left: 6px;
   font-size: 20px;
 
+  @media (max-width: 800px) {
+    font-size: 16px;
+    font-weight: bold;
+    top: 4px;
+  }
+
   @media (max-width: 500px) {
     font-size: 10px;
     font-weight: bold;
@@ -58,7 +65,13 @@ const Sets = styled.div`
   font-size: 64px;
   color: #0288c7;
 
+  @media (max-width: 800px) {
+    padding-top: 8px;
+    font-size: 48px;
+  }
+
   @media (max-width: 500px) {
+    padding-top: 8px;
     font-size: 36px;
   }
 `;

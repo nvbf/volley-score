@@ -29,7 +29,7 @@ function ScorePage() {
             <MatchId onChange={console.log} />
             <Settings matchId={matchId} />
             <ScoreControl matchId={matchId} />
-            <Foot>Laget av Thor Even Tutturen, NTNUI</Foot>
+            <Foot />
           </PageContainer>
         );
       }}

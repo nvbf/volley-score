@@ -25,11 +25,7 @@ const Container = styled.div`
 
 const TeamContainer = styled.div`
   width: 50%;
-  ${props => (props.flipped ? 'margin-left: 8px' : 'margin-right: 8px')};
-
-  @media (max-width: 500px) {
-    ${props => (props.flipped ? 'margin-left: 4px' : 'margin-right: 4px')};
-  }
+  box-sizing: border-box;
 `;
 
 const ControlRow = styled.div`

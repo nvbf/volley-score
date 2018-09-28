@@ -5,7 +5,7 @@ export const PreTitle = styled.div`
   color: #a70f7f;
   font-weight: bolder;
   text-transform: uppercase;
-  padding-top: 16px;
+  padding-top: 36px;
 
   @media (max-width: 800px) {
     padding-left: 12px;

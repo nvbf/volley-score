@@ -89,7 +89,7 @@ function Settings(props) {
                   />
                 )}
               </Mutation>
-              <Mutation mutation={SET_COLOR_VISIBILITY}>
+              {/* <Mutation mutation={SET_COLOR_VISIBILITY}>
                 {setColorVisibility => (
                   <ToggleBox
                     onChange={val =>
@@ -101,7 +101,7 @@ function Settings(props) {
                     label="Show shirt colors"
                   />
                 )}
-              </Mutation>
+                  </Mutation> */}
               <Mutation mutation={SET_LOGO_VISIBILITY}>
                 {setLogoVisibility => (
                   <ToggleBox
@@ -122,18 +122,18 @@ function Settings(props) {
                 <Link href={{ pathname: '/teams', query: { team: 'home', id: props.matchId } }}>
                   <SelectBox text={homeTeam.name} logo={homeTeam.logo} selectText="Select name" />
                 </Link>
-                <SelectBox text={homeTeam.color} color={homeTeam.color} selectText="Select color" />
+                {/* <SelectBox text={homeTeam.color} color={homeTeam.color} selectText="Select color" /> */}
               </SectionGroup>
               <SectionGroup>
                 <SubSectionTitle>Guest Team</SubSectionTitle>
                 <Link href={{ pathname: '/teams', query: { team: 'guest', id: props.matchId } }}>
                   <SelectBox text={guestTeam.name} logo={guestTeam.logo} selectText="Select name" />
                 </Link>
-                <SelectBox
+                {/* <SelectBox
                   text={guestTeam.color}
                   color={guestTeam.color}
                   selectText="Select color"
-                />
+                /> */}
               </SectionGroup>
             </SectionContainer>
           </React.Fragment>
