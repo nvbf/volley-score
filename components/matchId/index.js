@@ -1,9 +1,9 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 import { SectionTitle } from '../shared/Title';
 import TextInput from './TextInput';
 import Container from './Container';
 import InputLabel from './InputLabel';
-import debounce from 'lodash/debounce';
 
 class MatchId extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class MatchId extends React.Component {
     };
   }
 
-  updateMatchId = (matchId) => {
+  updateMatchId = matchId => {
     this.setState({
       matchId,
     });
@@ -29,7 +29,7 @@ class MatchId extends React.Component {
           <InputLabel>Insert match ID</InputLabel>
           <TextInput
             value={this.state.matchId}
-            onChange={(e) => {
+            onChange={e => {
               this.updateMatchId(e.target.value);
             }}
           />

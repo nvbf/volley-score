@@ -6,7 +6,6 @@ import Settings from '../components/settings';
 import ScoreControl from '../components/scoreControl';
 import Foot from '../components/footer';
 import ScoreLogo from '../components/scoreLogo';
-import withData from '../apollo/withData';
 
 class ScorePage extends React.Component {
   static async getInitialProps({ query }) {
@@ -20,7 +19,7 @@ class ScorePage extends React.Component {
     return (
       <PageContainer>
         <ScoreLogo />
-        <MatchId id={matchId} onChange={(id) => Router.replace({ pathname: '/', query: { id } })} />
+        <MatchId id={matchId} onChange={id => Router.replace({ pathname: '/', query: { id } })} />
         {matchId.length > 2 && <Settings matchId={matchId} />}
         {matchId.length > 2 && <ScoreControl matchId={matchId} />}
         <Foot />
@@ -29,4 +28,4 @@ class ScorePage extends React.Component {
   }
 }
 
-export default withData(ScorePage);
+export default ScorePage;

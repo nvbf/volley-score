@@ -9,13 +9,11 @@ const ScoreContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  min-width: 100px;
   background-color: #d8d8d9;
   box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
-
-  @media (max-width: 800px) {
-    width: 100%;
-  }
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
 `;
 
 const TEAMS_QUERY = gql`

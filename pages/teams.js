@@ -5,7 +5,6 @@ import gql from 'graphql-tag';
 import Link from 'next/link';
 import Box from '../components/shared/Box';
 import ToggleBox from '../components/shared/ToggleBox';
-import withData from '../apollo/withData';
 
 const Container = styled.div`
   background-color: #f9f8fc;
@@ -253,10 +252,10 @@ class Teams extends React.Component {
                 <NoPadBox>
                   <Image src={team.logo} alt={team.name} />
                   <Mutation mutation={getTeamMutation(teamType)}>
-                    {(setTeamName) => (
+                    {setTeamName => (
                       <NameInput
                         value={team.name}
-                        onChange={(e) =>
+                        onChange={e =>
                           setTeamName({
                             variables: { id: matchId, name: e.target.value },
                             optimisticResponse: {
@@ -277,11 +276,11 @@ class Teams extends React.Component {
                   </Mutation>
                 </NoPadBox>
                 <Mutation mutation={SET_LOGO_VISIBILITY}>
-                  {(setLogoVisibility) => (
+                  {setLogoVisibility => (
                     <ToggleBox
                       label="Use logo"
                       checked={showLogos}
-                      onChange={(e) =>
+                      onChange={e =>
                         setLogoVisibility({
                           variables: { id: matchId, show: e.target.checked },
                         })
@@ -304,7 +303,7 @@ class Teams extends React.Component {
               if (error) {
                 return 'error';
               }
-              return data.allClubs.map((team) => (
+              return data.allClubs.map(team => (
                 <Mutation
                   key={team.name}
                   mutation={getTeamMutation(teamType)}
@@ -314,7 +313,7 @@ class Teams extends React.Component {
                     logo: team.logo,
                   }}
                 >
-                  {(update) => (
+                  {update => (
                     <TeamBox
                       logo={team.logo}
                       name={team.name}
@@ -332,4 +331,4 @@ class Teams extends React.Component {
   }
 }
 
-export default withData(Teams);
+export default Teams;

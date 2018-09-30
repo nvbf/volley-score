@@ -2,7 +2,6 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Scoreboard from '../components/scoreboard/Scoreboard';
-import withData from '../apollo/withData';
 
 const GET_SCOREBOARD = gql`
   query GetMatchSettings($matchId: ID!) {
@@ -84,4 +83,4 @@ class ScoreboardPage extends React.Component {
   }
 }
 
-export default withData(ScoreboardPage);
+export default ScoreboardPage;

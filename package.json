@@ -8,12 +8,7 @@
     "storybook": "start-storybook -p 9001 -s ./static",
     "build-storybook": "build-storybook",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./components/** -c ./.eslintrc.json --fix",
-    "prettier":
-      "prettier-eslint --single-quote --trailing-comma all '{components,pages,apollo}/**/*.js' --write"
-  },
-  "engines": {
-    "node": "10.8.0",
-    "yarn": "1.9.4"
+    "prettier": "prettier-eslint --single-quote --trailing-comma all '{components,pages,apollo}/**/*.js' --write"
   },
   "prettier": {
     "printWidth": 100,
@@ -22,38 +17,35 @@
     "semi": true,
     "singleQuote": true,
     "trailingComma": "all",
-    "arrowParens": "always"
+    "arrowParens": "avoid"
   },
   "dependencies": {
-    "@zeit/next-css": "^0.1.5",
+    "@zeit/next-css": "^1.0.1",
     "animated": "^0.2.0",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
+    "apollo-link": "^1.2.3",
     "apollo-link-http": "^1.5.4",
-    "apollo-link-state": "^0.4.1",
+    "apollo-link-state": "^0.4.2",
     "babel-eslint": "^7.2.2",
     "babel-preset-env": "^1.6.1",
-    "graphql": "^0.13.2",
-    "graphql-binding": "^1.3.1",
+    "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "graphql-tools": "^3.0.0",
     "isomorphic-unfetch": "^2.0.0",
-    "lodash": "^4.17.4",
-    "next": "6.0.0",
+    "lodash.debounce": "^4.0.8",
+    "next": "7.0.1",
     "polished": "^1.1.3",
     "prop-types": "^15.5.8",
-    "react": "^16.0.0",
-    "react-apollo": "^2.1.4",
+    "react": "^16.4.2",
+    "react-apollo": "^2.2.2",
     "react-color": "^2.11.4",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.4.2",
     "react-toggle": "^4.0.2",
-    "styled-components": "^2.2.2"
+    "styled-components": "v4.0.0-beta.9"
   },
   "license": "MIT",
   "devDependencies": {
-    "@storybook/addon-info": "^3.2.9",
-    "@storybook/addon-knobs": "^3.2.8",
-    "@storybook/react": "3.2.8",
     "eslint": "^4.6.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "2.7.0",

@@ -31,14 +31,14 @@ const ShrinkLeft = keyframes`
 `;
 
 const GrowRightDiv = styled.div`
-  width: ${(props) => (props.isShowing ? '100%' : '0%')};
-  animation: ${(props) =>
+  width: ${props => (props.isShowing ? '100%' : '0%')};
+  animation: ${props =>
     props.isShowing ? `${GrowRight} 0.3s linear` : `${ShrinkLeft} 0.6s linear`};
 `;
 
 const FadeInDiv = styled.div`
-  opacity: ${(props) => (props.isShowing ? 1 : 0)};
-  animation: ${(props) => (props.isShowing ? `${fadeIn} 0.5s linear` : `${fadeOut} 0.2s linear`)};
+  opacity: ${props => (props.isShowing ? 1 : 0)};
+  animation: ${props => (props.isShowing ? `${fadeIn} 0.5s linear` : `${fadeOut} 0.2s linear`)};
 `;
 
 const Row = styled.div`
@@ -60,9 +60,9 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: ${(props) => (props.isShowing ? '57' : '0')}px;
-  width: ${(props) => (props.isShowing ? '57' : '0')}px;
-  opacity: ${(props) => (props.isShowing ? 1 : 0)};
+  min-width: ${props => (props.isShowing ? '57' : '0')}px;
+  width: ${props => (props.isShowing ? '57' : '0')}px;
+  opacity: ${props => (props.isShowing ? 1 : 0)};
 `;
 
 const Logo = styled.img`
@@ -85,7 +85,7 @@ const NameAndPointContainer = styled.div`
   align-items: center;
   font-size: 32px;
   font-weight: 400;
-  border-bottom: ${(props) => (props.showBorder ? '2px solid #222b38' : 'none')};
+  border-bottom: ${props => (props.showBorder ? '2px solid #222b38' : 'none')};
 `;
 
 const TeamName = styled.div`
@@ -146,18 +146,18 @@ const ShrinkLeft203 = keyframes`
 const PrevSetsContainer = styled.div`
   background: url('/static/blue-bar-270-55.svg');
   box-sizing: border-box;
-  border: ${(props) => (props.isShowing ? '1px solid rgba(31, 154, 225, 1)' : 'none')};
+  border: ${props => (props.isShowing ? '1px solid rgba(31, 154, 225, 1)' : 'none')};
   color: white;
   background-size: cover;
   display: flex;
   flex-direction: row;
   font-size: 32px;
-  width: ${(props) => (props.isShowing ? '203px' : '0px')};
-  animation: ${(props) =>
+  width: ${props => (props.isShowing ? '203px' : '0px')};
+  animation: ${props =>
     props.isShowing ? `${GrowRight203} 0.3s linear` : `${ShrinkLeft203} 0.6s linear`};
 `;
 
-const PrevSet = FadeInDiv.extend`
+const PrevSet = styled(FadeInDiv)`
   width: 67px;
   text-align: center;
 `;

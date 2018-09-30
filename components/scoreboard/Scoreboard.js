@@ -18,21 +18,15 @@ const boardColors = {
 };
 
 const Container = styled.div`
-  box-sizing: content-box;
+  box-sizing: border-box;
   margin-top: 16px;
-  margin-left: 16px;
-  margin-right: 16px;
-  min-width: 400px;
+  width: 100%;
   height: 116px;
   color: white;
   display: flex;
   flex-direction: row;
   font-family: 'Source Sans Pro', sans-serif;
   overflow: hidden;
-
-  @media (max-width: 300px) {
-    min-width: 300px;
-  }
 `;
 
 const TeamRowContainer = styled.div`
