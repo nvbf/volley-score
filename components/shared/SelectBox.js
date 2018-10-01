@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import Box from './Box';
-import Toggle from 'react-toggle';
-import 'react-toggle/style.css';
 
 const Label = styled.span`
   text-indent: 16px;
