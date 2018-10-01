@@ -10,7 +10,7 @@ const Container = styled.div`
   border-radius: 6px;
   margin-bottom: 16px;
   display: flex;
-  flex-direction: ${(props) => (props.flipped ? 'row-reverse' : 'row')};
+  flex-direction: ${props => (props.flipped ? 'row-reverse' : 'row')};
   box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.45);
 
   @media (max-width: 720px) {
@@ -30,7 +30,7 @@ const TeamContainer = styled.div`
 
 const ControlRow = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.flipped ? 'row-reverse' : 'row')};
+  flex-direction: ${props => (props.flipped ? 'row-reverse' : 'row')};
   align-items: flex-start;
   width: 100%;
   padding-top: 12px;
@@ -43,12 +43,13 @@ const Logo = styled.img`
   width: 48px;
   height: 48px;
   min-width: 48px;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin: 0 16px;
 
   @media (max-width: 500px) {
     height: 36px;
     width: 36px;
+    min-width: 36px;
+    margin: 0 8px;
   }
 `;
 
@@ -61,21 +62,36 @@ const Name = styled.h2`
   letter-spacing: 1px;
   font-size: 36px;
   margin: 0;
+  text-align: ${props => (props.alignRight ? 'right' : 'left')};
+  line-height: 36px;
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
+    font-size: 30px;
+  }
+
+  @media (max-width: 530px) {
     font-size: 24px;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 14px;
   }
 `;
 
 function ControlPanel(props) {
+  const { homeTeam, guestTeam, flipped } = props;
   return (
-    <Container flipped={props.flipped}>
-      <TeamContainer flipped={props.flipped}>
-        <ControlRow flipped={props.flipped}>
-          <Logo src={props.homeTeam.logo || '/static/logo/vs.svg'} alt={props.homeTeam.name} />
-          <Name>{props.homeTeam.name}</Name>
+    <Container flipped={flipped}>
+      <TeamContainer flipped={flipped}>
+        <ControlRow flipped={flipped}>
+          <Logo src={homeTeam.logo || '/static/logo/vs.svg'} alt={homeTeam.name} />
+          <Name alignRight={flipped}>{homeTeam.name}</Name>
         </ControlRow>
-        <ControlRow flipped={props.flipped}>
+        <ControlRow flipped={flipped}>
           <SetsControl
             sets={props.homeTeamSets || 0}
             onPlusClick={props.onHomeTeamSetsPlusClick}
@@ -88,12 +104,12 @@ function ControlPanel(props) {
           />
         </ControlRow>
       </TeamContainer>
-      <TeamContainer flipped={!props.flipped}>
-        <ControlRow flipped={!props.flipped}>
-          <Logo src={props.guestTeam.logo || '/static/logo/vs.svg'} alt={props.guestTeam.name} />
-          <Name>{props.guestTeam.name}</Name>
+      <TeamContainer flipped={!flipped}>
+        <ControlRow flipped={!flipped}>
+          <Logo src={guestTeam.logo || '/static/logo/vs.svg'} alt={guestTeam.name} />
+          <Name alignRight={!flipped}>{guestTeam.name}</Name>
         </ControlRow>
-        <ControlRow flipped={!props.flipped}>
+        <ControlRow flipped={!flipped}>
           <SetsControl
             sets={props.guestTeamSets || 0}
             onPlusClick={props.onGuestTeamSetsPlusClick}

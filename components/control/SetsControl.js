@@ -11,6 +11,11 @@ const Container = styled.div`
   @media (max-width: 500px) {
     height: 81px;
   }
+
+  @media (max-width: 380px) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 `;
 
 const MainContainer = styled.button`

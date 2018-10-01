@@ -13,9 +13,11 @@ const SelectText = styled.span`
 `;
 
 const Image = styled.img`
-  height: 36px;
-  width: 36px;
-  min-width: 36px;
+  height: 48px;
+  width: 48px;
+  padding: 8px;
+  min-width: 48px;
+  background-color: #222b38;
 `;
 const Color = styled.div`
   height: 36px;
@@ -27,7 +29,7 @@ const Color = styled.div`
 
 function SelectBox(props) {
   return (
-    <Box noMargin onClick={props.onClick}>
+    <Box paddingLeft={0} noMargin onClick={props.onClick}>
       {props.logo && <Image src={props.logo} alt={props.text} />}
       {props.color && <Color code={props.color} />}
       <Label>{props.text}</Label>

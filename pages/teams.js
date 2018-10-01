@@ -60,7 +60,7 @@ const NoPadBox = styled(Box)`
 const Image = styled.img`
   width: 48px;
   height: 48px;
-  min-width: 36px;
+  min-width: 48px;
   background-color: #222b38;
   padding: 7px;
 `;

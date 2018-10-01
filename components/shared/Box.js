@@ -7,7 +7,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 16px;
+  padding-left: ${props => (props.paddingLeft === 0 ? 0 : props.paddingLeft || 16)}px;
   padding-right: 16px;
   font-weight: bolder;
   font-size: 18px;
