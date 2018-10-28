@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import TeamRow from './TeamRow';
 import color from './color';
-import OpacityContainer from './OpacityContainer';
+import { Keyframes, animated, config } from 'react-spring';
 
 const boardColors = {
   nameBottom: darken(0.8, color.white),
@@ -17,7 +17,7 @@ const boardColors = {
   pointsText: color.white,
 };
 
-const Container = styled.div`
+const Container = styled(animated.div)`
   box-sizing: border-box;
   margin-top: 16px;
   width: 100%;
@@ -34,36 +34,43 @@ const TeamRowContainer = styled.div`
   flex-direction: column;
 `;
 
+const OpacityContainer = Keyframes.Spring({
+  visible: { to: { opacity: 1 }, config: config.default },
+  invisible: { to: { opacity: 0 }, config: config.gentle },
+});
+
 export default function Scoreboard(props) {
   return (
-    <OpacityContainer isShowing={props.isShowing}>
-      <Container>
-        <TeamRowContainer>
-          <TeamRow
-            name={props.homeTeam.name || '(home team)'}
-            logo={props.homeTeam.logo}
-            color={props.homeTeam.color}
-            points={props.homeTeam.points || 0}
-            sets={props.homeTeam.sets || 0}
-            showLogo={props.showLogos}
-            showColor={props.showColors}
-            textColor={boardColors.nameText}
-            showBorder
-            showPrevSets={(props.homeTeam.points + props.awayTeam.points) % 2 === 0}
-          />
-          <TeamRow
-            name={props.awayTeam.name || '(away team)'}
-            logo={props.awayTeam.logo}
-            color={props.awayTeam.color}
-            points={props.awayTeam.points || 0}
-            sets={props.awayTeam.sets || 0}
-            showLogo={props.showLogos}
-            showColor={props.showColors}
-            textColor={boardColors.nameText}
-            showPrevSets={(props.homeTeam.points + props.awayTeam.points) % 2 === 0}
-          />
-        </TeamRowContainer>
-      </Container>
+    <OpacityContainer native state={props.isShowing ? 'visible' : 'invisible'}>
+      {styles => (
+        <Container style={{ opacity: styles.opacity }}>
+          <TeamRowContainer>
+            <TeamRow
+              name={props.homeTeam.name || '(home team)'}
+              logo={props.homeTeam.logo}
+              color={props.homeTeam.color}
+              points={props.homeTeam.points || 0}
+              sets={props.homeTeam.sets || 0}
+              showLogo={props.showLogos}
+              showColor={props.showColors}
+              textColor={boardColors.nameText}
+              showBorder
+              showPrevSets={(props.homeTeam.points + props.awayTeam.points) % 2 === 0}
+            />
+            <TeamRow
+              name={props.awayTeam.name || '(away team)'}
+              logo={props.awayTeam.logo}
+              color={props.awayTeam.color}
+              points={props.awayTeam.points || 0}
+              sets={props.awayTeam.sets || 0}
+              showLogo={props.showLogos}
+              showColor={props.showColors}
+              textColor={boardColors.nameText}
+              showPrevSets={(props.homeTeam.points + props.awayTeam.points) % 2 === 0}
+            />
+          </TeamRowContainer>
+        </Container>
+      )}
     </OpacityContainer>
   );
 }

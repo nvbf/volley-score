@@ -116,6 +116,7 @@ const TeamSets = styled.div`
 
 const TeamPoints = styled.div`
   width: 48px;
+  min-width: 48px;
   height: 48px;
   line-height: 48px;
   text-align: center;
@@ -162,49 +163,45 @@ const PrevSet = styled(FadeInDiv)`
   text-align: center;
 `;
 
-class TeamRow extends React.Component {
-  static propTypes = {
-    color: PropTypes.string,
-    textColor: PropTypes.string,
-    logo: PropTypes.string,
-    name: PropTypes.string,
-    showColor: PropTypes.bool,
-    showLogo: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    logo: '',
-    name: '',
-    color: '',
-    showLogo: false,
-    showColor: false,
-    showPrevSets: false,
-    textColor: '#ffffff',
-  };
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <Row>
-        <LogoContainer isShowing={this.props.showLogo}>
-          <Logo src={this.props.logo} />
-        </LogoContainer>
-        <NameAndPointContainer showBorder={this.props.showBorder}>
-          <TeamName>{this.props.name}</TeamName>
-          <TeamSets>{this.props.sets}</TeamSets>
-          {/* }<PrevSetsContainer isShowing={this.props.showPrevSets}>
-            <PrevSet isShowing={this.props.showPrevSets}>21</PrevSet>
-            <PrevSet isShowing={this.props.showPrevSets}>25</PrevSet>
-            <PrevSet isShowing={this.props.showPrevSets}>19</PrevSet>
+function TeamRow(props) {
+  return (
+    <Row>
+      <LogoContainer isShowing={props.showLogo}>
+        <Logo src={props.logo} />
+      </LogoContainer>
+      <NameAndPointContainer showBorder={props.showBorder}>
+        <TeamName>{props.name}</TeamName>
+        <TeamSets>{props.sets}</TeamSets>
+        {/* }<PrevSetsContainer isShowing={props.showPrevSets}>
+            <PrevSet isShowing={props.showPrevSets}>21</PrevSet>
+            <PrevSet isShowing={props.showPrevSets}>25</PrevSet>
+            <PrevSet isShowing={props.showPrevSets}>19</PrevSet>
           </PrevSetsContainer> */}
-          <TeamPoints>{this.props.points}</TeamPoints>
-        </NameAndPointContainer>
-      </Row>
-    );
-  }
+        <TeamPoints>{props.points}</TeamPoints>
+      </NameAndPointContainer>
+    </Row>
+  );
 }
+
+TeamRow.defaultProps = {
+  logo: '',
+  name: '',
+  color: '',
+  showLogo: false,
+  showColor: false,
+  showPrevSets: false,
+  textColor: '#ffffff',
+  sets: 0,
+  points: 0,
+};
+
+TeamRow.propTypes = {
+  color: PropTypes.string,
+  textColor: PropTypes.string,
+  logo: PropTypes.string,
+  name: PropTypes.string,
+  showColor: PropTypes.bool,
+  showLogo: PropTypes.bool,
+};
 
 export default TeamRow;
