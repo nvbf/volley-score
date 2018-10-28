@@ -26,6 +26,7 @@ const options = [
     label: 'Blussuvoll',
   },
   { imgName: 'bodo', value: '/static/logo/bodo.svg', label: 'Bodø' },
+  { imgName: 'breimsbygda', value: '/static/logo/breimsbygda.svg', label: 'Breimsbygda' },
   { imgName: 'bsi', value: '/static/logo/bsi.svg', label: 'BSI' },
   { imgName: 'dristug', value: '/static/logo/dristug.svg', label: 'Dristug' },
   {
