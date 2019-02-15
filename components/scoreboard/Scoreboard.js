@@ -116,3 +116,5 @@ export default inject((stores) => {
     awayTeam: store.awayTeam,
   };
 })(observer(Scoreboard));
+
+// module.exports = Scoreboard;
