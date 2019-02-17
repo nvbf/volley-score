@@ -2,6 +2,7 @@ const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
 const { updateScore, fetchScore } = require('./src/score/score');
+const createImageFromApi = require('./src/create-png/createImageFromApi');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -62,6 +63,15 @@ app.prepare().then(() => {
       }),
     );
   });
+
+  server.get('/scoreboard.png', async (req, res, nextFunction) => {
+    const { matchId } = req.query;
+    await createImageFromApi(matchId);
+    req.url = `/scoreboard/live/${matchId}`;
+    nextFunction();
+  });
+
+  server.use('/scoreboard/live', express.static('static/score'));
 
   server.get('*', (req, res) => handle(req, res));
 
