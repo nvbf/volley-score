@@ -13,8 +13,8 @@
     "prettier": "prettier-eslint --single-quote --trailing-comma all '{components,pages,src}/**/*.js' --write"
   },
   "engines": {
-    "node": "10.8.0",
-    "yarn": "1.9.4"
+    "node": ">10.8.0",
+    "yarn": ">1.9.4"
   },
   "dependencies": {
     "animated": "^0.2.0",
@@ -41,8 +41,7 @@
     "react-dom": "^15.6.1",
     "react-select": "^1.0.0-rc.3",
     "repng": "^3.1.1",
-    "styled-components": "^2.2.2",
-    "why-is-node-running": "^2.0.3"
+    "styled-components": "^2.2.2"
   },
   "license": "MIT",
   "devDependencies": {
