@@ -1,16 +1,15 @@
-const repng = require('repng');
-const FakePage = require('../../components/scoreboard/FakePage');
-
 const fs = require('fs');
 
+const repng = require('repng');
 const firebase = require('firebase');
 
+const { Scoreboard } = require('../../components/scoreboard/Scoreboard');
 const { getLastName } = require('../../store/logic');
 
 async function createImage({ tournamentId, matchId, homeColor = '', awayColor = '' }) {
   return new Promise((resolve, reject) => {
     if (!tournamentId || !matchId) {
-      reject({ ok: false, Error: 'No tournamentId or/and matchId info given' });
+      reject({ ok: false, error: 'No tournamentId or/and matchId info given' });
     }
 
     const config = {
@@ -25,10 +24,8 @@ async function createImage({ tournamentId, matchId, homeColor = '', awayColor = 
       firebase.initializeApp(config);
     }
     const ref = firebase.database().ref(`/tournament_matches/${tournamentId}/${matchId}`);
-    ref.once('value', (res) => {
+    ref.once('value', async (res) => {
       const match = res.val();
-      console.log('match');
-      console.log(match);
 
       const homeTeam = {
         points: match.pointsInCurrentSet[0],
@@ -59,25 +56,19 @@ async function createImage({ tournamentId, matchId, homeColor = '', awayColor = 
           isShowing: true,
         },
       };
+      const stream = await repng(Scoreboard, options);
+      const writeStream = fs.createWriteStream(
+        `${__dirname}/../../static/score/firebase/${tournamentId}-${matchId}.png`,
+      );
 
-      const result = repng(FakePage, options);
-      return result
-        .then((stream) => {
-          const writeStream = fs.createWriteStream(`${tournamentId}-${matchId}.png`);
-          stream.pipe(writeStream).on('finish', () => {
-            console.log('Done');
-            writeStream.end();
-            stream.destroy();
-            resolve({ ok: true });
-          });
-        })
-        .catch((err) => {
-          console.log('ERROR');
-          console.log(err);
-          reject(err);
-        });
+      stream.pipe(writeStream).on('finish', () => {
+        console.log('Done');
+        writeStream.end();
+        stream.destroy();
+        resolve({ ok: true });
+      });
     });
   });
 }
 
-createImage({ tournamentId: '938530', matchId: '2' });
+module.exports = createImage;
