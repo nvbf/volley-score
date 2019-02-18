@@ -64,14 +64,14 @@ app.prepare().then(() => {
     );
   });
 
-  server.get('/scoreboard.png', async (req, res, nextFunction) => {
+  server.get('/scoreboard/png', async (req, res, nextFunction) => {
     const { matchId } = req.query;
     await createImageFromApi(matchId);
-    req.url = `/scoreboard/live/${matchId}`;
+    req.url = `/static/score/${matchId}.png`;
     nextFunction();
   });
 
-  server.use('/scoreboard/live', express.static('static/score'));
+  server.use('/static/score', express.static('static/score'));
 
   server.get('*', (req, res) => handle(req, res));
 
