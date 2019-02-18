@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 import { Provider } from 'mobx-react';
 import Score from '../components/scoreboard/Scoreboard';
 import FirebaseStore from '../store/firebase';

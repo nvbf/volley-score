@@ -2,6 +2,8 @@ const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
 const { updateScore, fetchScore } = require('./src/score/score');
+const createImageFromApi = require('./src/create-png/createImageFromApi');
+const createImageFromFirebase = require('./src/create-png/createImageFromFirebase');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -62,6 +64,22 @@ app.prepare().then(() => {
       }),
     );
   });
+
+  server.get('/scoreboard/png', async (req, res, nextFunction) => {
+    const { matchId } = req.query;
+    await createImageFromApi(matchId);
+    req.url = `/static/score/${matchId}.png`;
+    nextFunction();
+  });
+
+  server.get('/firebase/png', async (req, res, nextFunction) => {
+    const { tournamentId, matchId } = req.query;
+    await createImageFromFirebase({ tournamentId, matchId });
+    req.url = `/static/score/firebase/${tournamentId}-${matchId}.png`;
+    nextFunction();
+  });
+
+  server.use('/static/score', express.static('static/score'));
 
   server.get('*', (req, res) => handle(req, res));
 
