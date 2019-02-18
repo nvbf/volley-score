@@ -7,8 +7,8 @@ async function createImageFromApi(key) {
   if (!key) {
     throw new Error('No key provided');
   }
-  // TODO: export as env.var
-  const HOST = 'http://localhost:3000';
+
+  const HOST = process.env.HOST;
   const resultAxios = await axios.get(`${HOST}/api/scores/${key}`);
   const data = resultAxios.data;
 
