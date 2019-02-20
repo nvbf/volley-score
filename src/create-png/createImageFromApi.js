@@ -5,11 +5,17 @@ const fs = require('fs');
 
 async function createImageFromApi(key) {
   if (!key) {
-    throw new Error('No key provided');
+    return Promise.reject('No key provided');
+  }
+  const HOST = process.env.HOST;
+
+  let resultAxios;
+  try {
+    resultAxios = await axios.get(`${HOST}/api/scores/${key}`);
+  } catch (err) {
+    throw new Error(err);
   }
 
-  const HOST = process.env.HOST;
-  const resultAxios = await axios.get(`${HOST}/api/scores/${key}`);
   const data = resultAxios.data;
 
   const homeTeam = {
@@ -34,6 +40,7 @@ async function createImageFromApi(key) {
     width: 500,
     height: 200,
     cssLibrary: 'styled-components',
+    puppeter: "{args: ['--no-sandbox', '--disable-setuid-sandbox']}",
     props: {
       homeTeam,
       awayTeam,
@@ -46,15 +53,21 @@ async function createImageFromApi(key) {
   const stream = await repng(Scoreboard, options);
   const writeStream = fs.createWriteStream(`${__dirname}/../../static/score/${key}.png`);
 
-  return new Promise((resolve) => {
-    stream.pipe(writeStream).on('finish', () => {
-      console.log('Done');
+  return new Promise((resolve, reject) => {
+    const pipe = stream.pipe(writeStream);
+
+    pipe.on('finish', () => {
+      // TODO: is this needed?
       writeStream.end();
-      stream.destroy();
+      // stream.destroy();
       resolve({ ok: true });
+    });
+    stream.on('error', (err) => {
+      // TODO: is this needed?
+      writeStream.end();
+      reject({ ok: false, error: err });
     });
   });
 }
 
 module.exports = createImageFromApi;
-// createImage('test');
