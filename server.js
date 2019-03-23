@@ -68,6 +68,10 @@ app.prepare().then(() => {
   server.get('/scoreboard/png', async (req, res, nextFunction) => {
     try {
       const { matchId } = req.query;
+      if(!matchId) {
+        res.status(404).send("No query param matchId provided, was not able to find your match");
+        return 
+      }
       await createImageFromApi(matchId);
       req.url = `/static/score/${matchId}.png`;
       nextFunction();

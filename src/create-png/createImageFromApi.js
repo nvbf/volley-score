@@ -54,20 +54,16 @@ async function createImageFromApi(key) {
   const writeStream = fs.createWriteStream(`${__dirname}/../../static/score/${key}.png`);
 
   return new Promise((resolve, reject) => {
-    const pipe = stream.pipe(writeStream);
-
-    pipe.on('finish', () => {
-      // TODO: is this needed?
+    writeStream.write(stream, (err) => {
+      if(!err) {
+        resolve({ ok: true });
+      }
       writeStream.end();
-      // stream.destroy();
-      resolve({ ok: true });
-    });
-    stream.on('error', (err) => {
-      // TODO: is this needed?
-      writeStream.end();
-      reject({ ok: false, error: err });
-    });
+      reject({ ok: false, error: err })
+    })
   });
+
+    
 }
 
 module.exports = createImageFromApi;
