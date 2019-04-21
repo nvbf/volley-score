@@ -40,7 +40,7 @@ async function createImageFromApi(key) {
     width: 500,
     height: 200,
     cssLibrary: 'styled-components',
-    puppeter: "{args: ['--no-sandbox', '--disable-setuid-sandbox']}",
+    puppeteer: { args: ['--no-sandbox', '--disable-setuid-sandbox'] },
     props: {
       homeTeam,
       awayTeam,
@@ -55,7 +55,7 @@ async function createImageFromApi(key) {
 
   return new Promise((resolve, reject) => {
     writeStream.write(stream, (err) => {
-      if(!err) {
+      if (!err) {
         resolve({ ok: true });
       }
       writeStream.end();
