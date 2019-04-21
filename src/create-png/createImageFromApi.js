@@ -40,7 +40,7 @@ async function createImageFromApi(key) {
     width: 500,
     height: 200,
     cssLibrary: 'styled-components',
-    puppeteer: { args: ['--no-sandbox', '--disable-setuid-sandbox'] },
+    puppeteer: { headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] },
     props: {
       homeTeam,
       awayTeam,
