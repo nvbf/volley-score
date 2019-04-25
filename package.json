@@ -40,7 +40,7 @@
     "react-color": "^2.11.4",
     "react-dom": "^15.6.1",
     "react-select": "^1.0.0-rc.3",
-    "repng": "^3.1.1",
+    "repng": "sindresvendby/repng#4560c15c",
     "styled-components": "^2.2.2"
   },
   "license": "MIT",

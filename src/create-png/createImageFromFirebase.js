@@ -46,6 +46,7 @@ async function createImage({ tournamentId, matchId, homeColor = '', awayColor = 
         width: 500,
         height: 200,
         cssLibrary: 'styled-components',
+        puppeteer: { args: ['--no-sandbox', '--disable-setuid-sandbox'] },
         props: {
           homeTeam,
           awayTeam,

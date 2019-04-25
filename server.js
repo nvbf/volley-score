@@ -66,17 +66,31 @@ app.prepare().then(() => {
   });
 
   server.get('/scoreboard/png', async (req, res, nextFunction) => {
-    const { matchId } = req.query;
-    await createImageFromApi(matchId);
-    req.url = `/static/score/${matchId}.png`;
-    nextFunction();
+    try {
+      const { matchId } = req.query;
+      if(!matchId) {
+        res.status(404).send("No query param matchId provided, was not able to find your match");
+        return 
+      }
+      await createImageFromApi(matchId);
+      req.url = `/static/score/${matchId}.png`;
+      nextFunction();
+    } catch (err) {
+      console.error(err);
+      res.status(503).json({ error: JSON.stringify(err.message || err, null, 2) });
+    }
   });
 
   server.get('/firebase/png', async (req, res, nextFunction) => {
-    const { tournamentId, matchId } = req.query;
-    await createImageFromFirebase({ tournamentId, matchId });
-    req.url = `/static/score/firebase/${tournamentId}-${matchId}.png`;
-    nextFunction();
+    try {
+      const { tournamentId, matchId } = req.query;
+      await createImageFromFirebase({ tournamentId, matchId });
+      req.url = `/static/score/firebase/${tournamentId}-${matchId}.png`;
+      nextFunction();
+    } catch (err) {
+      console.error(err);
+      res.status(503).json({ error: JSON.stringify(err.message || err, null, 2) });
+    }
   });
 
   server.use('/static/score', express.static('static/score'));
