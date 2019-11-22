@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import gql from 'graphql-tag';
-import { useQuery, useMutation } from 'react-apollo';
-import Link from 'next/link';
 import { Heading, Text } from 'evergreen-ui';
-import ToggleBox from '../shared/ToggleBox';
+import gql from 'graphql-tag';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useMutation, useQuery } from 'react-apollo';
+import styled from 'styled-components';
 import SectionContainer from '../shared/SectionContainer';
 import SelectBox from '../shared/SelectBox';
+import ToggleBox from '../shared/ToggleBox';
 
 const SectionGroup = styled.div`
   display: flex;
@@ -63,8 +63,8 @@ function Settings({ matchId }: { matchId: string }) {
   const [setBoardVisibility] = useMutation(SET_BOARD_VISIBILITY);
   const [setLogoVisibility] = useMutation(SET_LOGO_VISIBILITY);
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error...</Text>;
+  if (loading) { return <Text>Loading...</Text>; }
+  if (error) { return <Text>Error...</Text>; }
   const {
     showLogos, showBoard, homeTeam, guestTeam,
   } = data.localScoreboard;

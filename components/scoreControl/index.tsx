@@ -1,12 +1,12 @@
+import { Heading, Text } from 'evergreen-ui';
 import gql from 'graphql-tag';
 import React from 'react';
 import { useMutation, useQuery } from 'react-apollo';
-import { Heading, Text } from 'evergreen-ui';
-import ScorePreview from '../scorePreview';
-import { PreTitle } from '../shared/Title';
 import ControlPanel from '../control/NewControlPanel';
-import SectionContainer from '../shared/SectionContainer';
+import ScorePreview from '../scorePreview';
 import IconButton from '../shared/IconButton';
+import SectionContainer from '../shared/SectionContainer';
+import { PreTitle } from '../shared/Title';
 
 const GET_TEAMS = gql`
   query GetTeams($id: ID!) {

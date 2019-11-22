@@ -233,8 +233,8 @@ class Teams extends React.Component {
 
         <Query query={GET_SCOREBOARD} variables={{ matchId }}>
           {({ loading, error, data }) => {
-            if (loading) return 'Loading...';
-            if (error) return 'Error...';
+            if (loading) { return 'Loading...'; }
+            if (error) { return 'Error...'; }
             const { showLogos, homeTeam, guestTeam } = data.localScoreboard;
             const team = teamType === 'guest' ? guestTeam : homeTeam;
             return (

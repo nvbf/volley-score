@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { NextPage } from 'next';
 import Router from 'next/router';
-import PageContainer from '../components/shared/PageContainer';
-import MatchId from '../components/matchId';
-import Settings from '../components/settings';
-import ScoreControl from '../components/scoreControl';
+import * as React from 'react';
 import Foot from '../components/footer';
+import MatchId from '../components/matchId';
+import ScoreControl from '../components/scoreControl';
 import ScoreLogo from '../components/scoreLogo';
+import Settings from '../components/settings';
+import PageContainer from '../components/shared/PageContainer';
 
 interface Props {
   matchId: string;

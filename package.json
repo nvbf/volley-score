@@ -7,7 +7,7 @@
     "start": "next start",
     "storybook": "start-storybook -p 9001 -s ./static",
     "build-storybook": "build-storybook",
-    "lint": "tslint components/**/* pages/**/*",
+    "lint": "tslint components/**/* pages/**/* --fix",
     "prettier": "prettier-eslint --single-quote --trailing-comma all '{components,pages,apollo}/**/*.js' --write"
   },
   "prettier": {
