@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Link from 'next/link';
+import { Button } from 'evergreen-ui';
 import Box from '../components/shared/Box';
 import ToggleBox from '../components/shared/ToggleBox';
-import { Button } from 'evergreen-ui';
 
 const Container = styled.div`
   background-color: #f9f8fc;

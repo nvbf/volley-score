@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import TeamRow from './TeamRow';
 import color from './color';
-import { Keyframes, animated, config } from 'react-spring';
+import { animated, useTransition } from "react-spring";
 
 const boardColors = {
   nameBottom: darken(0.8, color.white),
@@ -34,16 +34,15 @@ const TeamRowContainer = styled.div`
   flex-direction: column;
 `;
 
-const OpacityContainer = Keyframes.Spring({
-  visible: { to: { opacity: 1 }, config: config.default },
-  invisible: { to: { opacity: 0 }, config: config.gentle },
-});
-
 export default function Scoreboard(props) {
-  return (
-    <OpacityContainer native state={props.isShowing ? 'visible' : 'invisible'}>
-      {styles => (
-        <Container style={{ opacity: styles.opacity }}>
+  const transitions = useTransition(props.isShowing, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
+  return transitions.map(({ item, key, props: styleProps }) =>
+    item && <animated.div key={key} style={styleProps}>
+        <Container>
           <TeamRowContainer>
             <TeamRow
               name={props.homeTeam.name || '(home team)'}
@@ -70,8 +69,8 @@ export default function Scoreboard(props) {
             />
           </TeamRowContainer>
         </Container>
-      )}
-    </OpacityContainer>
+
+    </animated.div>
   );
 }
 
