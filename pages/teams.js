@@ -115,19 +115,6 @@ const TitleRow = styled.div`
   justify-content: space-between;
 `;
 
-const XButton = styled.button`
-  border: 1px solid #a70f7f;
-  background-color: transparent;
-  border-radius: 4px;
-  height: 32px;
-  width: 80px;
-  text-align: center;
-  color: #a70f7f;
-  font-size: 18px;
-  margin-top: 8px;
-  margin-right: 16px;
-`;
-
 const NameInput = styled.input`
   font-size: 28px;
   box-sizing: border-box;
@@ -255,39 +242,35 @@ class Teams extends React.Component {
                 <NoPadBox>
                   <Image src={team.logo} alt={team.name} />
                   <Mutation mutation={getTeamMutation(teamType)}>
-                    {setTeamName => (
+                    {(setTeamName) => (
                       <NameInput
                         value={team.name}
-                        onChange={e =>
-                          setTeamName({
-                            variables: { id: matchId, name: e.target.value },
-                            optimisticResponse: {
-                              __typename: 'Mutation',
-                              updateLocalScoreboard: {
-                                id: matchId,
-                                __typename: 'Scoreboard',
-                                [teamType === 'guest' ? 'guestTeam' : 'homeTeam']: {
-                                  __typename: 'Team',
-                                  name: e.target.value,
-                                },
+                        onChange={(e) => setTeamName({
+                          variables: { id: matchId, name: e.target.value },
+                          optimisticResponse: {
+                            __typename: 'Mutation',
+                            updateLocalScoreboard: {
+                              id: matchId,
+                              __typename: 'Scoreboard',
+                              [teamType === 'guest' ? 'guestTeam' : 'homeTeam']: {
+                                __typename: 'Team',
+                                name: e.target.value,
                               },
                             },
-                          })
-                        }
+                          },
+                        })}
                       />
                     )}
                   </Mutation>
                 </NoPadBox>
                 <Mutation mutation={SET_LOGO_VISIBILITY}>
-                  {setLogoVisibility => (
+                  {(setLogoVisibility) => (
                     <ToggleBox
                       label="Use logo"
                       checked={showLogos}
-                      onChange={e =>
-                        setLogoVisibility({
-                          variables: { id: matchId, show: e.target.checked },
-                        })
-                      }
+                      onChange={(e) => setLogoVisibility({
+                        variables: { id: matchId, show: e.target.checked },
+                      })}
                     />
                   )}
                 </Mutation>
@@ -306,7 +289,7 @@ class Teams extends React.Component {
               if (error) {
                 return 'error';
               }
-              return data.allClubs.map(team => (
+              return data.allClubs.map((team) => (
                 <Mutation
                   key={team.name}
                   mutation={getTeamMutation(teamType)}
@@ -316,7 +299,7 @@ class Teams extends React.Component {
                     logo: team.logo,
                   }}
                 >
-                  {update => (
+                  {(update) => (
                     <TeamBox
                       logo={team.logo}
                       name={team.name}
