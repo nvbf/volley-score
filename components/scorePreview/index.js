@@ -6,14 +6,16 @@ import Scoreboard from '../scoreboard/Scoreboard';
 
 const ScoreContainer = styled.div`
   padding-bottom: 12px;
+  padding-left: 12px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
-  background-color: #d8d8d9;
-  box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  background-color: rgba(67, 90, 111, 0.7);
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
+  border: 1px solid #171e27;
 `;
 
 const TEAMS_QUERY = gql`

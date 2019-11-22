@@ -1,8 +1,9 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
+import { Heading } from 'evergreen-ui';
 import ScorePreview from '../scorePreview';
-import { PreTitle, Title, SubSectionTitle } from '../shared/Title';
+import { PreTitle } from '../shared/Title';
 import ControlPanel from '../control/NewControlPanel';
 import SectionContainer from '../shared/SectionContainer';
 import IconButton from '../shared/IconButton';
@@ -106,13 +107,19 @@ function ScoreControl(props) {
         return (
           <React.Fragment>
             <PreTitle>{props.matchId}</PreTitle>
-            <Title>Scoreboard</Title>
-            <SubSectionTitle>Preview</SubSectionTitle>
+            <Heading size={900} marginTop={0} marginBottom={16}>
+              Scoreboard
+            </Heading>
+            <Heading size={700} marginTop={8} marginBottom={16} marginLeft={16}>
+              Preview
+            </Heading>
             <SectionContainer>
               <ScorePreview matchId={props.matchId} />
             </SectionContainer>
             <SectionContainer>
-              <SubSectionTitle>Control Panel</SubSectionTitle>
+              <Heading size={700} marginTop={24} marginBottom={16} marginLeft={16}>
+                Control Panel
+              </Heading>
               <Mutation mutation={UPDATE_SCOREBOARD}>
                 {updateScoreboard => (
                   <ControlPanel
@@ -253,13 +260,13 @@ function ScoreControl(props) {
             <SectionContainer>
               <Mutation mutation={FLIP_SCORE}>
                 {flipScore => (
-                  <IconButton onClick={flipScore} icon="/static/icon/flip.svg" text="Flip teams" />
+                  <IconButton onClick={flipScore} icon="swap-horizontal" text="Flip teams" />
                 )}
               </Mutation>
               <Mutation mutation={UPDATE_SCOREBOARD}>
                 {updateScoreboard => (
                   <IconButton
-                    icon="/static/icon/reset.svg"
+                    icon="refresh"
                     text="Reset points"
                     onClick={() =>
                       updateScoreboard({

@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
-    "react-spring": "^5.9.0",
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "apollo-link": "^1.2.3",
@@ -29,6 +28,8 @@
     "apollo-link-state": "^0.4.2",
     "babel-eslint": "^7.2.2",
     "babel-preset-env": "^1.6.1",
+    "emotion": "^10.0.23",
+    "evergreen-ui": "^4.21.5",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "graphql-tools": "^3.0.0",
@@ -41,6 +42,7 @@
     "react-apollo": "^2.2.2",
     "react-color": "^2.11.4",
     "react-dom": "^16.4.2",
+    "react-spring": "^5.9.0",
     "react-toggle": "^4.0.2",
     "styled-components": "v4.0.0-beta.9"
   },

@@ -1,9 +1,7 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
-import { SectionTitle } from '../shared/Title';
-import TextInput from './TextInput';
+import { TextInputField, Heading } from 'evergreen-ui';
 import Container from './Container';
-import InputLabel from './InputLabel';
 
 class MatchId extends React.Component {
   constructor(props) {
@@ -14,7 +12,7 @@ class MatchId extends React.Component {
     };
   }
 
-  updateMatchId = matchId => {
+  updateMatchId = (matchId) => {
     this.setState({
       matchId,
     });
@@ -24,17 +22,27 @@ class MatchId extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SectionTitle>Match ID</SectionTitle>
+        <Heading size={900} marginTop={24} marginBottom={16} marginLeft={16}>
+          Match ID
+        </Heading>
         <Container>
-          <InputLabel>Insert match ID</InputLabel>
-          <TextInput
+          <TextInputField
+            label="Insert match ID"
+            width="100%"
+            marginTop={8}
+            marginBottom={24}
+            inputHeight={48}
             value={this.state.matchId}
-            onChange={e => {
+            onChange={(e) => {
               this.updateMatchId(e.target.value);
             }}
           />
-          <InputLabel>Stream overlay link</InputLabel>
-          <TextInput
+          <TextInputField
+            marginTop={8}
+            marginBottom={24}
+            label="Stream overlay link"
+            width="100%"
+            inputHeight={48}
             value={`http://score.volleystream.no/scoreboard?matchId=${this.state.matchId}`}
             disabled
           />

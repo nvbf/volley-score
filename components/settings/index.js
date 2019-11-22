@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
 import Link from 'next/link';
+import { Heading } from 'evergreen-ui';
 import ToggleBox from '../shared/ToggleBox';
-import { SectionTitle, SubSectionTitle } from '../shared/Title';
 import SectionContainer from '../shared/SectionContainer';
 import SelectBox from '../shared/SelectBox';
 
@@ -47,6 +47,28 @@ const SET_COLOR_VISIBILITY = gql`
   }
 `;
 
+/* <Mutation mutation={SET_COLOR_VISIBILITY}>
+                {setColorVisibility => (
+                  <ToggleBox
+                    onChange={val =>
+                      setColorVisibility({
+                        variables: { id: props.matchId, show: val.target.checked },
+                      })
+                    }
+                    checked={showColors}
+                    label="Show shirt colors"
+                  />
+                )}
+                  </Mutation> */
+
+/* <SelectBox text={homeTeam.color} color={homeTeam.color} selectText="Select color" /> */
+
+/* <SelectBox
+                  text={guestTeam.color}
+                  color={guestTeam.color}
+                  selectText="Select color"
+                /> */
+
 const SET_LOGO_VISIBILITY = gql`
   mutation SetLogoVisibility($id: ID!, $show: Boolean!) {
     setLogoVisibility(matchId: $id, show: $show) {
@@ -71,10 +93,13 @@ function Settings(props) {
       {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) return 'Error...';
+
         const { showColors, showLogos, showBoard, homeTeam, guestTeam } = data.localScoreboard;
         return (
           <React.Fragment>
-            <SectionTitle>Settings</SectionTitle>
+            <Heading size={900} marginTop={24} marginBottom={16} marginLeft={16}>
+              Settings
+            </Heading>
             <SectionContainer>
               <Mutation mutation={SET_BOARD_VISIBILITY}>
                 {setVisibility => (
@@ -89,19 +114,7 @@ function Settings(props) {
                   />
                 )}
               </Mutation>
-              {/* <Mutation mutation={SET_COLOR_VISIBILITY}>
-                {setColorVisibility => (
-                  <ToggleBox
-                    onChange={val =>
-                      setColorVisibility({
-                        variables: { id: props.matchId, show: val.target.checked },
-                      })
-                    }
-                    checked={showColors}
-                    label="Show shirt colors"
-                  />
-                )}
-                  </Mutation> */}
+              {}
               <Mutation mutation={SET_LOGO_VISIBILITY}>
                 {setLogoVisibility => (
                   <ToggleBox
@@ -118,22 +131,20 @@ function Settings(props) {
             </SectionContainer>
             <SectionContainer>
               <SectionGroup>
-                <SubSectionTitle>Home Team</SubSectionTitle>
+                <Heading size={700} marginTop={24} marginBottom={16} marginLeft={16}>
+                  Home Team
+                </Heading>
                 <Link href={{ pathname: '/teams', query: { team: 'home', id: props.matchId } }}>
                   <SelectBox text={homeTeam.name} logo={homeTeam.logo} selectText="Select team" />
                 </Link>
-                {/* <SelectBox text={homeTeam.color} color={homeTeam.color} selectText="Select color" /> */}
               </SectionGroup>
               <SectionGroup>
-                <SubSectionTitle>Guest Team</SubSectionTitle>
+                <Heading size={700} marginTop={24} marginBottom={16} marginLeft={16}>
+                  Guest Team
+                </Heading>
                 <Link href={{ pathname: '/teams', query: { team: 'guest', id: props.matchId } }}>
                   <SelectBox text={guestTeam.name} logo={guestTeam.logo} selectText="Select team" />
                 </Link>
-                {/* <SelectBox
-                  text={guestTeam.color}
-                  color={guestTeam.color}
-                  selectText="Select color"
-                /> */}
               </SectionGroup>
             </SectionContainer>
           </React.Fragment>

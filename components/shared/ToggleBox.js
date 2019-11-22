@@ -1,21 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Switch, Text } from 'evergreen-ui';
 import { LabelBox } from './Box';
-import Toggle from 'react-toggle';
-import 'react-toggle/style.css';
-
-const Label = styled.span`
-  text-indent: 16px;
-  flex-grow: 1;
-`;
 
 function ToggleBox(props) {
   const checked = props.checked || false;
   return (
     <LabelBox>
-      <Label>{props.label}</Label>
-      <Toggle checked={checked} icons={false} onChange={(e) => props.onChange(e)} />
+      <Text size={500} textIndent={16} flexGrow={1}>
+        {props.label}
+      </Text>
+      <Switch checked={checked} height={24} onChange={e => props.onChange(e)} marginRight={16} />
     </LabelBox>
   );
 }

@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import Link from 'next/link';
 import Box from '../components/shared/Box';
 import ToggleBox from '../components/shared/ToggleBox';
+import { Button } from 'evergreen-ui';
 
 const Container = styled.div`
   background-color: #f9f8fc;
@@ -114,7 +115,7 @@ const TitleRow = styled.div`
   justify-content: space-between;
 `;
 
-const Button = styled.button`
+const XButton = styled.button`
   border: 1px solid #a70f7f;
   background-color: transparent;
   border-radius: 4px;
@@ -236,7 +237,9 @@ class Teams extends React.Component {
             {teamType !== 'guest' && <Title>Home Team</Title>}
             {teamType === 'guest' && <Title>Guest Team</Title>}
             <Link href={{ pathname: '/', query: { id: matchId } }}>
-              <Button>Done</Button>
+              <Button height={36} appearance="primary" marginRight={16}>
+                Done
+              </Button>
             </Link>
           </TitleRow>
         </FlexColumn>
