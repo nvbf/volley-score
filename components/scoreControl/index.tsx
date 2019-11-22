@@ -108,17 +108,17 @@ function ScoreControl({ matchId }: { matchId: string }) {
           {...scoreData}
           onHomeTeamPointsPlusClick={() =>
             updateScoreboard({
-              variables: {
-                id: matchId,
-                homeTeamPoints: scoreData.homeTeamPoints + 1,
-              },
               optimisticResponse: {
                 __typename: 'Mutation',
                 updateLocalScoreboard: {
-                  id: matchId,
                   __typename: 'Scoreboard',
                   homeTeamPoints: scoreData.homeTeamPoints + 1,
+                  id: matchId,
                 },
+              },
+              variables: {
+                homeTeamPoints: scoreData.homeTeamPoints + 1,
+                id: matchId,
               },
             })
           }
@@ -243,19 +243,19 @@ function ScoreControl({ matchId }: { matchId: string }) {
           text="Reset points"
           onClick={() =>
             updateScoreboard({
-              variables: {
-                id: matchId,
-                homeTeamPoints: 0,
-                guestTeamPoints: 0,
-              },
               optimisticResponse: {
                 __typename: 'Mutation',
                 updateLocalScoreboard: {
-                  id: matchId,
                   __typename: 'Scoreboard',
-                  homeTeamPoints: 0,
                   guestTeamPoints: 0,
+                  homeTeamPoints: 0,
+                  id: matchId,
                 },
+              },
+              variables: {
+                guestTeamPoints: 0,
+                homeTeamPoints: 0,
+                id: matchId,
               },
             })
           }
