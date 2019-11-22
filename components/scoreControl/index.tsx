@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import {
   useQuery, useMutation,
 } from 'react-apollo';
-import { Heading } from 'evergreen-ui';
+import { Heading, Text } from 'evergreen-ui';
 import ScorePreview from '../scorePreview';
 import { PreTitle } from '../shared/Title';
 import ControlPanel from '../control/NewControlPanel';
@@ -75,15 +75,15 @@ const FLIP_SCORE = gql`
   }
 `;
 
-function ScoreControl({ matchId }) {
+function ScoreControl({ matchId }: { matchId: string }) {
   const { loading, error, data } = useQuery(GET_TEAMS, { variables: { id: matchId } });
   const [updateScoreboard] = useMutation(UPDATE_SCOREBOARD);
   const [flipScore] = useMutation(FLIP_SCORE);
   if (loading) {
-    return 'loading';
+    return <Text>Loading...</Text>;
   }
   if (error) {
-    return 'error';
+    return <Text>Error</Text>;
   }
 
   const scoreData = data.localScoreboard;

@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
-import {
-  useQuery, useMutation
-} from 'react-apollo';
+import { useQuery, useMutation } from 'react-apollo';
 import Link from 'next/link';
-import { Heading } from 'evergreen-ui';
+import { Heading, Text } from 'evergreen-ui';
 import ToggleBox from '../shared/ToggleBox';
 import SectionContainer from '../shared/SectionContainer';
 import SelectBox from '../shared/SelectBox';
@@ -58,15 +56,15 @@ const SET_BOARD_VISIBILITY = gql`
   }
 `;
 
-function Settings({ matchId }) {
+function Settings({ matchId }: { matchId: string }) {
   const { loading, error, data } = useQuery(GET_SETTINGS, {
     variables: { matchId },
   });
   const [setBoardVisibility] = useMutation(SET_BOARD_VISIBILITY);
   const [setLogoVisibility] = useMutation(SET_LOGO_VISIBILITY);
 
-  if (loading) return 'Loading...';
-  if (error) return 'Error...';
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error...</Text>;
   const {
     showLogos, showBoard, homeTeam, guestTeam,
   } = data.localScoreboard;
