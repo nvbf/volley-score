@@ -1,8 +1,6 @@
-import React from 'react';
 import gql from 'graphql-tag';
-import {
-  useQuery, useMutation,
-} from 'react-apollo';
+import React from 'react';
+import { useMutation, useQuery } from 'react-apollo';
 import { Heading, Text } from 'evergreen-ui';
 import ScorePreview from '../scorePreview';
 import { PreTitle } from '../shared/Title';
@@ -108,118 +106,134 @@ function ScoreControl({ matchId }: { matchId: string }) {
         <ControlPanel
           flipped={data.isFlipped}
           {...scoreData}
-          onHomeTeamPointsPlusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              homeTeamPoints: scoreData.homeTeamPoints + 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+          onHomeTeamPointsPlusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 homeTeamPoints: scoreData.homeTeamPoints + 1,
               },
-            },
-          })}
-          onHomeTeamPointsMinusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              homeTeamPoints: scoreData.homeTeamPoints - 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  homeTeamPoints: scoreData.homeTeamPoints + 1,
+                },
+              },
+            })
+          }
+          onHomeTeamPointsMinusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 homeTeamPoints: scoreData.homeTeamPoints - 1,
               },
-            },
-          })}
-          onGuestTeamPointsPlusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              guestTeamPoints: scoreData.guestTeamPoints + 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  homeTeamPoints: scoreData.homeTeamPoints - 1,
+                },
+              },
+            })
+          }
+          onGuestTeamPointsPlusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 guestTeamPoints: scoreData.guestTeamPoints + 1,
               },
-            },
-          })}
-          onGuestTeamPointsMinusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              guestTeamPoints: scoreData.guestTeamPoints - 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  guestTeamPoints: scoreData.guestTeamPoints + 1,
+                },
+              },
+            })
+          }
+          onGuestTeamPointsMinusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 guestTeamPoints: scoreData.guestTeamPoints - 1,
               },
-            },
-          })}
-          onHomeTeamSetsPlusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              homeTeamSets: scoreData.homeTeamSets + 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  guestTeamPoints: scoreData.guestTeamPoints - 1,
+                },
+              },
+            })
+          }
+          onHomeTeamSetsPlusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 homeTeamSets: scoreData.homeTeamSets + 1,
               },
-            },
-          })}
-          onHomeTeamSetsMinusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              homeTeamSets: scoreData.homeTeamSets - 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  homeTeamSets: scoreData.homeTeamSets + 1,
+                },
+              },
+            })
+          }
+          onHomeTeamSetsMinusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 homeTeamSets: scoreData.homeTeamSets - 1,
               },
-            },
-          })}
-          onGuestTeamSetsPlusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              guestTeamSets: scoreData.guestTeamSets + 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  homeTeamSets: scoreData.homeTeamSets - 1,
+                },
+              },
+            })
+          }
+          onGuestTeamSetsPlusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 guestTeamSets: scoreData.guestTeamSets + 1,
               },
-            },
-          })}
-          onGuestTeamSetsMinusClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              guestTeamSets: scoreData.guestTeamSets - 1,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  guestTeamSets: scoreData.guestTeamSets + 1,
+                },
+              },
+            })
+          }
+          onGuestTeamSetsMinusClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 guestTeamSets: scoreData.guestTeamSets - 1,
               },
-            },
-          })}
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  guestTeamSets: scoreData.guestTeamSets - 1,
+                },
+              },
+            })
+          }
         />
       </SectionContainer>
       <SectionContainer>
@@ -227,22 +241,24 @@ function ScoreControl({ matchId }: { matchId: string }) {
         <IconButton
           icon="refresh"
           text="Reset points"
-          onClick={() => updateScoreboard({
-            variables: {
-              id: matchId,
-              homeTeamPoints: 0,
-              guestTeamPoints: 0,
-            },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              updateLocalScoreboard: {
+          onClick={() =>
+            updateScoreboard({
+              variables: {
                 id: matchId,
-                __typename: 'Scoreboard',
                 homeTeamPoints: 0,
                 guestTeamPoints: 0,
               },
-            },
-          })}
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateLocalScoreboard: {
+                  id: matchId,
+                  __typename: 'Scoreboard',
+                  homeTeamPoints: 0,
+                  guestTeamPoints: 0,
+                },
+              },
+            })
+          }
         />
       </SectionContainer>
     </>
