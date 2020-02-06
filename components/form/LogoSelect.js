@@ -104,6 +104,7 @@ const options = [
     value: '/static/logo/tonsberg.svg',
     label: 'Tønsberg',
   },
+  { imgName: 'torvastad', value: '/static/logo/torvastad.svg', label: 'Torvastad' },
   { imgName: 'tvn', value: '/static/logo/tvn.svg', label: 'TVN' },
   { imgName: 'vestli', value: '/static/logo/vestli.svg', label: 'Vestli' },
   { imgName: 'viking', value: '/static/logo/viking.svg', label: 'TIF Viking' },

@@ -5,3 +5,4 @@ npm-debug.log
 dump.rdp
 redis
 static/score
+.vscode
