@@ -11,9 +11,13 @@ There also exist a solution to run against a firebase database. so this can work
 
 By default you can find the application on `http://localhost:3000`.
 
-You need to install and run Redis before running the server.
-
 ##
+
+## Creating a redis image
+Creating a docker image should be as simple as `docker build -t redis .`
+
+## Running a redis image
+`docker run --rm -it -p 8080:8080 redis`
 
 ## Prerequisites
 

@@ -6,3 +6,7 @@ dump.rdp
 redis
 static/score
 .vscode
+
+# Idea project files
+*.iml
+.idea/
