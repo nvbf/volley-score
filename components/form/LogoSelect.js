@@ -75,6 +75,7 @@ const options = [
     value: '/static/logo/sarpsborg.svg',
     label: 'Sarpsborg',
   },
+  { imgName: 'skrival', value: '/static/logo/skrival.svg', label: 'SK Rival' },
   {
     imgName: 'spiritlorenskog',
     value: '/static/logo/spiritlorenskog.svg',
