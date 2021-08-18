@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
-import { darken } from 'polished';
 import { observer } from 'mobx-react';
-import Animated from 'animated/lib/targets/react-dom';
 
 const fadeIn = keyframes`
   0% { opacity: 0; }

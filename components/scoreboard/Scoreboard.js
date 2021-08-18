@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { darken } from 'polished';
 import { inject, observer } from 'mobx-react';
 import TeamRow from './TeamRow';
 import color from './color';
 import OpacityContainer from './OpacityContainer';
 
 const boardColors = {
-  nameBottom: darken(0.8, color.white),
-  nameTop: darken(0.6, color.white),
   nameText: color.white,
-  setsBottom: color.white,
-  setsTop: color.lightGray,
-  pointsBottom: color.darkBlue,
-  pointsTop: color.blue,
-  pointsText: color.white,
 };
 
 const Container = styled.div`
