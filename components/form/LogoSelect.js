@@ -110,6 +110,7 @@ const options = [
   { imgName: 'vestli', value: '/static/logo/vestli.svg', label: 'Vestli' },
   { imgName: 'viking', value: '/static/logo/viking.svg', label: 'TIF Viking' },
   { imgName: 'volda', value: '/static/logo/volda.svg', label: 'KFUM Volda' },
+  { imgName: 'aalesund', value: '/static/logo/aalesund.svg', label: 'Ålesund' },
 ];
 
 function renderOption(option) {
