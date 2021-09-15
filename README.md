@@ -13,7 +13,9 @@ By default you can find the application on `http://localhost:3000`.
 
 You need to install and run Redis before running the server.
 
-##
+## Scoreboard as a service
+
+You can use the scoreboard (auto-updated from this repo) at https://www.volleytv.no/score-board/
 
 ## Prerequisites
 
