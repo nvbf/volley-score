@@ -57,7 +57,7 @@ const LogoContainer = styled.div`
   min-height: 57px;
   height: 57px;
   margin-right: 8px;
-  background-color: #222b38;
+  background-color: #999;
   display: flex;
   justify-content: center;
   align-items: center;
