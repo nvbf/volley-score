@@ -55,7 +55,6 @@ const options = [
   { imgName: 'ksk', value: '/static/logo/ksk.svg', label: 'KSK' },
   { imgName: 'lierne', value: '/static/logo/lierne.svg', label: 'Lierne' },
   { imgName: 'marienlyst', value: '/static/logo/marienlyst.svg', label: 'Marienlyst' },
-  { imgName: 'molde', value: '/static/logo/molde.svg', label: 'Molde' },
   { imgName: 'ntnui', value: '/static/logo/ntnui.svg', label: 'NTNUI' },
   { imgName: 'oskil', value: '/static/logo/oksil.svg', label: 'ØKSIL' },
   { imgName: 'osi', value: '/static/logo/osi.svg', label: 'OSI' },
