@@ -14,7 +14,7 @@ class Scoreboard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.store = new ScoreStore(props.query.matchId);
+    this.store = new ScoreStore(props.query.matchId, props.query.scoreDelay);
   }
 
   componentDidMount() {
@@ -38,8 +38,9 @@ class Scoreboard extends React.Component {
 
 Scoreboard.propTypes = {
   query: PropTypes.shape({
-    matchId: PropTypes.string,
-  }).isRequired,
+    matchId: PropTypes.string.isRequired,
+    scoreDelay: PropTypes.number
+  }),
 };
 
 export default Scoreboard;
