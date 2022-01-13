@@ -14,7 +14,8 @@ class Scoreboard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.store = new ScoreStore(props.query.matchId, props.query.scoreDelay);
+    const { matchId, scoreDelay} = props.query;
+    this.store = new ScoreStore(matchId, scoreDelay ? parseInt(scoreDelay) : undefined);
   }
 
   componentDidMount() {
@@ -39,8 +40,8 @@ class Scoreboard extends React.Component {
 Scoreboard.propTypes = {
   query: PropTypes.shape({
     matchId: PropTypes.string.isRequired,
-    scoreDelay: PropTypes.number
-  }),
+    scoreDelay: PropTypes.string // Can we somehow automatic convert this to int if present?
+  }).isRequired,
 };
 
 export default Scoreboard;
