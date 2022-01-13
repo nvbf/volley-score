@@ -69,7 +69,7 @@ class ScoreStore {
         setTimeout(() => this.doUpdateData(data), this.scoreDelay * 1000);
       }
       else {
-        this.doUpdateData();
+        this.doUpdateData(data);
       }
     });
   };
