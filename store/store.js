@@ -27,8 +27,11 @@ class ScoreStore {
 
   intervalId;
 
-  constructor(matchId, scoreDelay) {
+  constructor(matchId) {
     this.matchId = matchId;
+  }
+
+  setScoreDelay(scoreDelay) {
     this.scoreDelay = scoreDelay;
   }
 

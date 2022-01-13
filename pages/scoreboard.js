@@ -15,7 +15,10 @@ class Scoreboard extends React.Component {
   constructor(props) {
     super(props);
     const { matchId, scoreDelay} = props.query;
-    this.store = new ScoreStore(matchId, scoreDelay ? parseInt(scoreDelay) : undefined);
+    this.store = new ScoreStore(matchId);
+    if (scoreDelay) {
+      this.store.setScoreDelay(parseInt(scoreDelay));
+    }
   }
 
   componentDidMount() {
