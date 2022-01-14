@@ -89,6 +89,13 @@ const NameAndPointContainer = styled.div`
   border-bottom: ${props => (props.showBorder ? '2px solid #222b38' : 'none')};
 `;
 
+const TeamColor = styled.div`
+  background-color: ${props => props.color};
+  width: 6px;
+  height: 100%;
+  flex-grow: 0;
+`;
+
 const TeamName = styled.div`
   text-indent: 16px;
   width: 260px;
@@ -201,20 +208,23 @@ class TeamRow extends React.Component {
   }
 
   render() {
+    const { showLogo, logo, showBorder, name, sets, points, color} = this.props;
+  
     return (
       <Row>
-        <LogoContainer isShowing={this.props.showLogo}>
-          <Logo src={this.props.logo} />
+        <LogoContainer isShowing={showLogo}>
+          <Logo src={logo} />
         </LogoContainer>
-        <NameAndPointContainer showBorder={this.props.showBorder}>
-          <TeamName size={this.getNameSize()}>{this.props.name}</TeamName>
-          <TeamSets>{this.props.sets}</TeamSets>
-          {/* }<PrevSetsContainer isShowing={this.props.showPrevSets}>
-            <PrevSet isShowing={this.props.showPrevSets}>21</PrevSet>
-            <PrevSet isShowing={this.props.showPrevSets}>25</PrevSet>
-            <PrevSet isShowing={this.props.showPrevSets}>19</PrevSet>
+        <NameAndPointContainer showBorder={showBorder}>
+          {color && <TeamColor color={color} />}
+          <TeamName size={this.getNameSize()}>{name}</TeamName>
+          <TeamSets>{sets}</TeamSets>
+          {/* }<PrevSetsContainer isShowing={showPrevSets}>
+            <PrevSet isShowing={showPrevSets}>21</PrevSet>
+            <PrevSet isShowing={showPrevSets}>25</PrevSet>
+            <PrevSet isShowing={showPrevSets}>19</PrevSet>
           </PrevSetsContainer> */}
-          <TeamPoints>{this.props.points}</TeamPoints>
+          <TeamPoints>{points}</TeamPoints>
         </NameAndPointContainer>
       </Row>
     );
