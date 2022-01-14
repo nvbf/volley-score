@@ -208,7 +208,7 @@ class TeamRow extends React.Component {
   }
 
   render() {
-    const { showLogo, logo, showBorder, name, sets, points, color} = this.props;
+    const { showLogo, logo, showBorder, name, sets, points, color, showColor } = this.props;
   
     return (
       <Row>
@@ -216,7 +216,7 @@ class TeamRow extends React.Component {
           <Logo src={logo} />
         </LogoContainer>
         <NameAndPointContainer showBorder={showBorder}>
-          {color && <TeamColor color={color} />}
+          {showColor && <TeamColor color={color} />}
           <TeamName size={this.getNameSize()}>{name}</TeamName>
           <TeamSets>{sets}</TeamSets>
           {/* }<PrevSetsContainer isShowing={showPrevSets}>
