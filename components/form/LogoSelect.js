@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import Select from 'react-select';
 
 const options = [
+  { imgName: '_empty', value: '/static/logo/_empty.svg', label: 'Lag uten logo' },
   { imgName: 'asker', value: '/static/logo/asker.svg', label: 'Asker' },
   { imgName: 'askim', value: '/static/logo/askim.svg', label: 'Askim' },
   {
@@ -35,9 +36,13 @@ const options = [
     label: 'Egersund',
   },
   { imgName: 'farsund', value: '/static/logo/farsund.svg', label: 'Farsund' },
+  { imgName: 'fjellmann', value: '/static/logo/fjellmann.svg', label: 'Fjellmann' },
   { imgName: 'forde', value: '/static/logo/forde.svg', label: 'Førde' },
+  { imgName: 'framnes', value: '/static/logo/framnes.svg', label: 'Framnes' },
   { imgName: 'gjesdal', value: '/static/logo/gjesdal.svg', label: 'Gjesdal' },
   { imgName: 'gneist', value: '/static/logo/gneist.svg', label: 'Gneist' },
+  { imgName: 'grong', value: '/static/logo/grong.svg', label: 'Grong' },
+  { imgName: 'gulset', value: '/static/logo/gulset.svg', label: 'Gulset' },
   {
     imgName: 'haugesund',
     value: '/static/logo/haugesund.svg',
@@ -45,14 +50,11 @@ const options = [
   },
   { imgName: 'holstad', value: '/static/logo/holstad.svg', label: 'Holstad' },
   { imgName: 'hvidovre', value: '/static/logo/hvidovre.svg', label: 'Hvidovre' },
-  {
-    imgName: 'kfumstavanger',
-    value: '/static/logo/kfumstavanger.svg',
-    label: 'KFUM Stavanger',
-  },
+  { imgName: 'jardar', value: '/static/logo/jardar.svg', label: 'Jardar' },
   { imgName: 'kolbotn', value: '/static/logo/kolbotn.svg', label: 'Kolbotn' },
   { imgName: 'koll', value: '/static/logo/koll.svg', label: 'Koll' },
   { imgName: 'ksk', value: '/static/logo/ksk.svg', label: 'KSK' },
+  { imgName: 'lier', value: '/static/logo/lier.svg', label: 'Lier' },
   { imgName: 'lierne', value: '/static/logo/lierne.svg', label: 'Lierne' },
   { imgName: 'marienlyst', value: '/static/logo/marienlyst.svg', label: 'Marienlyst' },
   { imgName: 'ntnui', value: '/static/logo/ntnui.svg', label: 'NTNUI' },
@@ -68,24 +70,28 @@ const options = [
     value: '/static/logo/randaberg.svg',
     label: 'Randaberg',
   },
+  { imgName: 'rival', value: '/static/logo/rival.svg', label: 'Rival' },
+  { imgName: 'rossvoll', value: '/static/logo/rossvoll.svg', label: 'Rossvoll' },
+  { imgName: 'sandefjord', value: '/static/logo/sandefjord.svg', label: 'Sandefjord' },
   { imgName: 'sandnes', value: '/static/logo/sandnes.svg', label: 'Sandnes' },
   {
     imgName: 'sarpsborg',
     value: '/static/logo/sarpsborg.svg',
     label: 'Sarpsborg',
   },
-  { imgName: 'skrival', value: '/static/logo/skrival.svg', label: 'SK Rival' },
+  { imgName: 'skjetten', value: '/static/logo/skjetten.svg', label: 'Skjetten' },
+  { imgName: 'snaasa', value: '/static/logo/snaasa.svg', label: 'Snåsa' },
+  { imgName: 'sortland', value: '/static/logo/sortland.svg', label: 'Sortland' },
   {
     imgName: 'spiritlorenskog',
     value: '/static/logo/spiritlorenskog.svg',
     label: 'Spirit Lørenskog',
   },
+  { imgName: 'stavanger', value: '/static/logo/kfumstavanger.svg', label: 'KFUM Stavanger', },
   { imgName: 'stod', value: '/static/logo/stod.svg', label: 'Stod' },
-  {
-    imgName: 'strandulv',
-    value: '/static/logo/strandulv.svg',
-    label: 'Strand-Ulv',
-  },
+  { imgName: 'stord', value: '/static/logo/stord.svg', label: 'Stord' },
+  { imgName: 'strandulv', value: '/static/logo/strandulv.svg', label: 'Strand-Ulv', },
+  { imgName: 'strandvik', value: '/static/logo/strandvik.svg', label: 'Strandvik', },
   {
     imgName: 'sunnfjord',
     value: '/static/logo/sunnfjord.svg',
@@ -107,7 +113,9 @@ const options = [
   { imgName: 'torvastad', value: '/static/logo/torvastad.svg', label: 'Torvastad' },
   { imgName: 'tvn', value: '/static/logo/tvn.svg', label: 'TVN' },
   { imgName: 'vestli', value: '/static/logo/vestli.svg', label: 'Vestli' },
+  { imgName: 'vikersund', value: '/static/logo/vikersund.svg', label: 'Vikersund' },
   { imgName: 'viking', value: '/static/logo/viking.svg', label: 'TIF Viking' },
+  { imgName: 'vindafjord', value: '/static/logo/vindafjord.svg', label: 'Vindafjord' },
   { imgName: 'volda', value: '/static/logo/volda.svg', label: 'KFUM Volda' },
   { imgName: 'aalesund', value: '/static/logo/aalesund.svg', label: 'Ålesund' },
 ];
