@@ -103,7 +103,7 @@ class ScoreboardPanel extends React.Component {
   }
 
   handleMatchIdChange(event) {
-    const matchId = event.target.value;
+    const matchId = event.target.value.toLowerCase();
     this.setState({ matchId });
     if (matchId.length > 2) {
       this.loadFromServer(matchId);
