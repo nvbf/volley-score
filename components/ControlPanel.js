@@ -144,6 +144,9 @@ function ControlPanel(props) {
                 showColor={props.showColors}
               />
             </div>
+            {props.saveFailed &&
+              <p><strong style={{ color: 'red', fontSize: '24px' }}>Failed to save latest changes. Do you have network connection?</strong></p>
+            }
           </section>
         </div>
       )}
@@ -181,6 +184,7 @@ ControlPanel.propTypes = {
   showLogos: PropTypes.bool.isRequired,
   showColors: PropTypes.bool.isRequired,
   isShowing: PropTypes.bool.isRequired,
+  saveFailed: PropTypes.bool.isRequired,
 };
 
 export default ControlPanel;

@@ -23,7 +23,8 @@ app.post('/update/:matchId', jsonParser, (req, res) => {
     logoB: req.body.logoB,
     colorA: req.body.colorA,
     colorB: req.body.colorB,
-  }).then(() => res.json({ message: 'Data received.' }));
+  }).then(() => res.json({ message: 'Data received.' }))
+    .catch(res.status(500).json({ message: 'Error updating score.' }));
 });
 
 app.get('/scores/:matchId', (req, res) => {
