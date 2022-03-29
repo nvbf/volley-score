@@ -22,6 +22,7 @@ class ScoreboardPanel extends React.Component {
       showLogos: false,
       showColors: false,
       isShowing: true,
+      saveFailed: false,
     };
     this.handleMatchIdChange = this.handleMatchIdChange.bind(this);
     this.handleNameAChange = this.handleNameAChange.bind(this);
@@ -38,15 +39,22 @@ class ScoreboardPanel extends React.Component {
     this.decrement = this.decrement.bind(this);
     this.resetPoints = this.resetPoints.bind(this);
     this.flipTeams = this.flipTeams.bind(this);
-    this.saveToServer = this.saveToServer.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.matchId === this.state.matchId) {
-      this.saveToServer();
+      const { saveFailed, retry, ...stateRest } = this.state;
+      const prevHash = hashState(prevState);
+      const currentHash = hashState(this.state)
+      if (currentHash !== prevHash) {
+        saveToServer(stateRest).then(() => {
+          this.setState({ saveFailed: false });
+        }).catch(() => {
+          this.setState({ saveFailed: true });
+        });
+      }
     }
   }
-
   increment(key) {
     return () =>
       this.setState({
@@ -128,12 +136,6 @@ class ScoreboardPanel extends React.Component {
     });
   }
 
-  saveToServer() {
-    axios.post(`/api/update/${this.state.matchId}`, {
-      ...this.state,
-    });
-  }
-
   loadFromServer(matchId = this.state.matchId) {
     axios.get(`/api/scores/${matchId}`).then(({ data }) =>
       this.setState({
@@ -195,6 +197,7 @@ class ScoreboardPanel extends React.Component {
           showLogos={this.state.showLogos}
           showColors={this.state.showColors}
           isShowing={this.state.isShowing}
+          saveFailed={this.state.saveFailed}
         />
       </div>
     );
@@ -202,3 +205,15 @@ class ScoreboardPanel extends React.Component {
 }
 
 export default ScoreboardPanel;
+
+
+function saveToServer(stateToSave) {
+  return axios.post(`/api/update/${stateToSave.matchId}`, {
+    ...stateToSave,
+  });
+}
+
+function hashState(state) {
+  const { saveFailed, retry, ...stateRest } = state;
+  return JSON.stringify(stateRest, null, 0);
+}
