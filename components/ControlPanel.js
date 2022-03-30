@@ -145,7 +145,7 @@ function ControlPanel(props) {
               />
             </div>
             {props.saveFailed &&
-              <p><strong style={{ color: 'red', fontSize: '24px' }}>Failed to save latest changes. Do you have network connection?</strong></p>
+              <p id="network-error"><strong style={{ color: 'red', fontSize: '24px' }}>Failed to save latest changes. Do you have network connection?</strong></p>
             }
           </section>
         </div>
