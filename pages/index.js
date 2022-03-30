@@ -45,13 +45,15 @@ class ScoreboardPanel extends React.Component {
     if (prevState.matchId === this.state.matchId) {
       const { saveFailed, retry, ...stateRest } = this.state;
       const prevHash = hashState(prevState);
-      const currentHash = hashState(this.state)
+      const currentHash = hashState(this.state);
       if (currentHash !== prevHash) {
         saveToServer(stateRest).then(() => {
           this.setState({ saveFailed: false });
         }).catch(() => {
           this.setState({ saveFailed: true });
         });
+      } else if (prevState.saveFailed !== this.state.saveFailed && this.state.saveFailed === true) {
+        document.getElementById('network-error').scrollIntoView();
       }
     }
   }
