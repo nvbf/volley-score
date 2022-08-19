@@ -28,6 +28,7 @@ async function createImage({ tournamentId, matchId, homeColor = '', awayColor = 
       const match = res.val();
       if (!match) {
         reject({ ok: false, error: 'tournamentId  and matchId combo do not exist' });
+        return;
       }
       const homeTeam = {
         points: match.pointsInCurrentSet[0],
