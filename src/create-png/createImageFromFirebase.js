@@ -26,7 +26,9 @@ async function createImage({ tournamentId, matchId, homeColor = '', awayColor = 
     const ref = firebase.database().ref(`/tournament_matches/${tournamentId}/${matchId}`);
     ref.once('value', async (res) => {
       const match = res.val();
-
+      if (!match) {
+        reject({ ok: false, error: 'tournamentId  and matchId combo do not exist' });
+      }
       const homeTeam = {
         points: match.pointsInCurrentSet[0],
         sets: match.setsWonByHomeTeam,
