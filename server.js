@@ -70,7 +70,7 @@ app.prepare().then(() => {
       const { matchId } = req.query;
       if(!matchId) {
         res.status(404).send("No query param matchId provided, was not able to find your match");
-        return 
+        return;
       }
       await createImageFromApi(matchId);
       req.url = `/static/score/${matchId}.png`;
@@ -83,9 +83,11 @@ app.prepare().then(() => {
 
   server.get('/firebase/png', async (req, res, nextFunction) => {
     try {
+      console.log("firebase/png")
       const { tournamentId, matchId } = req.query;
       await createImageFromFirebase({ tournamentId, matchId });
       req.url = `/static/score/firebase/${tournamentId}-${matchId}.png`;
+      console.log("nextFunction")
       nextFunction();
     } catch (err) {
       console.error(err);
