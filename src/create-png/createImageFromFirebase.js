@@ -23,10 +23,15 @@ async function createImage({ tournamentId, matchId, homeColor = '', awayColor = 
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
+
     const ref = firebase.database().ref(`/tournament_matches/${tournamentId}/${matchId}`);
     ref.once('value', async (res) => {
-      const match = res.val();
 
+      const match = res.val();
+      if (!match) {
+        reject({ ok: false, error: 'tournamentId  and matchId combo do not exist' });
+        return;
+      }
       const homeTeam = {
         points: match.pointsInCurrentSet[0],
         sets: match.setsWonByHomeTeam,
@@ -58,16 +63,20 @@ async function createImage({ tournamentId, matchId, homeColor = '', awayColor = 
         },
       };
       const stream = await repng(Scoreboard, options);
+
       const writeStream = fs.createWriteStream(
         `${__dirname}/../../static/score/firebase/${tournamentId}-${matchId}.png`,
       );
+        writeStream.write(stream, (err) => {
+          if (!err) {
+            writeStream.end();
+            resolve({ ok: true });
+            return 
+          }
+          writeStream.end();
+          reject({ ok: false, error: err })
 
-      stream.pipe(writeStream).on('finish', () => {
-        console.log('Done');
-        writeStream.end();
-        stream.destroy();
-        resolve({ ok: true });
-      });
+        })
     });
   });
 }
